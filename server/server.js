@@ -1,6 +1,7 @@
 const express = require('express');
 // apollo server used integrate graphQL with the express server.
 const { ApolloServer } = require('apollo-server-express');
+const { typeDefs, resolvers } = require('./schemas');
 
 const db = require('./config/connection');
 const path = require('path');
@@ -9,7 +10,10 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 
 const startServer = async () => {
-    const server = new ApolloServer();
+    const server = new ApolloServer({
+        typeDefs,
+        resolvers
+    });
 
     // start the apollo server
     await server.start();
@@ -34,9 +38,10 @@ if (process.env.NODE_ENV === 'production') {
 
 // deploy only, if there is a get request to an undefined endpoint.
 // respond with production ready React front end code.
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
+
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../client/build/index.html'));
+// });
   
   
 db.once('open', () => {
