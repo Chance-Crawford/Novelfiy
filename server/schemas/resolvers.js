@@ -12,6 +12,20 @@ const resolvers = {
             return User.findOne({ username })
               .select('-__v -password')
           },
+    },
+
+    Mutation: {
+
+        // change to return a token too when implementing auth.
+        addUser: async (parent, args) => {
+            // creates a user from the args object defined in typeDefs.js
+            // Here, the Mongoose User model creates a new user in the database 
+            // with whatever is passed in as the args.
+            const user = await User.create(args);
+
+            return user;
+        }
+
     }
 }
 
