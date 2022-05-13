@@ -45,6 +45,13 @@ const userSchema = new Schema(
           type: Schema.Types.ObjectId,
           ref: 'User'
         }
+    ],
+    // reviews that this user has given to other books
+    reviews: [
+        {
+          type: Schema.Types.ObjectId,
+          ref: 'Review'
+        }
     ]
   },
   {
@@ -80,6 +87,10 @@ userSchema.virtual('followingCount').get(function() {
 
 userSchema.virtual('followerCount').get(function() {
     return this.followers.length;
+});
+
+userSchema.virtual('givenReviewCount').get(function() {
+    return this.reviews.length;
 });
 
 const User = model('User', userSchema);

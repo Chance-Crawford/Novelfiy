@@ -7,11 +7,11 @@ const resolvers = {
               .select('-__v -password')
           },
       
-          // get a user by username
-          user: async (parent, { username }) => {
+        // get a user by username
+        user: async (parent, { username }) => {
             return User.findOne({ username })
-              .select('-__v -password')
-          },
+                .select('-__v -password')
+        },
     },
 
     Mutation: {
