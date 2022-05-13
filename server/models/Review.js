@@ -17,13 +17,13 @@ const reviewSchema = new Schema(
       get: timestamp => formatDate(timestamp)
     },
     // id of the user who made the review
-    userId: {
+    user: {
         type: Schema.Types.ObjectId,
         required: true,
         ref: 'User'
     },
     // id of the novel that the review was made on.
-    novelId: {
+    novel: {
         type: Schema.Types.ObjectId,
         required: true,
         ref: 'Novel'

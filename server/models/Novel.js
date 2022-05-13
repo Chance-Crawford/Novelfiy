@@ -3,17 +3,22 @@ const formatDate = require('../utils/formatDate');
 
 const novelSchema = new Schema(
   {
-    // username of user who made the novel
-    username: {
-      type: String,
-      required: true,
-      unique: true,
-      trim: true
+    // id of user who made the novel
+    user: {
+        type: Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
     },
     createdAt: {
         type: Date,
         default: Date.now,
         get: timestamp => formatDate(timestamp)
+    },
+    description: {
+        type: String,
+        required: true,
+        minlength: 1,
+        maxlength: 750
     },
     title: {
       type: String,
