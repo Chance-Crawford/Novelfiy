@@ -24,9 +24,17 @@ const resolvers = {
             // "user" property.
             const novels = Novel.find(params)
             .populate('user')
+            .populate('reviews');
 
             // put in descending order (newest)
             return novels.sort({ createdAt: -1 });
+        },
+
+        novel: async (parent, { _id }) => {
+            // returns single novel from the id given
+            return Novel.findOne({ _id })
+            .populate('user')
+            .populate('reviews');
         },
     },
 
