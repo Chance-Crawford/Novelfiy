@@ -2,6 +2,7 @@ const { User, Novel, Review } = require('../models');
 
 const resolvers = {
     Query: {
+        // return all users
         users: async () => {
             return User.find()
               .select('-__v -password')
@@ -17,6 +18,8 @@ const resolvers = {
                 .populate('givenReviews');
         },
         
+        // returns all novels
+        // optional user id to show one user's novels
         novels: async (parent, { user }) => {
             const params = user ? { user } : {};
 
@@ -30,8 +33,9 @@ const resolvers = {
             return novels.sort({ createdAt: -1 });
         },
 
+        // novel id
         novel: async (parent, { _id }) => {
-            // returns single novel from the id given
+            // returns single novel from the novel id given
             return Novel.findOne({ _id })
             .populate('user')
             .populate('reviews');
@@ -64,6 +68,29 @@ const resolvers = {
             );
 
             return novel;
+        },
+
+        // add context later
+        addReview: async (parent, { reviewText, novel, user }, context) => {
+            // create new review with the review's text and Id of novel
+            // and id of user.
+            const review = await Review.create({ reviewText, novel, user });
+
+            // add to user object that gave the review
+            await User.findByIdAndUpdate(
+                { _id: user },
+                { $push: { givenReviews: review._id } },
+                { new: true }
+            );
+
+            // add to novel object that the review was made for
+            await Novel.findByIdAndUpdate(
+                { _id: novel },
+                { $push: { reviews: review._id } },
+                { new: true }
+            );
+
+            return review;
         }
     }
 }
