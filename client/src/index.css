@@ -47,3 +47,9 @@
 .novel-desc{
   color: rgb(143, 143, 143);
 }
+
+.read-more{
+  color: rgb(62, 62, 255);
+  text-decoration: underline;
+  margin-left: .2rem;
+}

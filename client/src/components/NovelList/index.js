@@ -21,9 +21,22 @@ function NovelList({ novels }) {
                         <p className="m-0">By. <span className="ital">{novel.penName ? novel.penName : novel.user.username}</span></p>
                     </div>
                     <div>
-                        <p className="novel-desc">
-                            {novel.description}
-                        </p>
+                        {
+                            // have to put in a template literal to get it to read length
+                            `${novel.description}`.length <= 450 ? (
+                                <p className="novel-desc">
+                                    {novel.description}
+                                </p>
+                            )
+                            : (
+                                <p className="novel-desc">
+                                    {
+                                        `${novel.description}`.substring(0, 447)
+                                    }
+                                    ...<span className="read-more">Read more</span>
+                                </p>
+                            )
+                        }
                     </div>
                 </article>
             ))}

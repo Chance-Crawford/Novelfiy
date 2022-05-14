@@ -15,10 +15,10 @@ const novelSchema = new Schema(
         get: timestamp => formatDate(timestamp)
     },
     description: {
-        type: String,
-        required: true,
-        minlength: 1,
-        maxlength: 750
+      type: String,
+      required: true,
+      minlength: 1,
+      maxlength: 750
     },
     title: {
       type: String,
@@ -55,6 +55,7 @@ novelSchema.virtual('reviewCount').get(function() {
 novelSchema.virtual('chapterCount').get(function() {
     return this.chapters.length;
 });
+
 
 const Novel = model('Novel', novelSchema);
 
