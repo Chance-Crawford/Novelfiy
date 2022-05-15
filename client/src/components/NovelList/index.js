@@ -1,3 +1,6 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faReadme } from "@fortawesome/free-brands-svg-icons"
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
 
 function NovelList({ novels }) {
 
@@ -20,9 +23,10 @@ function NovelList({ novels }) {
                     <div className="mb-3">
                         <p className="m-0">By. <span className="ital">{novel.penName ? novel.penName : novel.user.username}</span></p>
                     </div>
-                    <div>
+                    <div className="mb-3">
                         {
                             // have to put in a template literal to get it to read length
+                            // and treat as string
                             `${novel.description}`.length <= 450 ? (
                                 <p className="novel-desc">
                                     {novel.description}
@@ -31,12 +35,26 @@ function NovelList({ novels }) {
                             : (
                                 <p className="novel-desc">
                                     {
+                                        // if description more than 450 characters, add read more
                                         `${novel.description}`.substring(0, 447)
                                     }
                                     ...<span className="read-more">Read more</span>
                                 </p>
                             )
                         }
+                    </div>
+                    <div className="d-flex align-items-center">
+                        <div>
+                            <button className="btn read-btn bold">
+                                <FontAwesomeIcon icon={faReadme} className="novel-list-icon"/>Read
+                            </button>
+                        </div>
+                        <div>
+                            <button className="btn fav-btn bold ml-3">
+                            <FontAwesomeIcon icon={faHeart} className="novel-list-icon"/>Add To Favorites
+                            </button>
+                        </div>
+                        
                     </div>
                 </article>
             ))}

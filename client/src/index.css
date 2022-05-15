@@ -10,6 +10,7 @@
 
 /* header */
 .main-title{
+  font-size: 2rem;
   cursor: pointer;
   color: rgb(61, 61, 61);
   font-family: 'Playfair Display', 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -49,7 +50,33 @@
 }
 
 .read-more{
+  cursor: pointer;
   color: rgb(62, 62, 255);
   text-decoration: underline;
   margin-left: .2rem;
+}
+
+.read-btn{
+  color: white;
+  background-color: rgb(37, 131, 255);
+}
+
+.fav-btn{
+  color: white;
+  background-color: rgb(0, 185, 46);
+}
+
+.read-btn:hover,
+.fav-btn:hover{
+  color: rgb(219, 219, 219);
+}
+
+.ml-3{
+  margin-left: 1.5rem;
+}
+
+.novel-list-icon{
+  margin-right: .25rem;
+  position: relative;
+  top: 1px;
 }

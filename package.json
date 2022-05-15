@@ -23,5 +23,8 @@
   "homepage": "https://github.com/Chance-Crawford/Novelfiy#readme",
   "devDependencies": {
     "concurrently": "^7.1.0"
+  },
+  "dependencies": {
+    "@fortawesome/free-solid-svg-icons": "^6.1.1"
   }
 }
