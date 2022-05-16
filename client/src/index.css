@@ -85,3 +85,45 @@ a{
   position: relative;
   top: 1px;
 }
+
+/* SingleNovel */
+
+.light-shadow-bottom{
+  -webkit-box-shadow: 0px 8px 10px 0px rgba(0,0,0,0.32); 
+  box-shadow: 0px 8px 10px 0px rgba(0,0,0,0.32);
+}
+
+.light-bottom-border{
+  border-bottom: 1px solid rgb(182, 182, 182);
+}
+
+.novel-article{
+  border-radius: 20px;
+  padding: 1rem;
+  width: 47.5%;
+  -webkit-box-shadow: 0px 0px 15px 3px rgba(0,0,0,0.4); 
+  box-shadow: 0px 0px 15px 3px rgba(0,0,0,0.4);
+  min-height: 600px;
+  max-height: 600px;
+}
+
+.review-textarea{
+  width: 75%;
+  font-size: 18px;
+  padding: 1rem;
+}
+
+.review-submit-btn{
+  margin-top: auto;
+  color: white;
+  margin-left: 1rem;
+  height: 4rem;
+  width: 5rem;
+  font-size: 30px;
+  background-color: rgb(0, 185, 46);
+}
+
+.review-submit-btn:hover{
+  color: white;
+  background-color: rgb(63, 211, 100);
+}

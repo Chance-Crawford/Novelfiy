@@ -18,7 +18,7 @@ const novelSchema = new Schema(
       type: String,
       required: true,
       minlength: 1,
-      maxlength: 750
+      maxlength: 1000
     },
     title: {
       type: String,
