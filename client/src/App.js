@@ -1,7 +1,10 @@
+
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { Route, Switch} from 'react-router-dom';
 
 import Header from './components/Header';
 import Home from './pages/Home';
+import SingleNovel from './pages/SingleNovel'
 
 // add a proxy to the client folder's package.json.
 // "proxy": "http://localhost:3001", so server can run on different port
@@ -20,24 +23,26 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Header></Header>
-      <div className='row'>
-        {/* left sidebar */}
-        <section className='col-lg-2'>
+        <Header></Header>
+        <div className='row'>
+          {/* left sidebar */}
+          <section className='col-lg-2'>
 
-        </section>
+          </section>
 
-        {/* middle main content */}
-        <main className='col-lg-8'>
-          <Home></Home>
-        </main>
+          {/* middle main content */}
+          <main className='col-lg-8'>
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/novel/:id" component={SingleNovel} />
+            </Switch>
+          </main>
 
-        {/* right sidebar */}
-        <section className='col-lg-2'>
+          {/* right sidebar */}
+          <section className='col-lg-2'>
 
-        </section>
-      </div>
-      
+          </section>
+        </div>
     </ApolloProvider>
   );
 }

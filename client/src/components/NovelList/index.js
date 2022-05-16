@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faReadme } from "@fortawesome/free-brands-svg-icons"
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
@@ -18,7 +20,9 @@ function NovelList({ novels }) {
             {novels && novels.map( novel => (
                 <article key={novel._id} className="mt-4 mb-4">
                     <div className="mt-3 mb-3">
-                        <h3 className="bold">{novel.title}</h3>
+                        <Link to={`/novel/${novel._id}`}>
+                            <h3 className="bold">{novel.title}</h3>
+                        </Link>
                     </div>
                     <div className="mb-3">
                         <p className="m-0">By. <span className="ital">{novel.penName ? novel.penName : novel.user.username}</span></p>
@@ -38,7 +42,10 @@ function NovelList({ novels }) {
                                         // if description more than 450 characters, add read more
                                         `${novel.description}`.substring(0, 447)
                                     }
-                                    ...<span className="read-more">Read more</span>
+                                    ...
+                                    <Link to={`/novel/${novel._id}`}>
+                                        <span className="read-more">Read more</span>
+                                    </Link>
                                 </p>
                             )
                         }
