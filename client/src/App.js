@@ -5,6 +5,7 @@ import { Route, Switch} from 'react-router-dom';
 import { setContext } from '@apollo/client/link/context';
 
 import Header from './components/Header';
+import Footer from './components/Footer';
 import Home from './pages/Home';
 import SingleNovel from './pages/SingleNovel'
 import Login from './pages/Login';
@@ -46,11 +47,13 @@ function App() {
 
           {/* middle main content */}
           <main className='col-lg-8'>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/novel/:id" component={SingleNovel} />
-            </Switch>
+            <div className='main-contain'>
+              <Switch>
+                <Route exact path="/" component={Home} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/novel/:id" component={SingleNovel} />
+              </Switch>
+            </div>
           </main>
 
           {/* right sidebar */}
@@ -58,6 +61,7 @@ function App() {
 
           </section>
         </div>
+        <Footer></Footer>
     </ApolloProvider>
   );
 }
