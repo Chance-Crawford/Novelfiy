@@ -9,10 +9,13 @@ const path = require('path');
 const PORT = process.env.PORT || 3001;
 const app = express();
 
+const { authMiddleware } = require('./utils/auth');
+
 const startServer = async () => {
     const server = new ApolloServer({
         typeDefs,
-        resolvers
+        resolvers,
+        context: authMiddleware
     });
 
     // start the apollo server

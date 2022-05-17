@@ -13,6 +13,10 @@ a{
   text-decoration: none;
 }
 
+a:hover{
+  color: inherit;
+}
+
 /* header */
 .main-title{
   font-size: 2rem;

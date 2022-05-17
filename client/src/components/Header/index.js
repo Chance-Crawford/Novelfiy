@@ -9,9 +9,11 @@ function Header() {
                     <h1 className="main-title m-0">novelfiy</h1>
                 </div>
             </Link>
-            <div>
-                <button className="btn login-btn">Log in</button>
-            </div>
+            <Link to="/login">
+                <div>
+                    <button className="btn login-btn">Log in</button>
+                </div>
+            </Link>
         </header>
     );
 }

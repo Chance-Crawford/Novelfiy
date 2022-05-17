@@ -2,9 +2,12 @@
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { Route, Switch} from 'react-router-dom';
 
+import { setContext } from '@apollo/client/link/context';
+
 import Header from './components/Header';
 import Home from './pages/Home';
 import SingleNovel from './pages/SingleNovel'
+import Login from './pages/Login';
 
 // add a proxy to the client folder's package.json.
 // "proxy": "http://localhost:3001", so server can run on different port
@@ -13,9 +16,20 @@ import SingleNovel from './pages/SingleNovel'
 const httpLink = createHttpLink({
   uri: '/graphql',
 });
+const authLink = setContext((_, { headers }) => {
+  const token = localStorage.getItem('id_token');
+  return {
+    // set the header object to have all the other headers, and then add
+    // an authorization header
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : '',
+    },
+  };
+});
 // cahnge to auth link when setting context
 const client = new ApolloClient({
-  link: httpLink,
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
@@ -34,6 +48,7 @@ function App() {
           <main className='col-lg-8'>
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route exact path="/login" component={Login} />
               <Route exact path="/novel/:id" component={SingleNovel} />
             </Switch>
           </main>
