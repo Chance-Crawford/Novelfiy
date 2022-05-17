@@ -47,7 +47,7 @@ function App() {
 
           {/* middle main content */}
           <main className='col-lg-8'>
-            <div className='main-contain'>
+            <div className='main-contain w-100'>
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/login" component={Login} />
