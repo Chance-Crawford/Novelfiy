@@ -10,6 +10,50 @@ import { ADD_USER, LOGIN_USER } from '../utils/mutations';
 function Login() {
     // the tab state to figure out which tab the user clicked on.
     const [formTabState, setFormTabState] = useState("Login");
+    
+
+    // state of the login form
+    const [loginFormState, setLoginFormState] = useState({ email: '', password: '' });
+    const [login, { error: loginError }] = useMutation(LOGIN_USER);
+    const handleLoginChange = (event) => {
+        // get name and value of input element from the event.target
+        let { name, value } = event.target;
+
+        // if it is an email make sure it is all lowercase
+        if(name === 'email'){
+            value = value.toLowerCase().trim();
+        }
+    
+        setLoginFormState({
+          ...loginFormState,
+          [name]: value.trim(),
+        });
+    };
+    const handleLoginFormSubmit = async (event) => {
+        event.preventDefault();
+    
+        try {
+          const { data } = await login({
+            variables: { ...loginFormState }
+          });
+      
+          // after user data is returned, get the user's login json web token
+          // and use the custom Auth object to add the token to the 
+          // local storage.
+          // Auth.login then redirects the page to home.
+          Auth.login(data.login.token);
+        } catch (e) {
+          console.error(e);
+          return;
+        }
+    
+        // clear form values
+        setLoginFormState({
+          email: '',
+          password: '',
+        });
+    };
+
 
     // state of the signup form
     const [signupFormState, setSignupFormState] = useState({ username: '', email: '', password: '' });
@@ -32,16 +76,7 @@ function Login() {
     const handleSignupFormSubmit = async (event) => {
         event.preventDefault();
 
-        // use try/catch instead of promises to handle errors
-        // We use the try...catch block functionality here, as it is 
-        // especially useful with asynchronous code such as Promises. This way, we 
-        // can use async/await instead of .then() and .catch() method-chaining while 
-        // still being able to handle any errors that may occur.
         try {
-        // execute addUser mutation 
-        // Upon success, we destructure the data object from 
-        // the response of our mutation and simply log it to see if 
-        // we're getting our token.
         const { data } = await addUser({
             // and pass in variable data from form
             variables: { ...signupFormState }
@@ -54,8 +89,10 @@ function Login() {
         } 
         catch (e) {
         console.error(e);
+        return;
         }
     };
+
 
     return (
         <section className="login-section w-100">
@@ -77,7 +114,12 @@ function Login() {
                     <div className='login-body-contain'>
                         {formTabState === 'Login' ? (
                             <div>
-                                <form className='info-form'>
+                                <form className='info-form' onSubmit={handleLoginFormSubmit}>
+                                    {loginError && (
+                                            <div className='new-here'>
+                                                New here? Press the sign up tab above to create an account
+                                            </div>
+                                    )}
                                     <div className='d-flex flex-wrap'>
                                         <label htmlFor="email" className='bold w-100'>Email:</label>
                                         <input
@@ -86,6 +128,7 @@ function Login() {
                                             name='email'
                                             type='email'
                                             id='email'
+                                            onChange={handleLoginChange}
                                         />
                                     </div>
                                     <div className='d-flex flex-wrap mt-4'>
@@ -96,6 +139,7 @@ function Login() {
                                             name='password'
                                             type='password'
                                             id='password'
+                                            onChange={handleLoginChange}
                                         />
                                     </div>
                                     <div className='mt-4'>
@@ -103,6 +147,11 @@ function Login() {
                                             Login
                                         </button>
                                     </div>
+                                    {loginError && (
+                                            <div className='err-text'>
+                                                The email or password entered was incorrect.
+                                            </div>
+                                    )}
                                     
                                 </form>
                             </div>
@@ -111,19 +160,29 @@ function Login() {
                                 <form className='info-form' onSubmit={handleSignupFormSubmit}>
                                     <div className='d-flex flex-wrap'>
                                         <label htmlFor="username" className='bold w-100'>Username:</label>
+                                        {/* pattern contains regex for not allowing spaces or tabs.
+                                        title changes message that appears when the pattern is not met */}
                                         <input
-                                            className='form-input mt-2'
+                                            className='form-input mt-2 username-input'
                                             placeholder='Your username'
                                             name='username'
                                             type='text'
                                             id='username'
-                                            
+                                            pattern='^\S+\w\S{1,}'
+                                            title='Username can not have any spaces, tabs, or special characters'
                                             onChange={handleSignupChange}
                                         />
                                     </div>
+                                    {/* username is required */}
+                                    {error && error.message.includes('required') && error.message.includes('username') && (
+                                            <div className='err-text'>
+                                                Please enter a username.
+                                            </div>
+                                    )}
+                                    {/* username already exists */}
                                     {error && error.message.includes('E11000') && error.message.includes('username') && (
                                             <div className='err-text'>
-                                                This username already exists. Please choose another.
+                                                This username is already taken. Please choose another.
                                             </div>
                                     )}
                                     <div className='d-flex flex-wrap mt-4'>
@@ -134,7 +193,6 @@ function Login() {
                                             name='email'
                                             type='email'
                                             id='email'
-                                            
                                             onChange={handleSignupChange}
                                         />
                                     </div>
@@ -151,7 +209,6 @@ function Login() {
                                             name='password'
                                             type='password'
                                             id='password'
-                                            
                                             onChange={handleSignupChange}
                                         />
                                     </div>
