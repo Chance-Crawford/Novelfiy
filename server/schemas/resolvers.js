@@ -68,15 +68,28 @@ const resolvers = {
     Mutation: {
 
         addUser: async (parent, args) => {
-            // creates a user from the args object defined in typeDefs.js
-            // Here, the Mongoose User model creates a new user in the database 
-            // with whatever is passed in as the args.
-            const user = await User.create(args);
+            const lowercaseUsername = args.username.toLowerCase()
+            // keep console log
+            console.log(lowercaseUsername);
+            
+            // the regexp wil find the object in the database no matter how the username
+            // was capitalized. It could be NAtEy in the DB or sent in from the client and it will still 
+            // match it
+            const checkForUser = await User.findOne({ username: new RegExp(`^${lowercaseUsername}$`, 'i') });
+            
+            // if the lowercase version of the username isnt in the database either, create the user.
+            if (!checkForUser) {
+                // creates a user from the args object defined in typeDefs.js
+                // Here, the Mongoose User model creates a new user in the database 
+                // with whatever is passed in as the args.
+                const user = await User.create(args);
 
-            const token = signToken(user);
-    
-            // return an object that combines the token with the user's data.
-            return { token, user };
+                const token = signToken(user);
+        
+                // return an object that combines the token with the user's data.
+                return { token, user };
+            }
+            throw new AuthenticationError('E11000 username');
         },
 
         login: async (parent, { email, password }) => {

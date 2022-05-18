@@ -26,7 +26,7 @@ function SingleNovel() {
     }
 
     return (
-        <div className="">
+        <div className="pb-5">
             <section className='d-flex justify-content-center flex-wrap light-shadow-bottom'>
                 <div className='w-50 d-flex flex-wrap justify-content-center align-items-center'>
                     <div className='mt-3 mb-2 w-100'>

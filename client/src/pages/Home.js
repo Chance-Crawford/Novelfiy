@@ -11,7 +11,7 @@ function Home() {
     console.log(novels);
 
     return (
-        <div className="">
+        <div className="pb-5">
             <div className='p-3 text-center'>
                 <h2 className='m-0 bold'>Top Novels For Today</h2>
             </div>

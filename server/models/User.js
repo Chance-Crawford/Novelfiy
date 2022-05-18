@@ -93,6 +93,7 @@ userSchema.virtual('givenReviewCount').get(function() {
     return this.givenReviews.length;
 });
 
+
 const User = model('User', userSchema);
 
 module.exports = User;
