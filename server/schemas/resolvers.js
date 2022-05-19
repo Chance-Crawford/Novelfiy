@@ -131,15 +131,15 @@ const resolvers = {
         },
 
         // add context later
-        addReview: async (parent, { reviewText, novel, user }, context) => {
+        addReview: async (parent, { reviewText, rating, novel }, context) => {
             if (context.user) {
                 // create new review with the review's text and Id of novel
                 // and id of user.
-                const review = await Review.create({ reviewText, novel, user });
+                const review = await Review.create({ reviewText, rating, novel, user: context.user._id });
 
                 // add to user object that gave the review
                 await User.findByIdAndUpdate(
-                    { _id: user },
+                    { _id: context.user._id },
                     { $push: { givenReviews: review._id } },
                     { new: true }
                 );

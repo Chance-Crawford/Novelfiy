@@ -16,6 +16,12 @@ const reviewSchema = new Schema(
       default: Date.now,
       get: timestamp => formatDate(timestamp)
     },
+    rating: {
+      type: Number,
+      required: 'You need to leave a rating!',
+      min: 1,
+      max: 10
+    },
     // id of the user who made the review
     user: {
         type: Schema.Types.ObjectId,

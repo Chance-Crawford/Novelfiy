@@ -69,6 +69,12 @@ a:hover{
   font-weight: bold;
 }
 
+.top-novel{
+  border: 2px solid var(--primary-color);
+  -webkit-box-shadow: 0px 7px 8px -4px rgba(0,0,0,0.47); 
+  box-shadow: 0px 7px 8px -4px rgba(0,0,0,0.47);
+}
+
 .main-contain{
   /* since there is a min height, must badd a table display ion order to center
   content vertically that does not fill upo the whole page, like Login */
@@ -144,6 +150,10 @@ a:hover{
   padding: 1rem;
 }
 
+.unactive-textarea{
+  background-color: rgba(228, 155, 121, .4);
+}
+
 .review-submit-btn{
   margin-top: auto;
   color: white;
@@ -152,6 +162,15 @@ a:hover{
   width: 5rem;
   font-size: 30px;
   background-color: rgb(0, 185, 46);
+}
+
+.font-larger{
+  font-size: 20px;
+}
+
+.rate-select{
+  width: 12.5%;
+  padding: .5rem 1rem;
 }
 
 .review-submit-btn:hover{

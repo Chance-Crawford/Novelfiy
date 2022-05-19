@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 import { useQuery } from '@apollo/client';
 import { GET_NOVEL } from '../utils/queries';
+import Auth from '../utils/auth';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faReadme } from "@fortawesome/free-brands-svg-icons"
@@ -77,12 +78,37 @@ function SingleNovel() {
                     </article>
                 </div>
             </section>
-            <section className='mt-3 mb-4'>
-                <h3 className='bold mb-3'>Write A Review</h3>
+            <section className='mt-4 mb-4'>
+                <h3 className='bold mb-4'>Write A Review</h3>
                 <form id='novel-review-form'>
                     <div className='d-flex'>
-                        <textarea name="" id="" rows="8" className='review-textarea'></textarea>
-                        <button className='btn review-submit-btn'><FontAwesomeIcon icon={faPaperPlane} /></button>
+                    {Auth.loggedIn() ? (
+                        <div className='d-flex flex-wrap w-100'>
+                            <div className='w-100'>
+                                <p className='font-larger'>Rate the novel on a scale of 1-10</p>
+                                <select id="novel-rating" className='rate-select mb-3'>
+                                    <option value="" selected disabled hidden>Select</option>
+                                    <option value="1"> 1 </option>
+                                    <option value="2"> 2 </option>
+                                    <option value="3"> 3 </option>
+                                    <option value="4"> 4 </option>
+                                    <option value="5"> 5 </option>
+                                    <option value="6"> 6 </option>
+                                    <option value="7"> 7 </option>
+                                    <option value="8"> 8 </option>
+                                    <option value="9"> 9 </option>
+                                    <option value="10"> 10 </option>
+                                </select>
+                            </div>
+                            <p className='font-larger w-100'>Write text for the review:</p>
+                            <textarea name="" rows="8" className='review-textarea'></textarea>
+                            <button className='btn review-submit-btn'><FontAwesomeIcon icon={faPaperPlane} /></button>
+                        </div>
+                    ) : (
+                        <textarea name="" rows="8" className='review-textarea unactive-textarea' readOnly value="Must be logged in to write a review!"></textarea>
+                    )}
+                        
+                        
                     </div>
                 </form>
             </section>

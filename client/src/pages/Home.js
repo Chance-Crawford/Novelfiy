@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import { GET_NOVELS } from '../utils/queries';
 
 import NovelList from '../components/NovelList'
+import TopNovelImg from '../images/topnovels.png'
 
 function Home() {
     
@@ -12,8 +13,8 @@ function Home() {
 
     return (
         <div className="pb-5">
-            <div className='p-3 text-center'>
-                <h2 className='m-0 bold'>Top Novels For Today</h2>
+            <div className='text-center w-100'>
+                <img className='w-100 top-novel' src={TopNovelImg} alt="todays top novels banner" />
             </div>
             <div>
                 <NovelList novels={novels}></NovelList>
