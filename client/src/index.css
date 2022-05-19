@@ -70,9 +70,7 @@ a:hover{
 }
 
 .top-novel{
-  border: 2px solid var(--primary-color);
-  -webkit-box-shadow: 0px 7px 8px -4px rgba(0,0,0,0.47); 
-  box-shadow: 0px 7px 8px -4px rgba(0,0,0,0.47);
+  
 }
 
 .main-contain{
@@ -144,6 +142,12 @@ a:hover{
   max-height: 600px;
 }
 
+.novel-sub-list{
+  overflow-y: scroll;
+  min-height: 525px;
+  max-height: 525px;
+}
+
 .review-textarea{
   width: 75%;
   font-size: 18px;
@@ -166,6 +170,10 @@ a:hover{
 
 .font-larger{
   font-size: 20px;
+}
+
+.font-18{
+  font-size: 18px;
 }
 
 .rate-select{
@@ -243,4 +251,35 @@ a:hover{
 .new-here{
   font-size: 16px;
   margin-bottom: 1rem;
+  text-decoration: underline;
+}
+
+/* ReviewList */
+.review-red{
+  background-color: red;
+  text-align: center;
+  color: white;
+  border-radius: 20px;
+  width: 25%;
+  padding: .25rem .5rem;
+}
+
+.font-17{
+  font-size: 17px;
+}
+
+.review-yellow{
+  background-color: yellow;
+  text-align: center;
+  border-radius: 20px;
+  width: 25%;
+  padding: .25rem .5rem;
+}
+
+.review-green{
+  background-color: rgb(11, 194, 36);
+  text-align: center;
+  border-radius: 20px;
+  width: 25%;
+  padding: .25rem .5rem;
 }

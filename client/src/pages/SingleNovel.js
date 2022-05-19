@@ -1,9 +1,14 @@
 // use id from url
 import { useParams } from 'react-router-dom';
+import { useState } from 'react';
+
+import ReviewList from '../components/ReviewList';
 
 import { useQuery } from '@apollo/client';
 import { GET_NOVEL } from '../utils/queries';
 import Auth from '../utils/auth';
+import { useMutation } from '@apollo/client';
+import { ADD_REVIEW } from '../utils/mutations';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faReadme } from "@fortawesome/free-brands-svg-icons"
@@ -11,6 +16,65 @@ import { faHeart, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
 function SingleNovel() {
     const { id: novelId } = useParams();
+
+    // adding error for if user does not fil out the review form
+    const [reviewFormError, setReviewFormError] = useState("");
+
+    // review form state
+    const [reviewFormState, setReviewFormState] = useState({ reviewText: '', rating: '' });
+    // instead of error. Use the review form error state above
+    const [addReview, { error }] = useMutation(ADD_REVIEW);
+    const handleReviewChange = (event) => {
+        // get name and value of input element from the event.target
+        let { name, value } = event.target;
+
+        // if it is the rating dropdown, make the string a number
+        if(name === 'rating'){
+            value = parseInt(value);
+        }
+
+        if(name === 'reviewText'){
+            value = value.trim();
+        }
+    
+        setReviewFormState({
+          ...reviewFormState,
+          [name]: value,
+        });
+    };
+    const handleReviewFormSubmit = async (event) => {
+        event.preventDefault();
+
+        // reset error catching state
+        setReviewFormError("");
+
+        // if no rating was ever selected
+        if(!reviewFormState.rating){
+            setReviewFormError("Please select a rating to submit your review!")
+            throw new Error('No rating selected.')
+        }
+
+        // if no text was ever input to review form
+        if(!reviewFormState.reviewText){
+            setReviewFormError("Please enter text for the review!")
+            throw new Error('No text entered.')
+        }
+
+        try {
+            await addReview({
+                // pass in variable data from state and also the novel id
+                // from url
+                variables: { ...reviewFormState, novel: novelId }
+            });
+
+            // refresh page to reset values.
+            window.location.reload();
+        } 
+        catch (e) {
+            console.error(e);
+            return;
+        }
+    };
 
     const { loading, data } = useQuery(GET_NOVEL, {
         // This is how you can pass variables to queries that need them. 
@@ -74,20 +138,21 @@ function SingleNovel() {
                     </article>
                     <article className='novel-article col-12'>
                         <h3>Reviews</h3>
-                        <hr />
+                        <hr className='mb-0'/>
+                        <ReviewList reviews={novel.reviews}></ReviewList>
                     </article>
                 </div>
             </section>
             <section className='mt-4 mb-4'>
                 <h3 className='bold mb-4'>Write A Review</h3>
-                <form id='novel-review-form'>
+                <form id='novel-review-form' onSubmit={handleReviewFormSubmit}>
                     <div className='d-flex'>
                     {Auth.loggedIn() ? (
                         <div className='d-flex flex-wrap w-100'>
                             <div className='w-100'>
                                 <p className='font-larger'>Rate the novel on a scale of 1-10</p>
-                                <select id="novel-rating" className='rate-select mb-3'>
-                                    <option value="" selected disabled hidden>Select</option>
+                                <select id="novel-rating" defaultValue="select" onChange={handleReviewChange} className='rate-select mb-3' name='rating'>
+                                    <option value="select" disabled hidden>Select</option>
                                     <option value="1"> 1 </option>
                                     <option value="2"> 2 </option>
                                     <option value="3"> 3 </option>
@@ -100,9 +165,15 @@ function SingleNovel() {
                                     <option value="10"> 10 </option>
                                 </select>
                             </div>
+                            {reviewFormError.includes('rating') && (
+                                <p className='err-text'>{reviewFormError}</p>
+                            )}
                             <p className='font-larger w-100'>Write text for the review:</p>
-                            <textarea name="" rows="8" className='review-textarea'></textarea>
-                            <button className='btn review-submit-btn'><FontAwesomeIcon icon={faPaperPlane} /></button>
+                            <textarea onChange={handleReviewChange} name="reviewText" rows="8" className='review-textarea'></textarea>
+                            <button type="submit" className='btn review-submit-btn'><FontAwesomeIcon icon={faPaperPlane} /></button>
+                            {reviewFormError.includes('text') && (
+                                <p className='mt-3 err-text'>{reviewFormError}</p>
+                            )}
                         </div>
                     ) : (
                         <textarea name="" rows="8" className='review-textarea unactive-textarea' readOnly value="Must be logged in to write a review!"></textarea>

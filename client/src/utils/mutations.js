@@ -24,3 +24,21 @@ export const ADD_USER = gql`
     }
   }
 `;
+
+// add a review
+export const ADD_REVIEW = gql`
+  mutation addReview($reviewText: String!, $rating: Int!, $novel: ID!) {
+    addReview(reviewText: $reviewText, rating: $rating, novel: $novel) {
+        _id
+        reviewText
+        rating
+        createdAt
+        user {
+          _id
+        }
+        novel {
+          _id
+        }
+    }
+  }
+`

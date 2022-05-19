@@ -38,9 +38,11 @@ query getNovel($_id: ID!) {
       reviews {
         _id
         reviewText
+        rating
         createdAt
         user{
             _id
+            username
         }
       }
       chapterCount

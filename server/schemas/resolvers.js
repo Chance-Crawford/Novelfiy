@@ -26,8 +26,8 @@ const resolvers = {
         },
         
         // returns all novels
-        // optional user id to show one user's novels
         novels: async (parent, { user }) => {
+            // optional user id to show one user's novels
             const params = user ? { user } : {};
 
             // finds all novels that have this user ID as their
@@ -39,13 +39,17 @@ const resolvers = {
             // put in descending order (newest)
             return novels.sort({ createdAt: -1 });
         },
-
         // novel id
         novel: async (parent, { _id }) => {
             // returns single novel from the novel id given
             return Novel.findOne({ _id })
             .populate('user')
-            .populate('reviews');
+            // populate the reviews for the novel but also populate
+            // the info within the reviews of the user who made each review.
+            .populate({
+                path: 'reviews',
+                populate: {path: 'user'}
+            });
         },
 
         me: async (parent, args, context) => {
