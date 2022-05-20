@@ -102,6 +102,16 @@ function SingleNovel() {
                     <div className="mt-3 mb-2 w-100">
                         <p className="m-0">By. <span className="bold">{novel.penName ? novel.penName : novel.user.username}</span></p>
                     </div>
+                    {novel.reviews.length > 10 && (
+                        <div className="mt-3 mb-2 w-100">
+                            <p className="m-0 bold font-18">Rating: {
+                                (novel.reviews.reduce((total, review)=>{
+                                    return total + review.rating
+                                }, 0) / novel.reviews.length).toFixed(2)
+                            } / 10
+                            </p>
+                        </div>
+                    )}
                     <div className="mt-3 mb-2 w-100">
                         <p className="m-0">Reviews: {novel.reviewCount} / Chapters: {novel.chapterCount}</p>
                     </div>
