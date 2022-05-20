@@ -9,7 +9,7 @@ const reviewSchema = new Schema(
       type: String,
       required: 'You need to leave a review!',
       minlength: 1,
-      maxlength: 750
+      maxlength: 10000
     },
     createdAt: {
       type: Date,

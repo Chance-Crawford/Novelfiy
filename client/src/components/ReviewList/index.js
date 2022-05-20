@@ -27,7 +27,11 @@ function ReviewList({ reviews }) {
                             // and treat as string
                             `${review.reviewText}`.length <= 430 ? (
                                 <p className="">
-                                    {review.reviewText}
+                                    {/* split review text by the newline characters and make
+                                    each section a paragraph */}
+                                    {review.reviewText.split('\n').map(part=>(
+                                        <p>{part}</p>
+                                    ))}
                                 </p>
                             ) : (
                                 <ReadMore text={review.reviewText} length={430}></ReadMore>

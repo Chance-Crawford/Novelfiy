@@ -23,6 +23,7 @@ function SingleNovel() {
     // review form state
     const [reviewFormState, setReviewFormState] = useState({ reviewText: '', rating: '' });
     // instead of error. Use the review form error state above
+    // use error for whenever the review is more than 10000 characters
     const [addReview, { error }] = useMutation(ADD_REVIEW);
     const handleReviewChange = (event) => {
         // get name and value of input element from the event.target
@@ -42,6 +43,7 @@ function SingleNovel() {
           [name]: value,
         });
     };
+    console.log(reviewFormState);
     const handleReviewFormSubmit = async (event) => {
         event.preventDefault();
 
@@ -173,6 +175,9 @@ function SingleNovel() {
                             <button type="submit" className='btn review-submit-btn'><FontAwesomeIcon icon={faPaperPlane} /></button>
                             {reviewFormError.includes('text') && (
                                 <p className='mt-3 err-text'>{reviewFormError}</p>
+                            )}
+                            {error && error.message.includes('maximum') && error.message.includes('length') && (
+                                <p className='mt-3 err-text'>Failed to submit. Review must be shorter than 10,000 characters</p>
                             )}
                         </div>
                     ) : (
