@@ -20,6 +20,7 @@ const resolvers = {
             return User.findOne({ username })
                 .select('-__v -password')
                 .populate('novels')
+                .populate('favoriteNovels')
                 .populate('givenReviews')
                 .populate('following')
                 .populate('followers');
@@ -55,11 +56,12 @@ const resolvers = {
         me: async (parent, args, context) => {
             if (context.user) {
               const userData = await User.findOne({ _id: context.user._id })
-                .select('-__v -password')
-                .populate('novels')
-                .populate('givenReviews')
-                .populate('following')
-                .populate('followers');
+              .select('-__v -password')
+              .populate('novels')
+              .populate('favoriteNovels')
+              .populate('givenReviews')
+              .populate('following')
+              .populate('followers');
           
               return userData;
             }
@@ -120,7 +122,7 @@ const resolvers = {
                 const novel = await Novel.create({...args});
 
                 await User.findByIdAndUpdate(
-                    { _id: args.user },
+                    { _id: context.user._id },
                     { $push: { novels: novel._id } },
                     // Remember, without the { new: true } flag 
                     // in User.findByIdAndUpdate(), Mongo would return the original 
@@ -134,7 +136,51 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
 
-        // add context later
+        addFavNovel: async (parent, { novelId }, context) => {
+            if (context.user) {
+
+                // cherck to see if novel is already in user's array
+                const checkUser = await User.findOne({ _id: context.user._id });
+
+                console.log(checkUser.favoriteNovels.includes(novelId));
+
+                // if it is, pull it from the user array and novel array.
+                if(checkUser.favoriteNovels.includes(novelId)){
+                    const pullUser = await User.findByIdAndUpdate(
+                        { _id: context.user._id },
+                        { $pull: { favoriteNovels: novelId } },
+                        { new: true }
+                    );
+    
+                    await Novel.findByIdAndUpdate(
+                        { _id: novelId },
+                        { $pull: { favorites: context.user._id } },
+                        { new: true }
+                    );
+    
+                    return pullUser;
+                }
+
+                // add to user object that gave the review
+                const user = await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { favoriteNovels: novelId } },
+                    { new: true }
+                );
+
+                // add to novel object that the review was made for
+                await Novel.findByIdAndUpdate(
+                    { _id: novelId },
+                    { $push: { favorites: context.user._id } },
+                    { new: true }
+                );
+
+                return user;
+            }
+            
+            throw new AuthenticationError('You need to be logged in!'); 
+        },
+
         addReview: async (parent, { reviewText, rating, novel }, context) => {
             if (context.user) {
                 // create new review with the review's text and Id of novel

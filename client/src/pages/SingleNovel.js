@@ -138,7 +138,10 @@ function SingleNovel() {
                 </div>
                 <div>
                 <p className="novel-desc">
-                    {novel.description}
+                    {novel.description.split('\n').map(part=>(
+                            <p>{part}</p>
+                        ))
+                    }
                 </p>
                 </div>
             </section>
@@ -147,11 +150,21 @@ function SingleNovel() {
                     <article className='novel-article col-12'>
                         <h3>Chapters</h3>
                         <hr />
+                        <div>
+                            <p className='mt-3 font-18'>No chapters have been released yet.</p>
+                        </div>
                     </article>
                     <article className='novel-article col-12'>
                         <h3>Reviews</h3>
                         <hr className='mb-0'/>
-                        <ReviewList reviews={novel.reviews}></ReviewList>
+                        { novel.reviewCount ? (<ReviewList reviews={novel.reviews}></ReviewList>) : (
+                          <div>
+                              <p className='mt-3 font-18'>No reviews yet. Be the first one to give a review!</p>
+                          </div>
+                        )
+
+                        }
+                        
                     </article>
                 </div>
             </section>

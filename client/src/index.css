@@ -80,9 +80,13 @@ a:hover{
   min-height: calc(100vh - 71.39px - 71.39px);
 }
 
-/* NovelList */
+/* Novel */
 .ital{
   font-style: italic;
+}
+
+.red-heart{
+  color: red;
 }
 
 .novel-desc{

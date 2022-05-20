@@ -42,3 +42,15 @@ export const ADD_REVIEW = gql`
     }
   }
 `
+
+export const TOGGLE_ADD_TO_FAVORITES = gql`
+mutation addFavNovel($novelId: ID!) {
+  addFavNovel(novelId: $novelId) {
+    username
+    _id
+    favoriteNovels{
+      _id
+    }
+  }
+}
+`

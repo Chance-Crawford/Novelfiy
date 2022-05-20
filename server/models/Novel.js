@@ -34,6 +34,12 @@ const novelSchema = new Schema(
           ref: 'Chapter'
         }
     ],
+    favorites: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+      }
+    ],
     reviews: [
       {
         type: Schema.Types.ObjectId,

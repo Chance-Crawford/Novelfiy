@@ -34,6 +34,12 @@ const userSchema = new Schema(
         ref: 'Novel'
       }
     ],
+    favoriteNovels: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Novel'
+      }
+    ],
     following: [
       {
         type: Schema.Types.ObjectId,

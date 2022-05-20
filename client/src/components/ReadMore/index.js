@@ -12,14 +12,26 @@ const ReadMore = ({ text, length = 300 }) => {
             p tags at each \n */}
             {!showLess ? text.split('\n').map(part=>(
                 <p>{part}</p>
-            )) : <p className='m-0'>{text.slice(0, length)}...</p>}
+            )) : 
+            <p className='m-0'>{text.slice(0, length)}...
+                <span
+                    className='read-more d-inline'
+                    onClick={() => setShowLess(!showLess)}
+                >
+                {showLess ? "Read more" : "Less ^"}
+                </span>
+            </p>
+            }
         </div>
-        <span
-          className='read-more d-inline'
-          onClick={() => setShowLess(!showLess)}
-        >
-          {showLess ? "Read more" : "Less ^"}
-          </span>
+        {!showLess && (
+            <span
+            className='read-more d-inline'
+            onClick={() => setShowLess(!showLess)}
+          >
+            {showLess ? "Read more" : "Less ^"}
+            </span>
+        )}
+        
       </div>
     );
   };

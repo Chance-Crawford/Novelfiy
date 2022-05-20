@@ -9,6 +9,7 @@ const typeDefs = gql`
         email: String
         createdAt: String
         novels: [Novel]
+        favoriteNovels: [Novel]
         givenReviews: [Review]
         followerCount: Int
         followingCount: Int
@@ -31,6 +32,7 @@ const typeDefs = gql`
         description: String
         createdAt: String
         penName: String
+        favorites: [User]
         reviews: [Review]
         reviewCount: Int
         chapterCount: Int
@@ -47,7 +49,8 @@ const typeDefs = gql`
     type Mutation{
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
-        addNovel(title: String!, description: String!, penName: String, user: ID!): Novel
+        addNovel(title: String!, description: String!, penName: String): Novel
+        addFavNovel(novelId: ID!): User
         addReview(reviewText: String!, rating: Int!, novel: ID!): Review
     }
 
