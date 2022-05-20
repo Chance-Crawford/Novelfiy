@@ -283,3 +283,7 @@ a:hover{
   width: 25%;
   padding: .25rem .5rem;
 }
+
+.ml-2{
+  margin-left: 1rem!important;
+}
