@@ -36,6 +36,7 @@ query getNovel($_id: ID!) {
       user {
         _id
         username
+        email
       }
       favorites{
         _id

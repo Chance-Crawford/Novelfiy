@@ -1,8 +1,9 @@
 // use id from url
 import { useParams } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import ReviewList from '../components/ReviewList';
+import AddToFavorites from '../components/AddToFavorites';
 
 import { useQuery } from '@apollo/client';
 import { GET_NOVEL } from '../utils/queries';
@@ -15,7 +16,26 @@ import { faReadme } from "@fortawesome/free-brands-svg-icons"
 import { faHeart, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 
 function SingleNovel() {
+
     const { id: novelId } = useParams();
+
+    // must define novel as a state to use useEffect correctly
+    const [novel, setNovel] = useState({});
+
+    const { loading, data } = useQuery(GET_NOVEL, {
+        variables: { _id: novelId }
+    });
+
+    // use effect ensures that all novel data is completely loaded
+    // before rendering the SingleNovel page
+    useEffect(() => {
+        // if there's data to be stored
+        if (data?.novel.user.username) {
+            setNovel(data.novel) 
+        }
+    }, [data, loading, novel]);
+
+    
 
     // adding error for if user does not fil out the review form
     const [reviewFormError, setReviewFormError] = useState("");
@@ -78,22 +98,13 @@ function SingleNovel() {
         }
     };
 
-    const { loading, data } = useQuery(GET_NOVEL, {
-        // This is how you can pass variables to queries that need them. 
-        // The id property on the variables object will become the $id 
-        // parameter in the GraphQL query.
-        // This is how you pass in a value to the query's parameter.
-        // we put in the value retieved in the thoughtId variable above.
-        variables: { _id: novelId }
-    });
-    const novel = data?.novel || {}
 
-    if (loading) {
-        return <h3 className='text-center'>Loading...</h3>;
-    }
+    
 
     return (
-        <div className="pb-5">
+        <div>
+            { novel.user &&  (
+            <div className="pb-5">
             <section className='d-flex justify-content-center flex-wrap light-shadow-bottom'>
                 <div className='w-50 d-flex flex-wrap justify-content-center align-items-center'>
                     <div className='mt-3 mb-2 w-100'>
@@ -121,11 +132,7 @@ function SingleNovel() {
                                 <FontAwesomeIcon icon={faReadme} className="novel-list-icon"/>Read
                             </button>
                         </div>
-                        <div>
-                            <button className="btn fav-btn bold ml-3">
-                            <FontAwesomeIcon icon={faHeart} className="novel-list-icon"/>Add To Favorites
-                            </button>
-                        </div>
+                        <AddToFavorites novel={novel}></AddToFavorites>
                     </div>
                 </div>
             </section>
@@ -211,7 +218,9 @@ function SingleNovel() {
                     </div>
                 </form>
             </section>
-            
+        </div>
+        )
+        }
         </div>
     );
 }
