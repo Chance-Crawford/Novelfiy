@@ -25,7 +25,7 @@ function Home() {
 
     return (
         <div className="pb-5">
-            { novels.length && (
+            { novels.length ? (
                 <div>
                     <div className='text-center w-100'>
                     <img className='w-100 top-novel' src={TopNovelImg} alt="todays top novels banner" />
@@ -34,7 +34,7 @@ function Home() {
                         <NovelList novels={novels}></NovelList>
                     </div>
                 </div>  
-            )
+            ) : (<h4 className='text-center'>Loading...</h4>)
             }
             
         </div>

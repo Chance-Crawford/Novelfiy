@@ -103,7 +103,7 @@ function SingleNovel() {
 
     return (
         <div>
-            { novel.user &&  (
+            { novel.user ? (
             <div className="pb-5">
             <section className='d-flex justify-content-center flex-wrap light-shadow-bottom'>
                 <div className='w-50 d-flex flex-wrap justify-content-center align-items-center'>
@@ -219,7 +219,7 @@ function SingleNovel() {
                 </form>
             </section>
         </div>
-        )
+        ) : (<h4 className='text-center'>Loading...</h4>)
         }
         </div>
     );

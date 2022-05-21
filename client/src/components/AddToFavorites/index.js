@@ -11,10 +11,19 @@ import { TOGGLE_ADD_TO_FAVORITES } from '../../utils/mutations';
 // generates add to favorites button with all its functionality 
 function AddToFavorites({ novel }) {
 
-    const { loading: fLoading, data: fData } = useQuery(GET_ME);
-    const me = fData?.me || {}
+    const { loading, data } = useQuery(GET_ME);
 
-    const [toggleFavorite, { error: fError }] = useMutation(TOGGLE_ADD_TO_FAVORITES);
+    const [me, setMe] = useState({});
+
+    useEffect(() => {
+        // make sure me has complete data by being as specific as possible.
+        if(data?.me.givenReviews){
+            // if data has returned fully give me a value
+            setMe(data.me)
+        }
+    }, [data, loading]);
+
+    const [toggleFavorite, { error }] = useMutation(TOGGLE_ADD_TO_FAVORITES);
 
     const [favorite, setFavorite] = useState(false);
 
@@ -34,11 +43,11 @@ function AddToFavorites({ novel }) {
         }
     }
 
-    
+    // once me was declared a value in the useEffect above. this will activate
     useEffect(() => {
-        // make sure me has fData.
+        // make sure me has data.
         if(me.username){
-            // when me changes and has fData. check to see if this novel is within
+            // when me changes and has data. check to see if this novel is within
             // one of this users favoritNovel objects
             if(me.favoriteNovels.some(novelSearch => novelSearch._id === novel._id)){
                 setFavorite(true);
