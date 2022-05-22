@@ -29,11 +29,15 @@ function SingleNovel() {
     // use effect ensures that all novel data is completely loaded
     // before rendering the SingleNovel page
     useEffect(() => {
+        console.log(data?.novel);
         // if there's data to be stored
-        if (data?.novel.user.username) {
+        // make sure novel is not already set. because if not the novel
+        // will be set again without the user.username.
+        if (!novel.title && data?.novel.reviews.every((review) => review.rating)) {
             setNovel(data.novel) 
+            
         }
-    }, [data, loading, novel]);
+    }, [data, loading]);
 
     
 
@@ -146,7 +150,7 @@ function SingleNovel() {
                 <div>
                 <p className="novel-desc">
                     {novel.description.split('\n').map(part=>(
-                            <p>{part}</p>
+                            <span>{part}</span>
                         ))
                     }
                 </p>

@@ -47,6 +47,7 @@ function AddToFavorites({ novel }) {
     useEffect(() => {
         // make sure me has data.
         if(me.username){
+            console.log(me)
             // when me changes and has data. check to see if this novel is within
             // one of this users favoritNovel objects
             if(me.favoriteNovels.some(novelSearch => novelSearch._id === novel._id)){

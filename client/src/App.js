@@ -1,6 +1,6 @@
 
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
-import { Route, Switch} from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import { setContext } from '@apollo/client/link/context';
 

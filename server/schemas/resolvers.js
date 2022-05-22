@@ -43,14 +43,18 @@ const resolvers = {
         // novel id
         novel: async (parent, { _id }) => {
             // returns single novel from the novel id given
-            return Novel.findOne({ _id })
+            const novel = await Novel.findOne({ _id })
             .populate('user')
             // populate the reviews for the novel but also populate
             // the info within the reviews of the user who made each review.
             .populate({
                 path: 'reviews',
                 populate: {path: 'user'}
-            });
+            })
+            .exec();
+
+            console.log(novel)
+            return novel;
         },
 
         me: async (parent, args, context) => {

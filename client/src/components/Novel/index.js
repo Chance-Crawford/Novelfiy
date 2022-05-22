@@ -10,9 +10,11 @@ function Novel({ novel }) {
     return(
         <article className="mt-4 mb-4">
             <div className="mt-3 mb-3">
-                <Link to={`/novel/${novel._id}`}>
+                {/* since data wasnt loading very well on single novel with link,
+                use <a> so that the page will refresh*/}
+                <a href={`/novel/${novel._id}`}>
                     <h3 className="bold">{novel.title}</h3>
-                </Link>
+                </a>
             </div>
             <div className="mb-3">
                 <p className="m-0">By. <span className="ital">{novel.penName ? novel.penName : novel.user.username}</span></p>
@@ -33,9 +35,9 @@ function Novel({ novel }) {
                                 `${novel.description}`.substring(0, 447)
                             }
                             ...
-                            <Link to={`/novel/${novel._id}`}>
+                            <a href={`/novel/${novel._id}`}>
                                 <span className="read-more">Read more</span>
-                            </Link>
+                            </a>
                         </p>
                     )
                 }
