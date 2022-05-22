@@ -7,8 +7,9 @@ import { setContext } from '@apollo/client/link/context';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Home from './pages/Home';
-import SingleNovel from './pages/SingleNovel'
+import SingleNovel from './pages/SingleNovel';
 import Login from './pages/Login';
+import Profile from './pages/Profile';
 
 // add a proxy to the client folder's package.json.
 // "proxy": "http://localhost:3001", so server can run on different port
@@ -52,6 +53,7 @@ function App() {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/novel/:id" component={SingleNovel} />
+                <Route exact path="/user/:id" component={Profile} />
               </Switch>
             </div>
           </main>
