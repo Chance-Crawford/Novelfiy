@@ -8,8 +8,8 @@ import AddToFavorites from '../AddToFavorites';
 function Novel({ novel }) {
 
     return(
-        <article className="mt-4 mb-4">
-            <div className="mt-3 mb-3">
+        <article className="">
+            <div className="mb-3">
                 {/* since data wasnt loading very well on single novel with link,
                 use <a> so that the page will refresh*/}
                 <a href={`/novel/${novel._id}`}>
@@ -17,7 +17,9 @@ function Novel({ novel }) {
                 </a>
             </div>
             <div className="mb-3">
-                <p className="m-0">By. <span className="ital">{novel.penName ? novel.penName : novel.user.username}</span></p>
+                <a href={`/user/${novel.user.username}`}>
+                    <p className="m-0 user-hover">By. <span className="ital">{novel.penName ? novel.penName : novel.user.username}</span></p>
+                </a>
             </div>
             <div className="mb-3">
                 {

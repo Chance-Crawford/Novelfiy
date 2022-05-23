@@ -3,6 +3,8 @@ import { GET_ME, GET_USER } from '../utils/queries';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
+import PageNotFound from './PageNotFound';
+
 function Profile() {
 
     const { username: username } = useParams();
@@ -44,10 +46,10 @@ function Profile() {
     return(
         <div>
             { user?.username ? (
-                <h2>{user.username}</h2>
+                <h2 className='text-center'>{user.username}</h2>
             )  : !userLoading && !user ? (
                 // if not loading anymore and there still is no user data.
-                <h4 className='text-center'>No user found!</h4>
+                <PageNotFound></PageNotFound>
             ) : (
                 // if the data is still loading
                 <h4 className='text-center'>Loading...</h4>

@@ -45,7 +45,7 @@ a:hover{
 .dropbtn {
   background-color: transparent;
   color: black;
-  padding: 16px;
+  padding: .5rem 1rem;
   font-size: 16px;
   border: none;
   cursor: pointer;
@@ -130,12 +130,22 @@ a:hover{
   /* since there is a min height, must badd a table display ion order to center
   content vertically that does not fill upo the whole page, like Login */
   display: table;
-  min-height: calc(100vh - 71.39px - 71.39px);
+  min-height: calc(100vh - 73px - 71.39px);
 }
 
 /* Novel */
 .ital{
   font-style: italic;
+}
+
+.novel-box{
+  margin: 1rem 0;
+  --webkit-box-shadow: 0 4px 5px rgb(27 27 27 / 10%), 0 1px 10px rgb(27 27 27 / 10%);
+  box-shadow: 0 4px 5px rgb(27 27 27 / 10%), 0 1px 10px rgb(27 27 27 / 10%);
+}
+
+.user-hover:hover{
+  text-decoration: underline;
 }
 
 .red-heart{
@@ -251,7 +261,7 @@ a:hover{
 
 .login-section{
   /* to center login img and form in parent div
-  main-contain. both parent and this child must width 100 */
+  main-contain. both parent and this child must be width 100 */
   display: table-cell;
   vertical-align: middle;
 }
@@ -343,4 +353,10 @@ a:hover{
 
 .ml-2{
   margin-left: .75rem!important;
+}
+
+/* 404 */
+.table-center-section{
+  display: table-cell;
+  vertical-align: middle;
 }

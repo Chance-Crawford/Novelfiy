@@ -16,7 +16,9 @@ function NovelList({ novels }) {
     return (
         <section className="w-100">
             {novels && novels.map( novel => (
-                <Novel novel={novel} key={novel._id}></Novel>
+                <div className='novel-box p-3'>
+                    <Novel novel={novel} key={novel._id}></Novel>
+                </div>
             ))}
         </section>
     );

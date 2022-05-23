@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 
 import ReviewList from '../components/ReviewList';
 import AddToFavorites from '../components/AddToFavorites';
+import PageNotFound from './PageNotFound';
 
 import { useQuery } from '@apollo/client';
 import { GET_NOVEL } from '../utils/queries';
@@ -115,7 +116,7 @@ function SingleNovel() {
                         <h2 className='m-0 bold'>{novel.title}</h2>
                     </div>
                     <div className="mt-3 mb-2 w-100">
-                        <p className="m-0">By. <span className="bold">{novel.penName ? novel.penName : novel.user.username}</span></p>
+                        <p className="m-0">By. <a className="bold user-hover" href={`/user/${novel.user.username}`}>{novel.penName ? novel.penName : novel.user.username}</a></p>
                     </div>
                     {novel.reviews.length > 10 && (
                         <div className="mt-3 mb-2 w-100">
@@ -223,6 +224,8 @@ function SingleNovel() {
                 </form>
             </section>
         </div>
+        ) : !loading && !novel.title ? (
+            <PageNotFound></PageNotFound>
         ) : (<h4 className='text-center'>Loading...</h4>)
         }
         </div>
