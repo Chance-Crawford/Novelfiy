@@ -17,13 +17,15 @@ const resolvers = {
       
         // get a user by username
         user: async (parent, { username }) => {
-            return User.findOne({ username })
+            const user = await User.findOne({ username })
                 .select('-__v -password')
                 .populate('novels')
                 .populate('favoriteNovels')
                 .populate('givenReviews')
                 .populate('following')
                 .populate('followers');
+
+            return user;
         },
         
         // returns all novels

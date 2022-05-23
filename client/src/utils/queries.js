@@ -107,3 +107,53 @@ query me{
   }
 }
 `
+
+export const GET_USER = gql`
+query getUser($username: String!) {
+  user(username: $username) {
+    _id
+    username
+    email
+    createdAt
+    favoriteNovels {
+      _id
+      title
+      description
+      penName
+      user {
+        _id
+        username
+      }
+      favorites {
+        _id
+      }
+      createdAt
+      reviews {
+        _id
+        rating
+      }
+      chapterCount
+      reviewCount
+    }
+    novels {
+      _id
+      title
+      description
+      penName
+      reviews {
+        _id
+      }
+      reviewCount
+      chapterCount
+    }
+    givenReviews {
+      _id
+      reviewText
+      createdAt
+    }
+    followerCount
+    followingCount
+    givenReviewCount
+  }
+}
+`

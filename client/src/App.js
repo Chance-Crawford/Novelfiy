@@ -53,7 +53,7 @@ function App() {
                 <Route exact path="/" component={Home} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/novel/:id" component={SingleNovel} />
-                <Route exact path="/user/:id" component={Profile} />
+                <Route exact path="/user/:username" component={Profile} />
               </Switch>
             </div>
           </main>

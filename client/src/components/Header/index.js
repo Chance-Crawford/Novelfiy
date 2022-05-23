@@ -40,7 +40,7 @@ function Header() {
                 <div class="dropdown">
                     <button class="dropbtn">{me.username} {<FontAwesomeIcon icon={faAngleDown} className="down-arr"/>}</button>
                     <div class="dropdown-content">
-                    <Link to={`/user/${me._id}`}><FontAwesomeIcon icon={faUser} className="" /> 	&#160;Profile</Link>
+                    <a href={`/user/${me.username}`}><FontAwesomeIcon icon={faUser} className="" /> 	&#160;Profile</a>
                     <a href="/" onClick={logout}>
                     <FontAwesomeIcon icon={faArrowRightFromBracket} /> &#160;Logout
                     </a>
