@@ -8,6 +8,7 @@ import { faBook, faFilePen, faHeart } from '@fortawesome/free-solid-svg-icons'
 
 import NovelList from '../components/NovelList'
 import PageNotFound from './PageNotFound';
+import ReadMore from '../components/ReadMore';
 
 function Profile() {
 
@@ -133,11 +134,79 @@ function Profile() {
                             </div>
                         ) : tab === 'Reviews' ? (
                             <div>
-                                
+                                <div className='mt-4 mb-3'>
+                                    <h3>{user.novels.length === 0 || user.novels.length > 1 ? (
+                                        <span>Reviews</span>
+                                    ) : (
+                                        <span>Review</span>
+                                    )} by {user.username}</h3>
+                                    <p className='novel-desc'>Novels that {user.username} has reviewed</p>
+                                </div>
+                                <div className='pt-1'>
+                                    {user.givenReviewCount ? (
+                                        <div>
+                                            {user.givenReviews.map( review => (
+                                                <div key={review._id}>
+                                                    <div className='novel-box p-3'>
+                                                        <div>
+                                                            <p className='font-18 bold text-center'>Review for: <a className='underline' href={`/novel/${review.novel._id}`}>{review.novel.title}</a></p>
+                                                        </div>
+                                                        <div className="d-flex mb-3">
+                                                            <a href={`/user/${review.user.username}`}>
+                                                                <p className="bold font-17 m-0 user-hover">{review.user.username}</p>
+                                                            </a>
+                                                            <p className="ml-2 ital font-17 m-0">{review.createdAt}</p>
+                                                        </div>
+                                                        <div className='w-50 mb-3'>
+                                                            <div className={review.rating < 4 ? 'mb-2 review-red' :
+                                                                review.rating < 7 ? 'mb-2 review-yellow' :
+                                                                'mb-2 review-green'
+                                                                }>
+                                                                <p className="m-0">Rating: {review.rating}/10</p>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        
+                                                        {
+                                                            // have to put in a template literal to get it to read length
+                                                            // and treat as string
+                                                            `${review.reviewText}`.length <= 430 ? (
+                                                                <p className="">
+                                                                    {/* split review text by the newline characters and make
+                                                                    each section a paragraph */}
+                                                                    {review.reviewText.split('\n').map(part=>(
+                                                                        <span>{part}</span>
+                                                                    ))}
+                                                                </p>
+                                                            ) : (
+                                                                <ReadMore text={review.reviewText} length={430}></ReadMore>
+                                                            )
+                                                        }
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <p className='font-18 text-center'>{user.username} has not reviewed any novels yet</p>
+                                    )}
+                                    
+                                </div>
                             </div>
                         ) : (
                             <div>
-                                
+                                <div className='mt-4 mb-3'>
+                                    <h3>Favorite Novels</h3>
+                                    <p className='novel-desc'>Novels that have been favorited by {user.username}</p>
+                                </div>
+                                <div className='pt-1'>
+                                    {user.favoriteNovels.length ? (
+                                        <div>
+                                            <NovelList novels={user.favoriteNovels}></NovelList>
+                                        </div>
+                                    ) : (
+                                        <p className='font-18 text-center'>{user.username} has not added any novels to their favorites</p>
+                                    )}
+                                </div>
                             </div>
                         )}
                     </section>
@@ -148,7 +217,13 @@ function Profile() {
                 <PageNotFound></PageNotFound>
             ) : (
                 // if the data is still loading
-                <h4 className='text-center'>Loading...</h4>
+                <div>
+                    {
+                        
+                    }
+                    <h4 className='text-center'>Loading...</h4>
+                </div>
+                
             )
             }
         </div>
