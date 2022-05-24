@@ -150,8 +150,8 @@ function Profile() {
                                     {user.givenReviewCount ? (
                                         <div>
                                             {user.givenReviews.map( review => (
-                                                <div key={review._id}>
-                                                    <div className='novel-box p-3'>
+                                                <div key={review._id} >
+                                                    <div className='novel-box p-3 review-contain'>
                                                         <div>
                                                             <p className='font-18 bold text-center'>Review for: <a className='underline' href={`/novel/${review.novel._id}`}>{review.novel.title}</a></p>
                                                         </div>

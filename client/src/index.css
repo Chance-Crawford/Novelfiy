@@ -382,3 +382,7 @@ a:hover{
 .underline{
   text-decoration: underline;
 }
+
+.review-contain{
+  border-radius: 20px;
+}
