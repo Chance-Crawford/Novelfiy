@@ -2,13 +2,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faReadme } from "@fortawesome/free-brands-svg-icons"
 import { Link } from 'react-router-dom';
 
+
+
 import AddToFavorites from '../AddToFavorites';
 
 
 function Novel({ novel }) {
 
     return(
-        <article className="">
+        <article className="" >
             <div className="mb-3">
                 {/* since data wasnt loading very well on single novel with link,
                 use <a> so that the page will refresh*/}

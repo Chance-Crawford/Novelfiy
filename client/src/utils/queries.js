@@ -146,7 +146,7 @@ query getUser($username: String!) {
       user{
         username
         _id
-        
+
       }
       reviewCount
       chapterCount
@@ -155,6 +155,15 @@ query getUser($username: String!) {
       _id
       reviewText
       createdAt
+      rating
+      novel{
+        title
+        _id
+      }
+      user{
+        _id
+        username
+      }
     }
     followerCount
     followingCount

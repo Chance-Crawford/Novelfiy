@@ -16,18 +16,22 @@ function Profile() {
 
     // get user from param
     const { loading: userLoading, data: userData } = useQuery(GET_USER, {
-        variables: { username: username }
+        variables: { username: username },
     });
 
     const [user, setUser] = useState({});
 
     useEffect(() => {
-        if(userData){
+        // !user.favoriteNovels so that user does not automatically update.
+        // if there is already a user reference available with all its data populated,
+        // use that one until refresh.
+        if(userData?.user.favoriteNovels && !user.favoriteNovels){
             console.log(userData.user);
             setUser(userData.user);
         } 
 
     }, [userData, userLoading]);
+
 
     // set state of which icon is active
     const [tab, setTab] = useState("Novels");

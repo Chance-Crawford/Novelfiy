@@ -378,3 +378,7 @@ a:hover{
 .active-icon{
   border-bottom: 5px solid var(--primary-hover);
 }
+
+.underline{
+  text-decoration: underline;
+}

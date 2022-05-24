@@ -21,12 +21,20 @@ const resolvers = {
             let user = await User.findOne({ username })
                 .select('-__v -password')
                 .populate('novels')
-                .populate('favoriteNovels')
-                .populate('givenReviews')
+                .populate({
+                    path: 'favoriteNovels',
+                    populate: {path: 'user'}
+                })
+                .populate({
+                    path: 'givenReviews',
+                    populate: {path: 'novel'}
+                })
                 .populate('following')
                 .populate('followers');
 
             user.novels.reverse();
+            user.givenReviews.reverse();
+            user.favoriteNovels.reverse()
 
             return user;
         },
