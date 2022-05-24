@@ -46,7 +46,51 @@ function Profile() {
     return(
         <div>
             { user?.username ? (
-                <h2 className='text-center'>{user.username}</h2>
+                <div>
+                    <section className='w-100 p-3 d-flex flex-wrap justify-content-center'>
+                        <div className='w-100'>
+                            <h2 className='text-center'>@{user.username}</h2>
+                        </div>
+                        <div className='w-100 pb-4 mt-3 d-flex justify-content-center flex-wrap light-bottom-border'>
+                            <div className='d-flex ml-3 justify-content-center flex-wrap text-center'>
+                                <div className='w-100'>
+                                    <p className='m-0 font-18 bold'>{user.novels.length}</p>
+                                </div>
+                                <div className='w-100'>
+                                    {
+                                        user.novels.length === 0 || user.novels.length > 1 ? (
+                                            <p className='m-0 font-18'>Novels</p>
+                                        ) : (
+                                            <p className='m-0 font-18'>Novel</p>
+                                        )
+                                    }
+                                </div>
+                            </div>
+
+                            <div className='d-flex ml-3  justify-content-center flex-wrap text-center'>
+                                <div className='w-100'>
+                                    <p className='m-0 font-18 bold'>{user.followingCount}</p>
+                                </div>
+                                <div className='w-100'>
+                                    <p className='m-0 font-18'>Following</p>
+                                </div>
+                            </div>
+
+                            <div className='d-flex ml-3 justify-content-center flex-wrap text-center'>
+                                <div className='w-100'>
+                                    <p className='m-0 font-18 bold'>{user.followerCount}</p>
+                                </div>
+                                <div className='w-100'>
+                                    <p className='m-0 font-18'>Followers</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    <section>
+                        
+                    </section>
+                </div>
+                
             )  : !userLoading && !user ? (
                 // if not loading anymore and there still is no user data.
                 <PageNotFound></PageNotFound>
