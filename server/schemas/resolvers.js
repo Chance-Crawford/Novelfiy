@@ -4,6 +4,7 @@ const { AuthenticationError } = require('apollo-server-express');
 
 // generates a json web token
 const { signToken } = require('../utils/auth');
+const { faLessThanEqual } = require('@fortawesome/free-solid-svg-icons');
 
 const resolvers = {
     Query: {
@@ -17,13 +18,15 @@ const resolvers = {
       
         // get a user by username
         user: async (parent, { username }) => {
-            const user = await User.findOne({ username })
+            let user = await User.findOne({ username })
                 .select('-__v -password')
                 .populate('novels')
                 .populate('favoriteNovels')
                 .populate('givenReviews')
                 .populate('following')
                 .populate('followers');
+
+            user.novels.reverse();
 
             return user;
         },
@@ -55,7 +58,6 @@ const resolvers = {
             })
             .exec();
 
-            console.log(novel)
             return novel;
         },
 

@@ -360,3 +360,21 @@ a:hover{
   display: table-cell;
   vertical-align: middle;
 }
+
+/* Profile */
+.mr-2{
+  margin-right: 0.75rem!important;
+}
+
+.profile-icon{
+  cursor: pointer;
+  transition: color .25s;
+}
+
+.profile-icon:hover{
+  color: var(--primary-hover);
+}
+
+.active-icon{
+  border-bottom: 5px solid var(--primary-hover);
+}

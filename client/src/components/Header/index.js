@@ -37,9 +37,9 @@ function Header() {
             </Link>
             {Auth.loggedIn() && me.username ? (
 
-                <div class="dropdown">
-                    <button class="dropbtn">{me.username} {<FontAwesomeIcon icon={faAngleDown} className="down-arr"/>}</button>
-                    <div class="dropdown-content">
+                <div className="dropdown">
+                    <button className="dropbtn">{me.username} {<FontAwesomeIcon icon={faAngleDown} className="down-arr"/>}</button>
+                    <div className="dropdown-content">
                     <a href={`/user/${me.username}`}><FontAwesomeIcon icon={faUser} className="" /> 	&#160;Profile</a>
                     <a href="/" onClick={logout}>
                     <FontAwesomeIcon icon={faArrowRightFromBracket} /> &#160;Logout

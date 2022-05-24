@@ -143,6 +143,11 @@ query getUser($username: String!) {
       reviews {
         _id
       }
+      user{
+        username
+        _id
+        
+      }
       reviewCount
       chapterCount
     }
