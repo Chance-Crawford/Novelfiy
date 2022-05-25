@@ -21,6 +21,7 @@ query getNovels($user: ID) {
       }
       chapterCount
       reviewCount
+      favoritesCount
     }
 }
 `
@@ -54,6 +55,7 @@ query getNovel($_id: ID!) {
       }
       chapterCount
       reviewCount
+      favoritesCount
     }
 }
 `
@@ -134,6 +136,7 @@ query getUser($username: String!) {
       }
       chapterCount
       reviewCount
+      favoritesCount
     }
     novels {
       _id
@@ -150,6 +153,7 @@ query getUser($username: String!) {
       }
       reviewCount
       chapterCount
+      favoritesCount
     }
     givenReviews {
       _id

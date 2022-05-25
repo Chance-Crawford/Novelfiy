@@ -103,17 +103,17 @@ function Profile() {
                             <div 
                             className={tab === 'Novels' ? 'd-flex justify-content-center w-25 profile-icon active-icon' : 'd-flex profile-icon justify-content-center w-25'}
                             onClick={()=>{setTab('Novels')}}>
-                                <h3 className='profile-icon'><FontAwesomeIcon icon={faBook} /></h3>
+                                <a title='Novels'><h3 className='profile-icon'><FontAwesomeIcon icon={faBook} /></h3></a>
                             </div>
                             <div 
                             className={tab === 'Reviews' ? 'd-flex justify-content-center w-25 profile-icon active-icon' : 'd-flex profile-icon justify-content-center w-25'}
                             onClick={()=>{setTab('Reviews')}}>
-                                <h3 className='profile-icon'><FontAwesomeIcon icon={faFilePen} /></h3>
+                                <a title='Reviews'><h3 className='profile-icon'><FontAwesomeIcon icon={faFilePen} /></h3></a>
                             </div>
                             <div 
                             className={tab === 'Favorites' ? 'd-flex profile-icon justify-content-center w-25 active-icon' : 'd-flex profile-icon justify-content-center w-25'}
                             onClick={()=>{setTab('Favorites')}}>
-                                <h3><FontAwesomeIcon icon={faHeart} /></h3>
+                                <a title='Favorites'><h3><FontAwesomeIcon icon={faHeart} /></h3></a>
                             </div>
                         </div>
                     </section>

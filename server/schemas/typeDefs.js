@@ -36,6 +36,7 @@ const typeDefs = gql`
         reviews: [Review]
         reviewCount: Int
         chapterCount: Int
+        favoritesCount: Int
     }
 
     type Query {

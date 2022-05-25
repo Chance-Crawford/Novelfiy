@@ -20,7 +20,10 @@ const resolvers = {
         user: async (parent, { username }) => {
             let user = await User.findOne({ username })
                 .select('-__v -password')
-                .populate('novels')
+                .populate({
+                    path: 'novels',
+                    populate: {path: 'favorites'}
+                })
                 .populate({
                     path: 'favoriteNovels',
                     populate: {path: 'user'}

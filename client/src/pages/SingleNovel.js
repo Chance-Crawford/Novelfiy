@@ -118,6 +118,10 @@ function SingleNovel() {
                     <div className="mt-3 mb-2 w-100">
                         <p className="m-0">By. <a className="bold user-hover" href={`/user/${novel.user.username}`}>{novel.penName ? novel.penName : novel.user.username}</a></p>
                     </div>
+                    <div className="mt-3 mb-2 w-100">
+                        <FontAwesomeIcon icon={faHeart} /> <span>{novel.favoritesCount}</span>
+                    </div>
+                    
                     {novel.reviews.length > 10 && (
                         <div className="mt-3 mb-2 w-100">
                             <p className="m-0 bold font-18">Rating: {

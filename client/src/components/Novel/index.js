@@ -1,5 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faReadme } from "@fortawesome/free-brands-svg-icons"
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
 
 
@@ -9,6 +10,7 @@ import AddToFavorites from '../AddToFavorites';
 
 function Novel({ novel }) {
 
+    console.log(novel)
     return(
         <article className="" >
             <div className="mb-3">
@@ -22,6 +24,9 @@ function Novel({ novel }) {
                 <a href={`/user/${novel.user.username}`}>
                     <p className="m-0 user-hover">By. <span className="ital">{novel.penName ? novel.penName : novel.user.username}</span></p>
                 </a>
+            </div>
+            <div className="mb-3">
+                <FontAwesomeIcon icon={faHeart} /> <span>{novel.favoritesCount}</span>
             </div>
             <div className="mb-3">
                 {

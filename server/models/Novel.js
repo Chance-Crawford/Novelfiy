@@ -62,6 +62,10 @@ novelSchema.virtual('chapterCount').get(function() {
     return this.chapters.length;
 });
 
+novelSchema.virtual('favoritesCount').get(function() {
+  return this.favorites.length;
+});
+
 
 const Novel = model('Novel', novelSchema);
 
