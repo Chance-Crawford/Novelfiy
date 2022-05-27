@@ -138,7 +138,7 @@ const resolvers = {
         // add context later 
         addNovel: async (parent, args, context) => {
             if (context.user) {
-                const novel = await Novel.create({...args});
+                const novel = await Novel.create({...args, user: context.user._id });
 
                 await User.findByIdAndUpdate(
                     { _id: context.user._id },

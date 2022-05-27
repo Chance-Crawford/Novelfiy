@@ -37,6 +37,13 @@ a:hover{
   font-style: italic;
 }
 
+.write-btn-contain{
+}
+
+.write-btn-contain:hover{
+  background-color: #f1f1f1;
+}
+
 .top-header{
   border-bottom: 1px solid rgb(221, 221, 221);
 }
@@ -91,7 +98,7 @@ a:hover{
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
-  background-color: rgb(226, 226, 226);
+  background-color: #f1f1f1;
 }
 
 .login-btn{
@@ -295,6 +302,10 @@ a:hover{
   width: 100%;
 }
 
+.form-padding{
+  padding: .25rem .5rem;
+}
+
 .info-form{
   font-size: 20px;
 }
@@ -389,4 +400,36 @@ a:hover{
 
 .font-17{
   font-size: 17px;
+}
+
+/* CreateNovel */
+
+.info-box{
+  border-left: 3px solid rgb(143, 143, 143);
+  padding-left: 1.5rem;
+}
+
+.light-box-shadow{
+  --webkit-box-shadow: 0 4px 5px rgb(27 27 27 / 10%), 0 1px 10px rgb(27 27 27 / 10%);
+  box-shadow: 0 4px 5px rgb(27 27 27 / 10%), 0 1px 10px rgb(27 27 27 / 10%);
+}
+
+.font-reg{
+  font-size: 1rem;
+}
+
+.browse-label-cust{
+  background-color: white;
+  padding: .25rem .5rem;
+  margin-left: 5px;
+  border-radius: 5px;
+  transition: background-color .5s;
+}
+
+.browse-label-cust:hover{
+  background-color: rgb(162, 255, 190);
+}
+
+.w-35{
+  width: 35%;
 }

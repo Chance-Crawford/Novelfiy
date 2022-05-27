@@ -11,6 +11,7 @@ import SingleNovel from './pages/SingleNovel';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import PageNotFound from './pages/PageNotFound';
+import CreateNovel from './pages/CreateNovel';
 
 // add a proxy to the client folder's package.json.
 // "proxy": "http://localhost:3001", so server can run on different port
@@ -55,6 +56,7 @@ function App() {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/novel/:id" component={SingleNovel} />
                 <Route exact path="/user/:username" component={Profile} />
+                <Route exact path="/create" component={CreateNovel} />
                 <Route component={PageNotFound} />
               </Switch>
             </div>

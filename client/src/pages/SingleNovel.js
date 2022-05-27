@@ -153,12 +153,12 @@ function SingleNovel() {
                     <h3 className='bold'>Description</h3>
                 </div>
                 <div>
-                <p className="novel-desc">
+                <div className="novel-desc">
                     {novel.description.split('\n').map(part=>(
-                            <span>{part}</span>
+                            <p>{part}</p>
                         ))
                     }
-                </p>
+                </div>
                 </div>
             </section>
             <section className='mt-3 p-3'>

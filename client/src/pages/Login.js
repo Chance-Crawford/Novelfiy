@@ -69,7 +69,8 @@ function Login() {
     
         setSignupFormState({
           ...signupFormState,
-          [name]: value.trim(),
+          // remove extra whitespace
+          [name]: value.replace(/ +/g, ' ').trim(),
         });
     };
     // submit signup form

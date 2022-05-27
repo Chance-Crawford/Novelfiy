@@ -54,3 +54,15 @@ mutation addFavNovel($novelId: ID!) {
   }
 }
 `
+
+export const ADD_NOVEL = gql`
+mutation addNovel($title: String!, $description: String!, $penName: String) {
+  addNovel(title: $title, description: $description, penName: $penName) {
+    _id
+    title
+    user {
+      _id
+    }
+  }
+}
+`

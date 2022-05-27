@@ -5,7 +5,7 @@ import { GET_ME } from '../../utils/queries';
 import { useState, useEffect } from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleDown, faUser, faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+import { faAngleDown, faUser, faArrowRightFromBracket, faPencil } from '@fortawesome/free-solid-svg-icons'
 
 function Header() {
     const { loading, data } = useQuery(GET_ME);
@@ -36,14 +36,21 @@ function Header() {
                 </div>
             </Link>
             {Auth.loggedIn() && me.username ? (
-
-                <div className="dropdown">
-                    <button className="dropbtn">{me.username} {<FontAwesomeIcon icon={faAngleDown} className="down-arr"/>}</button>
-                    <div className="dropdown-content">
-                    <a href={`/user/${me.username}`}><FontAwesomeIcon icon={faUser} className="" /> 	&#160;Profile</a>
-                    <a href="/" onClick={logout}>
-                    <FontAwesomeIcon icon={faArrowRightFromBracket} /> &#160;Logout
-                    </a>
+                <div className='d-flex align-items-center'>
+                    <Link to='/create'>
+                        <div className='mr-2 write-btn-contain'>
+                            <p className='btn m-0'><FontAwesomeIcon icon={faPencil} /> &#160;Submit My Novel</p>
+                        </div>
+                    </Link>
+                    <span className='novel-desc'>|</span>
+                    <div className="dropdown ml-2">
+                        <button className="dropbtn">{me.username} {<FontAwesomeIcon icon={faAngleDown} className="down-arr"/>}</button>
+                        <div className="dropdown-content">
+                        <a href={`/user/${me.username}`}><FontAwesomeIcon icon={faUser} className="" /> 	&#160;Profile</a>
+                        <a href="/" onClick={logout}>
+                        <FontAwesomeIcon icon={faArrowRightFromBracket} /> &#160;Logout
+                        </a>
+                        </div>
                     </div>
                 </div>
                 
