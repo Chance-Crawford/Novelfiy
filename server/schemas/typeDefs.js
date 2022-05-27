@@ -52,6 +52,7 @@ const typeDefs = gql`
         addUser(username: String!, email: String!, password: String!): Auth
         addNovel(title: String!, description: String!, penName: String): Novel
         addFavNovel(novelId: ID!): User
+        
         addReview(reviewText: String!, rating: Int!, novel: ID!): Review
     }
 

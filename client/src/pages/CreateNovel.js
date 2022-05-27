@@ -8,6 +8,8 @@ function CreateNovel() {
 
     const [charCount, setCharCount] = useState(0);
 
+    const [files, setFiles] = useState([]);
+
     const [novelFormState, setNovelFormState] = useState({ title: '', description: '', penName: '' });
     const [addNovel, { error }] = useMutation(ADD_NOVEL);
     const handleNovelChange = (event) => {
@@ -26,6 +28,8 @@ function CreateNovel() {
     };
     const handleNovelSubmit = async (event) => {
         event.preventDefault();
+
+        console.log(files)
 
         try {
         const { data } = await addNovel({
@@ -108,7 +112,7 @@ function CreateNovel() {
                     </div>
                     <div className="pt-3 mb-3">
                         <p className="bold">Cover Image:</p>
-                        <FilePondCustom></FilePondCustom>
+                        <FilePondCustom files={files} setFiles={setFiles}></FilePondCustom>
                     </div>
                     <div className='d-flex flex-wrap pt-3 w-75'>
                         <label htmlFor="description" className='bold w-100'>Description:</label>

@@ -20,11 +20,11 @@ import FilePondPluginFileEncode from 'filepond-plugin-file-encode'
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 
 // Register the plugins
-registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview, FilePondPluginImageResize, FilePondPluginFileEncode);
+registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview, FilePondPluginImageResize);
 
-function FilePondCustom() {
+function FilePondCustom({ files, setFiles }) {
 
-    const [files, setFiles] = useState([]);
+    
 
     return (
         <div className="w-35">
@@ -34,8 +34,9 @@ function FilePondCustom() {
                 imageResizeTargetWidth={200}
                 imageResizeTargetHeight={250}
                 onupdatefiles={setFiles}
+                allowMultiple={false}
                 maxFiles={1}
-                server="/api"
+                server='/graphql'
                 name="files"
                 labelIdle='Drag & Drop your files or <span class="filepond--label-action browse-label-cust">Browse</span>'
             />
