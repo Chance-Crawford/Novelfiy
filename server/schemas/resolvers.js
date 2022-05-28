@@ -1,12 +1,17 @@
 const { User, Novel, Review } = require('../models');
-
+const GraphQLUpload = require('graphql-upload/GraphQLUpload.js');
 const { AuthenticationError } = require('apollo-server-express');
+const fs = require("fs");
+const { finished } = require("stream/promises");
+let fileName;
+let imageUrl;
 
 // generates a json web token
 const { signToken } = require('../utils/auth');
-const { faLessThanEqual } = require('@fortawesome/free-solid-svg-icons');
 
 const resolvers = {
+    
+
     Query: {
         // return all users
         users: async () => {
@@ -90,6 +95,8 @@ const resolvers = {
         }
     },
 
+    Upload: GraphQLUpload,
+
     Mutation: {
 
         addUser: async (parent, args) => {
@@ -153,6 +160,23 @@ const resolvers = {
             }
             
             throw new AuthenticationError('You need to be logged in!');
+        },
+
+        singleUpload: async (parent, { file }) => {
+            const { createReadStream, filename, mimetype, encoding } = await file;
+
+            // Invoking the `createReadStream` will return a Readable Stream.
+            // See https://nodejs.org/api/stream.html#stream_readable_streams
+            const stream = createReadStream();
+
+            // This is purely for demonstration purposes and will overwrite the
+            // local-file-output.txt in the current working directory on EACH upload.
+            const out = fs.createWriteStream(`./${filename}`);
+            stream.pipe(out);
+            await finished(out);
+
+            console.log({ filename, mimetype, encoding });
+            return { filename, mimetype, encoding };
         },
 
         addFavNovel: async (parent, { novelId }, context) => {

@@ -3,6 +3,8 @@ const { gql } = require('apollo-server-express');
 // eventually change return type of addUser to auth!
 // add chapters to Novel type.
 const typeDefs = gql`
+    scalar Upload
+
     type User{
         _id: ID
         username: String
@@ -14,6 +16,12 @@ const typeDefs = gql`
         followerCount: Int
         followingCount: Int
         givenReviewCount: Int
+    }
+
+    type File {
+        filename: String!
+        mimetype: String!
+        encoding: String!
     }
 
     type Review{
@@ -52,7 +60,7 @@ const typeDefs = gql`
         addUser(username: String!, email: String!, password: String!): Auth
         addNovel(title: String!, description: String!, penName: String): Novel
         addFavNovel(novelId: ID!): User
-        
+        singleUpload(file: Upload!): File!
         addReview(reviewText: String!, rating: Int!, novel: ID!): Review
     }
 

@@ -1,17 +1,24 @@
 import { ADD_NOVEL } from "../utils/mutations";
+import { SINGLE_UPLOAD } from "../utils/mutations";
 import { useState } from 'react';
 import { useMutation } from '@apollo/client';
 
+
 import FilePondCustom from "../components/FilePondCustom";
+import SingleUpload from "../components/SingleUpload";
 
 function CreateNovel() {
 
     const [charCount, setCharCount] = useState(0);
+    
 
     const [files, setFiles] = useState([]);
 
     const [novelFormState, setNovelFormState] = useState({ title: '', description: '', penName: '' });
     const [addNovel, { error }] = useMutation(ADD_NOVEL);
+    // const [singleUpload, { error: uploadError }] = useMutation(SINGLE_UPLOAD, {
+    //     onCompleted: (data) => console.log(data),
+    // });
     const handleNovelChange = (event) => {
         // get name and value of input element from the event.target
         let { name, value } = event.target;
@@ -29,7 +36,18 @@ function CreateNovel() {
     const handleNovelSubmit = async (event) => {
         event.preventDefault();
 
-        console.log(files)
+        // try {
+        //     const { data: fileData } = await singleUpload({
+        //         // and pass in variable data from form
+        //         variables: { file: files }
+    
+        //     });
+        //     console.log(fileData);
+        // } 
+        // catch (e) {
+        //     console.error(e);
+        //     return;
+        // }
 
         try {
         const { data } = await addNovel({
@@ -40,6 +58,7 @@ function CreateNovel() {
         window.location.assign(`/novel/${data.addNovel._id}`)
         } 
         catch (e) {
+            
             console.error(e);
             return;
         }
@@ -112,7 +131,7 @@ function CreateNovel() {
                     </div>
                     <div className="pt-3 mb-3">
                         <p className="bold">Cover Image:</p>
-                        <FilePondCustom files={files} setFiles={setFiles}></FilePondCustom>
+                        <SingleUpload files={files} setFiles={setFiles}></SingleUpload>
                     </div>
                     <div className='d-flex flex-wrap pt-3 w-75'>
                         <label htmlFor="description" className='bold w-100'>Description:</label>

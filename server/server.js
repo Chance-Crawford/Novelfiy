@@ -1,6 +1,7 @@
 const express = require('express');
 // apollo server used integrate graphQL with the express server.
 const { ApolloServer } = require('apollo-server-express');
+const graphqlUploadExpress = require('graphql-upload/graphqlUploadExpress.js');
 const { typeDefs, resolvers } = require('./schemas');
 
 const db = require('./config/connection');
@@ -15,11 +16,16 @@ const startServer = async () => {
     const server = new ApolloServer({
         typeDefs,
         resolvers,
+        uploads: false,
+        // csrfPrevention: true,
         context: authMiddleware
     });
 
     // start the apollo server
     await server.start();
+
+    // This middleware should be added before calling `applyMiddleware`.
+    app.use(graphqlUploadExpress());
 
     // connect our Apollo server to our Express.js server. This will create 
     // a special /graphql endpoint for the Express.js server that will serve as the 
