@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import { SINGLE_UPLOAD } from '../../utils/mutations';
+
 
 // Import React FilePond
 import { FilePond, registerPlugin } from 'react-filepond';
@@ -23,7 +26,7 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview, FilePondPluginImageResize);
 
 function FilePondCustom({ files, setFiles }) {
-
+    const [singleUpload, { error: uploadError }] = useMutation(SINGLE_UPLOAD);
     
 
     return (
@@ -36,7 +39,7 @@ function FilePondCustom({ files, setFiles }) {
                 onupdatefiles={setFiles}
                 allowMultiple={false}
                 maxFiles={1}
-                server='/graphql'
+                server={singleUpload}
                 name="files"
                 labelIdle='Drag & Drop your files or <span class="filepond--label-action browse-label-cust">Browse</span>'
             />
