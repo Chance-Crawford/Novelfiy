@@ -1,5 +1,6 @@
 
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { createUploadLink } from 'apollo-upload-client';
 import { Route, Switch } from 'react-router-dom';
 
 import { setContext } from '@apollo/client/link/context';
@@ -17,9 +18,7 @@ import CreateNovel from './pages/CreateNovel';
 // "proxy": "http://localhost:3001", so server can run on different port
 // then React.
 // restart the server and client with npm run develop.
-const httpLink = createHttpLink({
-  uri: '/graphql',
-});
+const httpLink =  createUploadLink({uri: "http://localhost:3001/graphql"});
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('id_token');
   return {

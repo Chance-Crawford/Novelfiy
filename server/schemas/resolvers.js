@@ -1,13 +1,25 @@
 const { User, Novel, Review } = require('../models');
-const GraphQLUpload = require('graphql-upload/GraphQLUpload.js');
+const { GraphQLUpload } = require('apollo-upload-server');
 const { AuthenticationError } = require('apollo-server-express');
-const fs = require("fs");
+const {createWriteStream} = require("fs");
+const path = require('path');
 const { finished } = require("stream/promises");
 let fileName;
 let imageUrl;
 
 // generates a json web token
 const { signToken } = require('../utils/auth');
+
+const randomID = (length) =>  {
+    var result           = '';
+    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+      result += characters.charAt(Math.floor(Math.random() * 
+      charactersLength));
+   }
+   return result;
+}
 
 const resolvers = {
     
@@ -164,18 +176,15 @@ const resolvers = {
 
         singleUpload: async (parent, { file }) => {
             const { createReadStream, filename, mimetype, encoding } = await file;
-
-            // Invoking the `createReadStream` will return a Readable Stream.
-            // See https://nodejs.org/api/stream.html#stream_readable_streams
             const stream = createReadStream();
 
-            // This is purely for demonstration purposes and will overwrite the
-            // local-file-output.txt in the current working directory on EACH upload.
-            const out = fs.createWriteStream(`./${filename}`);
+            // store file
+            const pathName = path.join(__dirname, `../../client/public/images/${randomID(15)}_${filename}`);
+            const out = createWriteStream(pathName);
             stream.pipe(out);
             await finished(out);
-
-            console.log({ filename, mimetype, encoding });
+            
+            console.log({ filename });
             return { filename, mimetype, encoding };
         },
 
