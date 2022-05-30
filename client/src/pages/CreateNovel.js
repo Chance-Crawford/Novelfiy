@@ -97,7 +97,7 @@ function CreateNovel() {
                 </div>
             </div>
             <div className="pt-3 mb-5">
-                <form action="" className="font-18" onSubmit={handleNovelSubmit}>
+                <form action="" target="hidden-iframe" className="font-18" onSubmit={handleNovelSubmit}>
                     <div className='d-flex flex-wrap mb-3'>
                         <label htmlFor="title" className='bold w-100'>Title:</label>
                         <input

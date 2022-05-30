@@ -404,6 +404,10 @@ a:hover{
 
 /* CreateNovel */
 
+.hidden-i{
+  display: none;
+}
+
 .info-box{
   border-left: 3px solid rgb(143, 143, 143);
   padding-left: 1.5rem;

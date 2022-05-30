@@ -189,24 +189,12 @@ const resolvers = {
             // random name doesnt use filename because if filename has numbers
             // or spaces sometimes it will corrupt the file
             const randomName = `${randomID(15)}.${ext}`
-            const pathName = path.join(__dirname, `../../client/public/images/${randomName}`);
+            // ***make sure this path is within the server directory
+            const pathName = path.join(__dirname, `../images/${randomName}`);
 
-            await new Promise((resolve, reject) => {
-                // Create a stream to which the upload will be written.
-                const writeStream = createWriteStream(pathName);
-        
-                // When the upload is fully written, resolve the promise.
-                writeStream.on("finish", resolve);
-        
-                // If there's an error writing the file, remove the partially written
-                // file and reject the promise.
-                writeStream.on("error", (error) => {
-                  reject(error)
-                });
-        
-                // Pipe the upload into the write stream.
-                stream.pipe(writeStream);
-            });
+            const out = createWriteStream(pathName);
+            stream.pipe(out);
+            await finished(out);
 
             return { filename, mimetype, encoding };
         },
