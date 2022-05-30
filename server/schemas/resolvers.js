@@ -174,12 +174,21 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!');
         },
 
+        // for single upload to work, make sure you check your github answers to
+        // see how you got it to work. you have to add some things to 
+        // package.json
         singleUpload: async (parent, { file }) => {
             const { createReadStream, filename, mimetype, encoding } = await file;
             const stream = createReadStream();
+
+            // get file type at the end of filename
+            let filenameArr = filename.split('.');
+            const ext = filenameArr[filenameArr.length - 1]
             
             // store file
-            const randomName = `${randomID(15)}_${filename}`
+            // random name doesnt use filename because if filename has numbers
+            // or spaces sometimes it will corrupt the file
+            const randomName = `${randomID(15)}.${ext}`
             const pathName = path.join(__dirname, `../../client/public/images/${randomName}`);
 
             await new Promise((resolve, reject) => {
