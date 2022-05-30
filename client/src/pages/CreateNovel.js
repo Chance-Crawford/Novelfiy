@@ -12,13 +12,13 @@ function CreateNovel() {
     const [charCount, setCharCount] = useState(0);
     
 
-    const [files, setFiles] = useState([]);
+    const [file, setFile] = useState({});
 
     const [novelFormState, setNovelFormState] = useState({ title: '', description: '', penName: '' });
     const [addNovel, { error }] = useMutation(ADD_NOVEL);
-    // const [singleUpload, { error: uploadError }] = useMutation(SINGLE_UPLOAD, {
-    //     onCompleted: (data) => console.log(data),
-    // });
+    const [singleUpload, { error: uploadError }] = useMutation(SINGLE_UPLOAD, {
+        onCompleted: (data) => console.log(data),
+    });
     const handleNovelChange = (event) => {
         // get name and value of input element from the event.target
         let { name, value } = event.target;
@@ -36,19 +36,28 @@ function CreateNovel() {
     const handleNovelSubmit = async (event) => {
         event.preventDefault();
 
-        // try {
-        //     const { data: fileData } = await singleUpload({
-        //         // and pass in variable data from form
-        //         variables: { file: files }
-    
-        //     });
-        //     console.log(fileData);
-        // } 
-        // catch (e) {
-        //     console.error(e);
-        //     return;
-        // }
+        // if the form data is valid, then upload the image.
+        
+        if(novelFormState.title.length && novelFormState.description.length){
+            // upload file to server
+            try {
+                const { data: fileData } = await singleUpload({
+                    variables: { file }
+        
+                });
+                console.log(fileData);
+            } 
+            catch (e) {
+                console.log(uploadError?.message)
+                console.error(e);
+                return;
+            }
 
+        }
+
+        // if the form data is not valid, dont upload the image to the server
+        // and just attempt to create the novel in order to retrieve the
+        // errors.
         try {
         const { data } = await addNovel({
             // and pass in variable data from form
@@ -131,7 +140,8 @@ function CreateNovel() {
                     </div>
                     <div className="pt-3 mb-3">
                         <p className="bold">Cover Image:</p>
-                        <FilePondCustom files={files} setFiles={setFiles}></FilePondCustom>
+                        <p className="novel-desc pb-1 font-reg">Recommended Size: 200px &times; 250px</p>
+                        <FilePondCustom file={file} setFile={setFile}></FilePondCustom>
                     </div>
                     <div className='d-flex flex-wrap pt-3 w-75'>
                         <label htmlFor="description" className='bold w-100'>Description:</label>
