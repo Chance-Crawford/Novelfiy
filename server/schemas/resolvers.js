@@ -177,14 +177,28 @@ const resolvers = {
         singleUpload: async (parent, { file }) => {
             const { createReadStream, filename, mimetype, encoding } = await file;
             const stream = createReadStream();
-
-            // store file
-            const pathName = path.join(__dirname, `../../client/public/images/${randomID(15)}_${filename}`);
-            const out = createWriteStream(pathName);
-            stream.pipe(out);
-            await finished(out);
             
-            console.log({ filename });
+            // store file
+            const randomName = `${randomID(15)}_${filename}`
+            const pathName = path.join(__dirname, `../../client/public/images/${randomName}`);
+
+            await new Promise((resolve, reject) => {
+                // Create a stream to which the upload will be written.
+                const writeStream = createWriteStream(pathName);
+        
+                // When the upload is fully written, resolve the promise.
+                writeStream.on("finish", resolve);
+        
+                // If there's an error writing the file, remove the partially written
+                // file and reject the promise.
+                writeStream.on("error", (error) => {
+                  reject(error)
+                });
+        
+                // Pipe the upload into the write stream.
+                stream.pipe(writeStream);
+            });
+
             return { filename, mimetype, encoding };
         },
 
