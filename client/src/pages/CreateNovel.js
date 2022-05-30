@@ -131,7 +131,7 @@ function CreateNovel() {
                     </div>
                     <div className="pt-3 mb-3">
                         <p className="bold">Cover Image:</p>
-                        <SingleUpload files={files} setFiles={setFiles}></SingleUpload>
+                        <FilePondCustom files={files} setFiles={setFiles}></FilePondCustom>
                     </div>
                     <div className='d-flex flex-wrap pt-3 w-75'>
                         <label htmlFor="description" className='bold w-100'>Description:</label>

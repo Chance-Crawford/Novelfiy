@@ -26,8 +26,26 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview, FilePondPluginImageResize);
 
 function FilePondCustom({ files, setFiles }) {
-    const [singleUpload, { error: uploadError }] = useMutation(SINGLE_UPLOAD);
+    const [singleUpload, { error: uploadError }] = useMutation(SINGLE_UPLOAD, {
+        onCompleted: (data) => console.log(data),
+    });
     
+    const handleFileChange = async (file) => {
+        if (!file) return;
+        console.log(file)
+        try {
+            const { data: fileData } = await singleUpload({
+                // and pass in variable data from form
+                variables: { file }
+    
+            });
+        } 
+        catch (e) {
+            console.log(uploadError?.message)
+            console.error(e);
+            return;
+        }
+      };
 
     return (
         <div className="w-35">
@@ -36,7 +54,7 @@ function FilePondCustom({ files, setFiles }) {
                 stylePanelAspectRatio={250/200}
                 imageResizeTargetWidth={200}
                 imageResizeTargetHeight={250}
-                onupdatefiles={setFiles}
+                onaddfile={(error, fileData)=>{handleFileChange(fileData.file)}}
                 allowMultiple={false}
                 maxFiles={1}
                 server={singleUpload}
