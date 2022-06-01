@@ -14,19 +14,7 @@ const SingleUpload = ({ files, setFiles }) => {
         const file = e.target.files[0];
         if (!file) return;
         console.log(file)
-        try {
-            const { data: fileData } = await singleUpload({
-                // and pass in variable data from form
-                variables: { file }
-    
-            });
-            console.log(fileData);
-        } 
-        catch (e) {
-            console.log(uploadError?.message)
-            console.error(e);
-            return;
-        }
+        
       };
     return (
         <div className='mt-3'>

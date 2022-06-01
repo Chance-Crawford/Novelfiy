@@ -25,32 +25,19 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview, FilePondPluginImageResize);
 
-function FilePondCustom({ files, setFiles }) {
-    const [singleUpload, { error: uploadError }] = useMutation(SINGLE_UPLOAD, {
-        onCompleted: (data) => console.log(data),
-    });
+function FilePondCustom({ file, setFile }) {
+    const [singleUpload, { error: uploadError }] = useMutation(SINGLE_UPLOAD);
     
     const handleFileChange = async (file) => {
         if (!file) return;
         console.log(file)
-        try {
-            const { data: fileData } = await singleUpload({
-                // and pass in variable data from form
-                variables: { file }
-    
-            });
-        } 
-        catch (e) {
-            console.log(uploadError?.message)
-            console.error(e);
-            return;
-        }
+        setFile(file);
       };
 
     return (
         <div className="w-35">
             <FilePond
-                files={files}
+                //files={file}
                 stylePanelAspectRatio={250/200}
                 imageResizeTargetWidth={200}
                 imageResizeTargetHeight={250}
@@ -58,7 +45,7 @@ function FilePondCustom({ files, setFiles }) {
                 allowMultiple={false}
                 maxFiles={1}
                 server={singleUpload}
-                name="files"
+                name="file"
                 labelIdle='Drag & Drop your files or <span class="filepond--label-action browse-label-cust">Browse</span>'
             />
         </div>
