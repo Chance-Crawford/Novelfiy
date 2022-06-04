@@ -158,6 +158,12 @@ function Profile() {
                                                         <div>
                                                             <p className='font-18 bold text-center'>Review for: <a className='underline' href={`/novel/${review.novel._id}`}>{review.novel.title}</a></p>
                                                         </div>
+                                                        <div className='d-flex justify-content-center mb-2'>
+                                                            <div className='cover-div p-3'>
+                                                                <img src={review.novel.imageLink} className="w-100" alt="book cover" />
+                                                            </div>
+                                                        </div>
+                                                        
                                                         <div className="d-flex mb-3">
                                                             <a href={`/user/${review.user.username}`}>
                                                                 <p className="bold font-17 m-0 user-hover">{review.user.username}</p>

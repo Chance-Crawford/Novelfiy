@@ -171,6 +171,7 @@ query getUser($username: String!) {
       rating
       novel{
         title
+        imageLink
         _id
       }
       user{
