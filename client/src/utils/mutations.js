@@ -55,6 +55,19 @@ mutation addFavNovel($novelId: ID!) {
 }
 `
 
+export const TOGGLE_ADD_TO_FOLLOWING = gql`
+mutation addToFollowing($userId: ID!) {
+  addToFollowing(userId: $userId) {
+    username
+    _id
+    following{
+      _id
+    }
+    followingCount
+  }
+}
+`
+
 export const ADD_NOVEL = gql`
 mutation addNovel($title: String!, $description: String!, $penName: String) {
   addNovel(title: $title, description: $description, penName: $penName) {

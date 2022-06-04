@@ -90,6 +90,9 @@ query me{
       chapterCount
       reviewCount
     }
+    following{
+      _id
+    }
     novels {
       _id
       title

@@ -13,6 +13,8 @@ const typeDefs = gql`
         novels: [Novel]
         favoriteNovels: [Novel]
         givenReviews: [Review]
+        following: [User]
+        followers: [User]
         followerCount: Int
         followingCount: Int
         givenReviewCount: Int
@@ -61,6 +63,7 @@ const typeDefs = gql`
         addUser(username: String!, email: String!, password: String!): Auth
         addNovel(title: String!, description: String!, penName: String): Novel
         addFavNovel(novelId: ID!): User
+        addToFollowing(userId: ID!): User
         singleUpload(file: Upload!): File!
         addReview(reviewText: String!, rating: Int!, novel: ID!): Review
     }

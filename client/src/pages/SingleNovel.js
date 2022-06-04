@@ -155,7 +155,7 @@ function SingleNovel() {
             </section>
             <section className='mt-4 pb-3 light-bottom-border'>
                 <div className='mb-3'>
-                    <h4>@{novel.user.username}</h4>
+                    <h4>@<a className="user-hover" href={`/user/${novel.user.username}`}>{novel.user.username}</a></h4>
                 </div>
                 <div className='mt-4 mb-3'>
                     <h3 className='bold'>Description</h3>

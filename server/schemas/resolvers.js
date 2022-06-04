@@ -273,6 +273,51 @@ const resolvers = {
             throw new AuthenticationError('You need to be logged in!'); 
         },
 
+        addToFollowing: async (parent, { userId }, context) => {
+            if (context.user) {
+
+                const checkUser = await User.findOne({ _id: context.user._id });
+
+                console.log(checkUser.following.includes(userId));
+
+
+                if(checkUser.following.includes(userId)){
+                    const pullUser = await User.findByIdAndUpdate(
+                        { _id: context.user._id },
+                        { $pull: { following: userId } },
+                        { new: true }
+                    );
+    
+                    // pull this user from the other users followers array too
+                    await User.findByIdAndUpdate(
+                        { _id: userId },
+                        { $pull: { followers: context.user._id } },
+                        { new: true }
+                    );
+    
+                    return pullUser;
+                }
+
+                // add to user object that gave the review
+                const user = await User.findByIdAndUpdate(
+                    { _id: context.user._id },
+                    { $push: { following: userId } },
+                    { new: true }
+                );
+
+                // add to novel object that the review was made for
+                await User.findByIdAndUpdate(
+                    { _id: userId },
+                    { $push: { followers: context.user._id } },
+                    { new: true }
+                );
+
+                return user;
+            }
+            
+            throw new AuthenticationError('You need to be logged in!'); 
+        },
+
         addReview: async (parent, { reviewText, rating, novel }, context) => {
             if (context.user) {
                 // create new review with the review's text and Id of novel

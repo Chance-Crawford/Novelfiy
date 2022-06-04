@@ -386,6 +386,21 @@ a:hover{
   margin-right: 0.75rem!important;
 }
 
+.follow-btn{
+  border: 1px solid black;
+  padding: .5rem 2rem;
+  transition: background-color .25s, color .25s;
+}
+
+.follow-btn:hover{
+  background-color: var(--primary-color);
+}
+
+.following-color{
+  background-color: var(--primary-hover);
+  color: white;
+}
+
 .profile-icon{
   cursor: pointer;
   transition: color .25s;

@@ -4,11 +4,12 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBook, faFilePen, faHeart } from '@fortawesome/free-solid-svg-icons'
+import { faBook, faFilePen, faHeart, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 
 import NovelList from '../components/NovelList'
 import PageNotFound from './PageNotFound';
 import ReadMore from '../components/ReadMore';
+import FollowButton from '../components/FollowButton';
 
 function Profile() {
 
@@ -48,6 +49,7 @@ function Profile() {
         if(data?.me.givenReviews){
             // if data has returned fully give me a value
             setMe(data.me)
+            console.log(data.me);
             if(data.me.username === username){
                 setMyProfile(true)
             }
@@ -96,6 +98,7 @@ function Profile() {
                                     <p className='m-0 font-18'>Followers</p>
                                 </div>
                             </div>
+                            <FollowButton user={user}></FollowButton>
                         </div>
                     </section>
                     <section className='w-100 d-flex justify-content-center light-bottom-border'>
