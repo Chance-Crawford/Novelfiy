@@ -111,10 +111,10 @@ function SingleNovel() {
             { novel.user ? (
             <div className="pb-5">
             <section className='d-flex justify-content-center flex-wrap light-shadow-bottom'>
-                <div className='w-50 p-3 d-flex flex-wrap justify-content-between align-items-center'>
+                <div className='w-58 p-3 d-flex flex-wrap justify-content-between align-items-center'>
                     <div>
-                        <div>
-                            <img src={novel.imageLink} alt="book cover" />
+                        <div className='cover-div'>
+                            <img src={novel.imageLink} className="w-100" alt="book cover" />
                         </div>
                     </div>
                     <div>

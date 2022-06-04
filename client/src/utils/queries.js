@@ -73,6 +73,7 @@ query me{
       _id
       title
       description
+      imageLink
       penName
       user {
         _id
@@ -92,6 +93,7 @@ query me{
     novels {
       _id
       title
+      imageLink
       description
       penName
       reviews {
@@ -123,6 +125,7 @@ query getUser($username: String!) {
       _id
       title
       description
+      imageLink
       penName
       user {
         _id
@@ -145,6 +148,7 @@ query getUser($username: String!) {
       title
       description
       penName
+      imageLink
       reviews {
         _id
       }

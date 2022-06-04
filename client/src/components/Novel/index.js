@@ -12,53 +12,62 @@ function Novel({ novel }) {
 
     console.log(novel)
     return(
-        <article className="" >
-            <div className="mb-3">
-                {/* since data wasnt loading very well on single novel with link,
-                use <a> so that the page will refresh*/}
-                <a href={`/novel/${novel._id}`}>
-                    <h3 className="bold">{novel.title}</h3>
-                </a>
-            </div>
-            <div className="mb-3">
-                <a href={`/user/${novel.user.username}`}>
-                    <p className="m-0 user-hover">By. <span className="ital">{novel.penName ? novel.penName : novel.user.username}</span></p>
-                </a>
-            </div>
-            <div className="mb-3">
-                <FontAwesomeIcon icon={faHeart} /> <span>{novel.favoritesCount}</span>
-            </div>
-            <div className="mb-3">
-                {
-                    // have to put in a template literal to get it to read length
-                    // and treat as string
-                    `${novel.description}`.length <= 450 ? (
-                        <p className="novel-desc">
-                            {novel.description}
-                        </p>
-                    )
-                    : (
-                        <p className="novel-desc">
-                            {
-                                // if description more than 450 characters, add read more
-                                `${novel.description}`.substring(0, 447)
-                            }
-                            ...
-                            <a href={`/novel/${novel._id}`}>
-                                <span className="read-more">Read more</span>
-                            </a>
-                        </p>
-                    )
-                }
-            </div>
+        <article  >
             <div className="d-flex align-items-center">
-                <div>
-                    <button className="btn read-btn bold">
-                        <FontAwesomeIcon icon={faReadme} className="novel-list-icon"/>Read
-                    </button>
+                <div className='novel-div-margin-r'>
+                    <div className='cover-div'>
+                        <img src={novel.imageLink} className="w-100" alt="book cover" />
+                    </div>
                 </div>
-                <AddToFavorites novel={novel}></AddToFavorites>
-                
+                <div className=''>
+                    <div className="mb-3">
+                        {/* since data wasnt loading very well on single novel with link,
+                        use <a> so that the page will refresh*/}
+                        <a href={`/novel/${novel._id}`}>
+                            <h3 className="bold">{novel.title}</h3>
+                        </a>
+                    </div>
+                    <div className="mb-3">
+                        <a href={`/user/${novel.user.username}`}>
+                            <p className="m-0 user-hover">By. <span className="ital">{novel.penName ? novel.penName : novel.user.username}</span></p>
+                        </a>
+                    </div>
+                    <div className="mb-3">
+                        <FontAwesomeIcon icon={faHeart} /> <span>{novel.favoritesCount}</span>
+                    </div>
+                    <div className="mb-3">
+                        {
+                            // have to put in a template literal to get it to read length
+                            // and treat as string
+                            `${novel.description}`.length <= 450 ? (
+                                <p className="novel-desc">
+                                    {novel.description}
+                                </p>
+                            )
+                            : (
+                                <p className="novel-desc">
+                                    {
+                                        // if description more than 450 characters, add read more
+                                        `${novel.description}`.substring(0, 447)
+                                    }
+                                    ...
+                                    <a href={`/novel/${novel._id}`}>
+                                        <span className="read-more">Read more</span>
+                                    </a>
+                                </p>
+                            )
+                        }
+                    </div>
+                    <div className="d-flex align-items-center">
+                        <div>
+                            <button className="btn read-btn bold">
+                                <FontAwesomeIcon icon={faReadme} className="novel-list-icon"/>Read
+                            </button>
+                        </div>
+                        <AddToFavorites novel={novel}></AddToFavorites>
+                        
+                    </div>
+                </div>
             </div>
         </article>
     );

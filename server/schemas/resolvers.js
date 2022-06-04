@@ -201,23 +201,28 @@ const resolvers = {
                 const { createReadStream, filename, mimetype, encoding } = await file;
                 const stream = createReadStream();
 
+                if(encoding){
+                    // get file type at the end of filename
+                    let filenameArr = filename.split('.');
+                    const ext = filenameArr[filenameArr.length - 1]
+                    
+                    // store file
+                    // random name doesnt use filename because if filename has numbers
+                    // or spaces sometimes it will corrupt the file
+                    const randomName = `${randomID(15)}.${ext}`
+                    // ***make sure this path is within the server directory
+                    pathName = path.join(__dirname, `../images/${randomName}`);
 
-                // get file type at the end of filename
-                let filenameArr = filename.split('.');
-                const ext = filenameArr[filenameArr.length - 1]
+                    const out = createWriteStream(pathName);
+                    stream.pipe(out);
+                    await finished(out);
+
+
+                    return { filename, mimetype, encoding};
+                }else{
+                    pathName = '';
+                }
                 
-                // store file
-                // random name doesnt use filename because if filename has numbers
-                // or spaces sometimes it will corrupt the file
-                const randomName = `${randomID(15)}.${ext}`
-                // ***make sure this path is within the server directory
-                pathName = path.join(__dirname, `../images/${randomName}`);
-
-                const out = createWriteStream(pathName);
-                stream.pipe(out);
-                await finished(out);
-
-                return { filename, mimetype, encoding};
             }
 
             throw new AuthenticationError('You need to be logged in!');
