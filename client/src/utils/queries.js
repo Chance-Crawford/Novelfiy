@@ -9,6 +9,7 @@ query getNovels($user: ID) {
       title
       description
       penName
+      imageLink
       favorites{
         _id
       }
@@ -39,6 +40,7 @@ query getNovel($_id: ID!) {
         username
         email
       }
+      imageLink
       favorites{
         _id
       }

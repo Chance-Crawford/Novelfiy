@@ -14,8 +14,10 @@ function CreateNovel() {
 
     const [file, setFile] = useState({});
 
-    const [novelFormState, setNovelFormState] = useState({ title: '', description: '', penName: '' });
-    const [addNovel, { error }] = useMutation(ADD_NOVEL);
+    const [novelFormState, setNovelFormState] = useState({ title: '', description: '', imageLink: '', penName: '' });
+    const [addNovel, { error }] = useMutation(ADD_NOVEL, {
+        onCompleted: (data) => console.log(data),
+    });
     const [singleUpload, { error: uploadError }] = useMutation(SINGLE_UPLOAD, {
         onCompleted: (data) => console.log(data),
     });
@@ -36,29 +38,26 @@ function CreateNovel() {
     const handleNovelSubmit = async (event) => {
         event.preventDefault();
 
-        // if the form data is valid, then upload the image.
         
         if(novelFormState.title.length && novelFormState.description.length){
-            // upload file to server
+            // if the form data is valid, then upload the image.
             try {
-                const { data: fileData } = await singleUpload({
+                await singleUpload({
                     variables: { file }
-        
                 });
-                console.log(fileData);
             } 
             catch (e) {
                 console.log(uploadError?.message)
                 console.error(e);
                 return;
             }
-
         }
 
         // if the form data is not valid, dont upload the image to the server
         // and just attempt to create the novel in order to retrieve the
         // errors.
         try {
+            console.log(novelFormState)
         const { data } = await addNovel({
             // and pass in variable data from form
             variables: { ...novelFormState }
@@ -75,7 +74,6 @@ function CreateNovel() {
 
     
 
-    console.log(novelFormState);
     return(
         <div>
             <div className="mt-3 mb-3">
@@ -123,6 +121,7 @@ function CreateNovel() {
                             </div>
                             
                         )}
+                        
                     </div>
                     <div className='d-flex flex-wrap pt-3 mb-3'>
                         <label htmlFor="penName" className='bold w-100'>Pen Name:</label>
@@ -143,6 +142,18 @@ function CreateNovel() {
                         <p className="novel-desc pb-1 font-reg">Recommended Size: 200px &times; 250px</p>
                         <FilePondCustom file={file} setFile={setFile}></FilePondCustom>
                     </div>
+                    {error && error.message.includes('imageLink') && error.message.includes('required') && (
+                            <div className="w-100">
+                                <p className="m-0 bold text-danger font-reg">Error uploading image</p>
+                            </div>
+                            
+                    )}
+                    {uploadError && uploadError.message.includes('createReadStream') && uploadError.message.includes('not') && (
+                            <div className="w-100">
+                                <p className="m-0 bold text-danger font-reg">Error uploading image</p>
+                            </div>
+                            
+                    )}
                     <div className='d-flex flex-wrap pt-3 w-75'>
                         <label htmlFor="description" className='bold w-100'>Description:</label>
                         <p className={charCount > 999 ? "novel-desc m-0 font-reg text-danger bold" : "novel-desc m-0 font-reg"}>

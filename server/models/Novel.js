@@ -28,6 +28,10 @@ const novelSchema = new Schema(
     penName: {
       type: String
     },
+    imageLink: {
+      type: String,
+      required: true,
+    },
     chapters: [
         {
           type: Schema.Types.ObjectId,

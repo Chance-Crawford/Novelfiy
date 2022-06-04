@@ -41,7 +41,10 @@ function FilePondCustom({ file, setFile }) {
                 stylePanelAspectRatio={250/200}
                 imageResizeTargetWidth={200}
                 imageResizeTargetHeight={250}
+                // when file is chosen, add it to the state
                 onaddfile={(error, fileData)=>{handleFileChange(fileData.file)}}
+                // when file is deleted, clear the state
+                onremovefile={(error, file)=>{setFile({})}}
                 allowMultiple={false}
                 maxFiles={1}
                 server={singleUpload}

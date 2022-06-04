@@ -1,11 +1,12 @@
 const { User, Novel, Review } = require('../models');
 const { GraphQLUpload } = require('apollo-upload-server');
 const { AuthenticationError } = require('apollo-server-express');
+require('dotenv').config();
 const {createWriteStream} = require("fs");
+const cloudinary = require("cloudinary").v2;
 const path = require('path');
 const { finished } = require("stream/promises");
-let fileName;
-let imageUrl;
+let pathName;
 
 // generates a json web token
 const { signToken } = require('../utils/auth');
@@ -157,7 +158,25 @@ const resolvers = {
         // add context later 
         addNovel: async (parent, args, context) => {
             if (context.user) {
+                // upload image from server to cloudinary
+                await cloudinary.uploader
+                .upload(pathName, {
+                    resource_type: "image",
+                })
+                .then(async (res) => {
+                    console.log("Success!", JSON.stringify(res, null, 2));
+                    
+                    args.imageLink = res.secure_url;
+                    console.log(args.imageLink);
+                })
+                .catch((error) => {
+                    console.log("Error!", JSON.stringify(error, null, 2));
+                });
+
+                // create novel
                 const novel = await Novel.create({...args, user: context.user._id });
+
+                console.log(novel);
 
                 await User.findByIdAndUpdate(
                     { _id: context.user._id },
@@ -177,32 +196,37 @@ const resolvers = {
         // for single upload to work, make sure you check your github answers to
         // see how you got it to work. you have to add some things to 
         // package.json
-        singleUpload: async (parent, { file }) => {
-            const { createReadStream, filename, mimetype, encoding } = await file;
-            const stream = createReadStream();
+        singleUpload: async (parent, { file }, context) => {
+            if (context.user) {
+                const { createReadStream, filename, mimetype, encoding } = await file;
+                const stream = createReadStream();
 
-            // get file type at the end of filename
-            let filenameArr = filename.split('.');
-            const ext = filenameArr[filenameArr.length - 1]
-            
-            // store file
-            // random name doesnt use filename because if filename has numbers
-            // or spaces sometimes it will corrupt the file
-            const randomName = `${randomID(15)}.${ext}`
-            // ***make sure this path is within the server directory
-            const pathName = path.join(__dirname, `../images/${randomName}`);
 
-            const out = createWriteStream(pathName);
-            stream.pipe(out);
-            await finished(out);
+                // get file type at the end of filename
+                let filenameArr = filename.split('.');
+                const ext = filenameArr[filenameArr.length - 1]
+                
+                // store file
+                // random name doesnt use filename because if filename has numbers
+                // or spaces sometimes it will corrupt the file
+                const randomName = `${randomID(15)}.${ext}`
+                // ***make sure this path is within the server directory
+                pathName = path.join(__dirname, `../images/${randomName}`);
 
-            return { filename, mimetype, encoding };
+                const out = createWriteStream(pathName);
+                stream.pipe(out);
+                await finished(out);
+
+                return { filename, mimetype, encoding};
+            }
+
+            throw new AuthenticationError('You need to be logged in!');
         },
 
         addFavNovel: async (parent, { novelId }, context) => {
             if (context.user) {
 
-                // cherck to see if novel is already in user's array
+                // check to see if novel is already in user's array
                 const checkUser = await User.findOne({ _id: context.user._id });
 
                 console.log(checkUser.favoriteNovels.includes(novelId));

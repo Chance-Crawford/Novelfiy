@@ -19,9 +19,9 @@ const typeDefs = gql`
     }
 
     type File {
-        filename: String!
-        mimetype: String!
-        encoding: String!
+        filename: String
+        mimetype: String
+        encoding: String
     }
 
     type Review{
@@ -40,6 +40,7 @@ const typeDefs = gql`
         description: String
         createdAt: String
         penName: String
+        imageLink: String
         favorites: [User]
         reviews: [Review]
         reviewCount: Int
