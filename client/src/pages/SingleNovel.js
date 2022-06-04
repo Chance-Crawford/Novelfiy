@@ -7,14 +7,14 @@ import AddToFavorites from '../components/AddToFavorites';
 import PageNotFound from './PageNotFound';
 
 import { useQuery } from '@apollo/client';
-import { GET_NOVEL } from '../utils/queries';
+import { GET_NOVEL, GET_ME_SMALL, GET_ME } from '../utils/queries';
 import Auth from '../utils/auth';
 import { useMutation } from '@apollo/client';
 import { ADD_REVIEW } from '../utils/mutations';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faReadme } from "@fortawesome/free-brands-svg-icons"
-import { faHeart, faPaperPlane } from '@fortawesome/free-solid-svg-icons'
+import { faHeart, faPaperPlane, faCirclePlus } from '@fortawesome/free-solid-svg-icons'
 
 function SingleNovel() {
 
@@ -39,6 +39,24 @@ function SingleNovel() {
             
         }
     }, [data, loading]);
+
+    const { loading: meLoading, data: myData } = useQuery(GET_ME_SMALL);
+
+    const [me, setMe] = useState({});
+
+    const [myNovel, setMyNovel] = useState(false);
+
+    useEffect(() => {
+        // make sure me has complete data by being as specific as possible.
+        if(myData?.me._id){
+            setMe(myData.me)
+            
+            if(myData.me._id === novel.user?._id){
+                setMyNovel(true)
+            }
+            
+        }
+    }, [myData, meLoading, novel]);
 
     
 
@@ -172,10 +190,26 @@ function SingleNovel() {
             <section className='mt-3 p-3'>
                 <div className='row justify-content-between'>
                     <article className='novel-article col-12'>
-                        <h3>Chapters</h3>
+                        <div className='d-flex justify-content-between'>
+                            <h3>Chapters</h3>
+                            {myNovel && (
+                                <FontAwesomeIcon className='add-chapter-btn' icon={faCirclePlus} />
+                            )}
+                            
+                        </div>
+                        
                         <hr />
                         <div>
-                            <p className='mt-3 font-18'>No chapters have been released yet.</p>
+                            {myNovel && novel.chapterCount < 1 ? (
+                                <p className='mt-3 font-18'>Click the '+' button to add your first chapter!</p>
+                            ) : myNovel && novel.chapterCount > 0 ? (
+                                <p className='mt-3 font-18'>Click the '+' button to add your next chapter!</p>
+                            ) : novel.chapterCount > 0 ? (
+                                <div></div>
+                            ) : (
+                                <p className='mt-3 font-18'>No chapters have been released yet.</p>
+                            )}
+                            
                         </div>
                     </article>
                     <article className='novel-article col-12'>

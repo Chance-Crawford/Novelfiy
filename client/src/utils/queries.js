@@ -117,6 +117,15 @@ query me{
 }
 `
 
+export const GET_ME_SMALL = gql`
+{
+  me{
+    _id
+    username
+  }
+}
+`
+
 export const GET_USER = gql`
 query getUser($username: String!) {
   user(username: $username) {
