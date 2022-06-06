@@ -55,7 +55,9 @@ const resolvers = {
 
             user.novels.reverse();
             user.givenReviews.reverse();
-            user.favoriteNovels.reverse()
+            user.favoriteNovels.reverse();
+            user.following.reverse();
+            user.followers.reverse();
 
             return user;
         },

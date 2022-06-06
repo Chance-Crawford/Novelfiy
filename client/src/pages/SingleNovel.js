@@ -193,7 +193,9 @@ function SingleNovel() {
                         <div className='d-flex justify-content-between'>
                             <h3>Chapters</h3>
                             {myNovel && (
-                                <FontAwesomeIcon className='add-chapter-btn' icon={faCirclePlus} />
+                                <a href={`/create-chapter/${novel._id}`}>
+                                    <FontAwesomeIcon className='add-chapter-btn' icon={faCirclePlus} />
+                                </a>
                             )}
                             
                         </div>

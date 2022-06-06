@@ -155,6 +155,14 @@ query getUser($username: String!) {
       reviewCount
       favoritesCount
     }
+    following{
+      _id
+      username
+    }
+    followers{
+      _id
+      username
+    }
     novels {
       _id
       title

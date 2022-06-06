@@ -396,6 +396,14 @@ a:hover{
   margin-right: 0.75rem!important;
 }
 
+.slight-border{
+  border-radius: 10px;
+}
+
+.point{
+  cursor: pointer;
+}
+
 .follow-btn{
   border: 1px solid black;
   padding: .5rem 2rem;

@@ -66,7 +66,7 @@ function Profile() {
                             <h2 className='text-center'>@{user.username}</h2>
                         </div>
                         <div className='w-100 pb-4 mt-3 d-flex justify-content-center flex-wrap light-bottom-border'>
-                            <div className='d-flex ml-2 mr-2 justify-content-center flex-wrap text-center'>
+                            <div onClick={()=>{setTab('Novels')}} className='d-flex point ml-2 mr-2 justify-content-center flex-wrap text-center'>
                                 <div className='w-100'>
                                     <p className='m-0 font-18 bold'>{user.novels.length}</p>
                                 </div>
@@ -81,7 +81,7 @@ function Profile() {
                                 </div>
                             </div>
 
-                            <div className='d-flex ml-2 mr-2 justify-content-center flex-wrap text-center'>
+                            <div onClick={()=>{setTab('Following')}} className='d-flex ml-2 mr-2 justify-content-center flex-wrap text-center point'>
                                 <div className='w-100'>
                                     <p className='m-0 font-18 bold'>{user.followingCount}</p>
                                 </div>
@@ -90,7 +90,7 @@ function Profile() {
                                 </div>
                             </div>
 
-                            <div className='d-flex ml-2 mr-2 justify-content-center flex-wrap text-center'>
+                            <div onClick={()=>{setTab('Followers')}} className='d-flex ml-2 mr-2 justify-content-center flex-wrap text-center point'>
                                 <div className='w-100'>
                                     <p className='m-0 font-18 bold'>{user.followerCount}</p>
                                 </div>
@@ -205,7 +205,7 @@ function Profile() {
                                     
                                 </div>
                             </div>
-                        ) : (
+                        ) : tab === 'Favorites' ? (
                             <div>
                                 <div className='mt-4 mb-3'>
                                     <h3>Favorite Novels</h3>
@@ -218,6 +218,54 @@ function Profile() {
                                         </div>
                                     ) : (
                                         <p className='font-18 text-center'>{user.username} has not added any novels to their favorites</p>
+                                    )}
+                                </div>
+                            </div>
+                        ) : tab === 'Following' ? (
+                            <div>
+                                <div className='mt-4 mb-3'>
+                                    <h3>Following</h3>
+                                    <p className='novel-desc'>Users that {user.username} follows</p>
+                                </div>
+                                <div className='pt-1'>
+                                    {user.following.length ? (
+                                        <div>
+                                            {user.following.map( followingUser =>(
+                                                <div className="mb-4 pb-1">
+                                                    <a href={`/user/${followingUser.username}`} >
+                                                    <div className='p-3 novel-box slight-border'>
+                                                        <h4 className='bold text-center m-0'>{followingUser.username}</h4>
+                                                    </div>
+                                                    </a>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <p className='font-18 text-center'>{user.username} has not followed anybody yet</p>
+                                    )}
+                                </div>
+                            </div>
+                        ) : (
+                            <div>
+                                <div className='mt-4 mb-3'>
+                                    <h3>Followers</h3>
+                                    <p className='novel-desc'>Users that follow {user.username}</p>
+                                </div>
+                                <div className='pt-1'>
+                                    {user.followers.length ? (
+                                        <div>
+                                            {user.followers.map( followerUser =>(
+                                                <div className="mb-4 pb-1">
+                                                    <a href={`/user/${followerUser.username}`} className="mb-3">
+                                                        <div className='p-3 novel-box slight-border'>
+                                                            <h4 className='bold text-center m-0'>{followerUser.username}</h4>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <p className='font-18 text-center'>{user.username} does not have any followers yet</p>
                                     )}
                                 </div>
                             </div>
