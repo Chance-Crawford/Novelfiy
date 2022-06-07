@@ -241,6 +241,12 @@ a:hover{
   max-height: 525px;
 }
 
+.novel-chapter-list{
+  overflow-y: scroll;
+  min-height: 515px;
+  max-height: 515px;
+}
+
 .review-textarea{
   width: 75%;
   font-size: 18px;
@@ -482,4 +488,49 @@ a:hover{
 
 .w-58{
   width: 58%;
+}
+
+/* ChapterEditor */
+
+.chapter-novel-img{
+  max-width: 100px;
+  min-width: 100px;
+}
+
+.publish-btn{
+  background-color: var(--primary-color);
+  transition: background-color .25s;
+}
+
+.publish-btn:hover{
+  background-color: var(--primary-hover);
+}
+
+.chapter-input{
+  padding: .5rem 1rem;
+  border: none;
+  border-bottom: 2px solid black;
+  transition: background-color .3s;
+}
+
+.chapter-input:focus-visible{
+  outline: none;
+  background-color: rgb(247, 247, 247);
+}
+
+.chapter-textarea{
+  height: 85vh;
+  width: 100%;
+  padding: 1rem;
+  border: none;
+  transition: background-color .3s;
+}
+
+.chapter-textarea:focus-visible{
+  outline: none;
+  background-color: rgb(247, 247, 247);
+}
+
+.font-20{
+  font-size: 20px;
 }

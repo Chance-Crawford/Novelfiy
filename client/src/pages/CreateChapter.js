@@ -3,6 +3,8 @@ import { GET_ME_SMALL, GET_NOVEL } from '../utils/queries';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
+import ChapterEditor from '../components/ChapterEditor';
+
 function CreateChapter() {
     const { novelId } = useParams();
 
@@ -47,7 +49,7 @@ function CreateChapter() {
     return(
         <div>
             {myNovel ? (
-                <p>Create novel</p>
+                <ChapterEditor novel={novel}></ChapterEditor>
             ) : loading || meLoading ? (
                 <p className='text-center font-18'>Loading...</p>
             ) : !novel._id ? (

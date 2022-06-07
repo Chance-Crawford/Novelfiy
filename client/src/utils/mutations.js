@@ -81,6 +81,19 @@ mutation addNovel($title: String!, $description: String!, $penName: String) {
 }
 `
 
+export const ADD_CHAPTER = gql`
+mutation addChapter($chapterTitle: String!, $chapterText: String!, $novelId: ID!) {
+  addChapter(chapterTitle: $chapterTitle, chapterText: $chapterText, novelId: $novelId) {
+    _id
+    chapterTitle
+    chapterText
+    novelId {
+      _id
+    }
+  }
+}
+`
+
 export const SINGLE_UPLOAD = gql`
 mutation singleUpload($file: Upload!) {
   singleUpload(file: $file) {

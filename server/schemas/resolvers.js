@@ -1,4 +1,4 @@
-const { User, Novel, Review } = require('../models');
+const { User, Novel, Review, Chapter } = require('../models');
 const { GraphQLUpload } = require('apollo-upload-server');
 const { AuthenticationError } = require('apollo-server-express');
 require('dotenv').config();
@@ -71,7 +71,8 @@ const resolvers = {
             // "user" property.
             const novels = Novel.find(params)
             .populate('user')
-            .populate('reviews');
+            .populate('reviews')
+            .populate('chapters');
 
             // put in descending order (newest)
             return novels.sort({ createdAt: -1 });
@@ -87,6 +88,7 @@ const resolvers = {
                 path: 'reviews',
                 populate: {path: 'user'}
             })
+            .populate('chapters')
             .exec();
 
             return novel;
@@ -193,6 +195,25 @@ const resolvers = {
             }
             
             throw new AuthenticationError('You need to be logged in!');
+        },
+
+        addChapter: async (parent, args, context) => {
+            if (context.user) {
+                // create new review with the review's text and Id of novel
+                // and id of user.
+                const chapter = await Chapter.create({...args});
+
+                // add to novel object that the review was made for
+                await Novel.findByIdAndUpdate(
+                    { _id: args.novelId },
+                    { $push: { chapters: chapter._id } },
+                    { new: true }
+                );
+
+                return chapter;
+            }
+            
+            throw new AuthenticationError('You need to be logged in!'); 
         },
 
         // for single upload to work, make sure you check your github answers to

@@ -200,19 +200,39 @@ function SingleNovel() {
                             
                         </div>
                         
-                        <hr />
-                        <div>
+                        <hr className='mb-0' />
+                        <div className='novel-chapter-list'>
                             {myNovel && novel.chapterCount < 1 ? (
-                                <p className='mt-3 font-18'>Click the '+' button to add your first chapter!</p>
+                                <div>
+                                    <p className='mt-3 font-18'>Click the '+' button to add your first chapter!</p>
+                                    <hr />
+                                </div>
+                                
                             ) : myNovel && novel.chapterCount > 0 ? (
-                                <p className='mt-3 font-18'>Click the '+' button to add your next chapter!</p>
+                                <div>
+                                    <p className='mt-3 font-18'>Click the '+' button to add your next chapter!</p>
+                                    <hr />
+                                </div>
+                                
                             ) : novel.chapterCount > 0 ? (
                                 <div></div>
                             ) : (
                                 <p className='mt-3 font-18'>No chapters have been released yet.</p>
                             )}
-                            
+                            <div >
+                                {novel.chapters.length ? novel.chapters.map(chapter => (
+                                    <div>
+                                        <a href={`/chapter/${chapter._id}`}>
+                                            <p className='font-18'>{chapter.chapterTitle}</p>
+                                        </a>
+                                    </div>
+                                )) : (
+                                    <div></div>
+                                )}
+                            </div>
                         </div>
+                        
+
                     </article>
                     <article className='novel-article col-12'>
                         <h3>Reviews</h3>

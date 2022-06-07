@@ -20,6 +20,14 @@ const typeDefs = gql`
         givenReviewCount: Int
     }
 
+    type Chapter{
+        _id: ID
+        chapterTitle: String
+        chapterText: String
+        createdAt: String
+        novelId: Novel
+    }
+
     type File {
         filename: String
         mimetype: String
@@ -43,6 +51,7 @@ const typeDefs = gql`
         createdAt: String
         penName: String
         imageLink: String
+        chapters: [Chapter]
         favorites: [User]
         reviews: [Review]
         reviewCount: Int
@@ -62,6 +71,7 @@ const typeDefs = gql`
         login(email: String!, password: String!): Auth
         addUser(username: String!, email: String!, password: String!): Auth
         addNovel(title: String!, description: String!, penName: String): Novel
+        addChapter(chapterTitle: String!, chapterText: String!, novelId: ID!): Chapter
         addFavNovel(novelId: ID!): User
         addToFollowing(userId: ID!): User
         singleUpload(file: Upload!): File!
