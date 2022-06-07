@@ -64,6 +64,7 @@ const typeDefs = gql`
         user(username: String!): User
         novels(user: ID): [Novel]
         novel(_id: ID!): Novel
+        chapter(_id: ID!): Chapter
         me: User
     }
 

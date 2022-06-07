@@ -534,3 +534,9 @@ a:hover{
 .font-20{
   font-size: 20px;
 }
+
+/* Chapter */
+
+.hover-underline:hover{
+  text-decoration: underline;
+}

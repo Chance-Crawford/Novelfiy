@@ -70,6 +70,32 @@ query getNovel($_id: ID!) {
 }
 `
 
+export const GET_CHAPTER = gql`
+query getChapter($_id: ID!) {
+    chapter(_id: $_id) {
+      _id
+      chapterTitle
+      chapterText
+      createdAt
+      novelId{
+        _id
+        title
+        penName
+        user {
+          _id
+          username
+        }
+        imageLink
+        chapters {
+          _id
+          chapterTitle
+        }
+        chapterCount
+      }
+    }
+}
+`
+
 export const GET_ME = gql`
 query me{
   me{

@@ -94,6 +94,21 @@ const resolvers = {
             return novel;
         },
 
+        chapter: async (parent, { _id }) => {
+            // returns single novel from the novel id given
+            const chapter = await Chapter.findOne({ _id })
+            .populate({
+                path: 'novelId',
+                populate: {path: 'chapters'}
+            })
+            .populate({
+                path: 'novelId',
+                populate: {path: 'user'}
+            });
+
+            return chapter;
+        },
+
         me: async (parent, args, context) => {
             if (context.user) {
               const userData = await User.findOne({ _id: context.user._id })
