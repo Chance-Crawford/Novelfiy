@@ -205,13 +205,13 @@ function SingleNovel() {
                             {myNovel && novel.chapterCount < 1 ? (
                                 <div>
                                     <p className='mt-3 font-18'>Click the '+' button to add your first chapter!</p>
-                                    <hr />
+                                    <hr className='mb-0' />
                                 </div>
                                 
                             ) : myNovel && novel.chapterCount > 0 ? (
                                 <div>
                                     <p className='mt-3 font-18'>Click the '+' button to add your next chapter!</p>
-                                    <hr />
+                                    <hr className='mb-0' />
                                 </div>
                                 
                             ) : novel.chapterCount > 0 ? (
@@ -219,7 +219,7 @@ function SingleNovel() {
                             ) : (
                                 <p className='mt-3 font-18'>No chapters have been released yet.</p>
                             )}
-                            <div >
+                            <div className='mt-3' >
                                 {novel.chapters.length ? novel.chapters.map(chapter => (
                                     <div>
                                         <a href={`/chapter/${chapter._id}`}>

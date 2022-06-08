@@ -540,3 +540,12 @@ a:hover{
 .hover-underline:hover{
   text-decoration: underline;
 }
+
+.chap-btns{
+  background-color: var(--primary-color);
+  transition: background-color .25s;
+}
+
+.chap-btns:hover{
+  background-color: var(--primary-hover);
+}
