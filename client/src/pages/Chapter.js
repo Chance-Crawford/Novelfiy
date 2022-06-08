@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 
 import { useQuery } from '@apollo/client';
 import { GET_CHAPTER } from '../utils/queries';
+import randomId from '../utils/randomId'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
@@ -58,7 +59,7 @@ function Chapter() {
                                         <button className="dropbtn">{chapter.chapterTitle} &nbsp;{<FontAwesomeIcon icon={faAngleDown} className="down-arr"/>}</button>
                                         <div className="dropdown-content w-100">
                                             {chapter?.novelId?.chapters && chapter.novelId.chapters.map(chap => (
-                                                <a className='' href={`/chapter/${chap._id}`}>{chap.chapterTitle}</a>
+                                                <a key={randomId(10)} className='' href={`/chapter/${chap._id}`}>{chap.chapterTitle}</a>
                                             ))}
                                         </div>
                                     </div>
@@ -78,7 +79,7 @@ function Chapter() {
                     <section>
                         <div className='font-18 p-3'>
                             {chapter.chapterText.split('\n').map(part=>(
-                                <p>{part}</p>
+                                <p key={randomId(10)}>{part}</p>
                             ))
                             }
                         </div>
