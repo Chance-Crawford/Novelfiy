@@ -2,6 +2,7 @@ import { useQuery } from '@apollo/client';
 import { GET_ME, GET_USER } from '../utils/queries';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import randomId from '../utils/randomId';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBook, faFilePen, faHeart, faUserPlus } from '@fortawesome/free-solid-svg-icons'
@@ -188,7 +189,7 @@ function Profile() {
                                                                     {/* split review text by the newline characters and make
                                                                     each section a paragraph */}
                                                                     {review.reviewText.split('\n').map(part=>(
-                                                                        <span>{part}</span>
+                                                                        <span key={randomId(10)}>{part}</span>
                                                                     ))}
                                                                 </p>
                                                             ) : (
@@ -231,7 +232,7 @@ function Profile() {
                                     {user.following.length ? (
                                         <div>
                                             {user.following.map( followingUser =>(
-                                                <div className="mb-4 pb-1">
+                                                <div key={randomId(10)} className="mb-4 pb-1">
                                                     <a href={`/user/${followingUser.username}`} >
                                                     <div className='p-3 novel-box slight-border'>
                                                         <h4 className='bold text-center m-0'>{followingUser.username}</h4>
@@ -255,7 +256,7 @@ function Profile() {
                                     {user.followers.length ? (
                                         <div>
                                             {user.followers.map( followerUser =>(
-                                                <div className="mb-4 pb-1">
+                                                <div key={randomId(10)} className="mb-4 pb-1">
                                                     <a href={`/user/${followerUser.username}`} className="mb-3">
                                                         <div className='p-3 novel-box slight-border'>
                                                             <h4 className='bold text-center m-0'>{followerUser.username}</h4>

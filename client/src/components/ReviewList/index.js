@@ -1,4 +1,5 @@
 import ReadMore from "../ReadMore";
+import randomId from "../../utils/randomId";
 
 function ReviewList({ reviews }) {
 
@@ -28,13 +29,13 @@ function ReviewList({ reviews }) {
                             // have to put in a template literal to get it to read length
                             // and treat as string
                             `${review.reviewText}`.length <= 430 ? (
-                                <p className="">
+                                <div className="">
                                     {/* split review text by the newline characters and make
                                     each section a paragraph */}
                                     {review.reviewText.split('\n').map(part=>(
-                                        <p>{part}</p>
+                                        <p key={randomId(10)}>{part}</p>
                                     ))}
-                                </p>
+                                </div>
                             ) : (
                                 <ReadMore text={review.reviewText} length={430}></ReadMore>
                             )

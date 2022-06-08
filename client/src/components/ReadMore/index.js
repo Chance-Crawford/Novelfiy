@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import randomId from "../../utils/randomId";
 
 const ReadMore = ({ text, length = 300 }) => {
     const [showLess, setShowLess] = useState(true);
@@ -11,7 +12,7 @@ const ReadMore = ({ text, length = 300 }) => {
             show the whole text and if ther are \n split the text into
             p tags at each \n */}
             {!showLess ? text.split('\n').map(part=>(
-                <p>{part}</p>
+                <p key={randomId(10)}>{part}</p>
             )) : 
             <p className='m-0'>{text.slice(0, length)}...
                 <span

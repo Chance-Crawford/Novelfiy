@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import ReviewList from '../components/ReviewList';
 import AddToFavorites from '../components/AddToFavorites';
 import PageNotFound from './PageNotFound';
+import randomId from '../utils/randomId';
 
 import { useQuery } from '@apollo/client';
 import { GET_NOVEL, GET_ME_SMALL, GET_ME } from '../utils/queries';
@@ -181,7 +182,7 @@ function SingleNovel() {
                 <div>
                 <div className="novel-desc">
                     {novel.description.split('\n').map(part=>(
-                            <p>{part}</p>
+                            <p key={randomId(10)}>{part}</p>
                         ))
                     }
                 </div>
@@ -221,7 +222,7 @@ function SingleNovel() {
                             )}
                             <div className='mt-3' >
                                 {novel.chapters.length ? novel.chapters.map(chapter => (
-                                    <div>
+                                    <div key={randomId(10)}>
                                         <a href={`/chapter/${chapter._id}`}>
                                             <p className='font-18'>{chapter.chapterTitle}</p>
                                         </a>
