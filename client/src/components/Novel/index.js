@@ -60,9 +60,16 @@ function Novel({ novel }) {
                     </div>
                     <div className="d-flex align-items-center">
                         <div>
-                            <button className="btn read-btn bold">
-                                <FontAwesomeIcon icon={faReadme} className="novel-list-icon"/>Read
-                            </button>
+                            {novel?.chapters?.length ? (
+                                <a href={`/chapter/${novel.chapters[0]._id}`} className="btn read-btn bold">
+                                    <FontAwesomeIcon icon={faReadme} className="novel-list-icon"/>Read
+                                </a>
+                            ) : (
+                                <a href={`/novel/${novel._id}`} className="btn read-btn bold">
+                                    <FontAwesomeIcon icon={faReadme} className="novel-list-icon"/>Read
+                                </a>
+                            )}
+                            
                         </div>
                         <AddToFavorites novel={novel}></AddToFavorites>
                         

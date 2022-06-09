@@ -171,6 +171,9 @@ query getUser($username: String!) {
       _id
       title
       description
+      chapters{
+        _id
+      }
       imageLink
       penName
       user {
@@ -203,6 +206,9 @@ query getUser($username: String!) {
       description
       penName
       imageLink
+      chapters{
+        _id
+      }
       reviews {
         _id
       }
