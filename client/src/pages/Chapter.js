@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_CHAPTER } from '../utils/queries';
 import randomId from '../utils/randomId'
+import PlayText from '../components/PlayText';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
@@ -84,7 +85,8 @@ function Chapter() {
                             }
                         </div>
                     </section>
-                    <section className='p-3 d-flex justify-content-between'>
+                    <PlayText chapter={chapter}></PlayText>
+                    <section className='p-3 d-flex justify-content-between mt-5'>
                         <div>
                             {prevChapter && (
                                 <a href={`/chapter/${prevChapter}`}>
