@@ -14,6 +14,9 @@ function PlayText({ chapter }) {
 
     // on load of component, do this.
     useEffect(() => {
+        // on load if speech synthesis is still talking, 
+        // from another page, cancel the utterance.
+        window.speechSynthesis.cancel();
         setSpeech()
         .then((voices)=>{ 
             setSynthVoices(voices);
@@ -154,6 +157,8 @@ function PlayText({ chapter }) {
             }, 10);
         });
     }
+
+    
 
     function togglePlay(){
         const play = !playing
