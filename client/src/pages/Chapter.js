@@ -43,6 +43,8 @@ function Chapter() {
         }
     }, [data, loading]);
 
+    
+
     return(
         <div className='chap-div'>
             {chapter?.novelId?.chapters.every((chap) => chap._id) ? (

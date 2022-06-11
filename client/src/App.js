@@ -42,12 +42,6 @@ const client = new ApolloClient({
 
 function App() {
 
-  useEffect(() => {
-    // on load if speech synthesis is still talking, 
-    // from another page, cancel the utterance.
-    window.speechSynthesis.cancel();
-  }, []);
-
   return (
     <ApolloProvider client={client}>
         <Header></Header>

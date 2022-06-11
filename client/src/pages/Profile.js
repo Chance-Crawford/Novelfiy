@@ -3,6 +3,7 @@ import { GET_ME, GET_USER } from '../utils/queries';
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import randomId from '../utils/randomId';
+import { stopSpeech } from '../utils/helpers';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBook, faFilePen, faHeart, faUserPlus } from '@fortawesome/free-solid-svg-icons'
@@ -22,6 +23,12 @@ function Profile() {
     });
 
     const [user, setUser] = useState({});
+
+    // this is used to stop the speech synthesis if user navigates to
+    // another component or page.
+    useEffect(() => {
+        stopSpeech();
+    }, []);
 
     useEffect(() => {
         // !user.favoriteNovels so that user does not automatically update.

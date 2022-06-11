@@ -122,9 +122,6 @@ function SingleNovel() {
         }
     };
 
-
-    
-
     return (
         <div>
             { novel.user ? (
@@ -162,9 +159,15 @@ function SingleNovel() {
                         </div>
                         <div className="d-flex align-items-center mt-4 mb-4 w-100">
                             <div>
+                            {novel?.chapters?.length ? (
+                                <a href={`/chapter/${novel.chapters[0]._id}`} className="btn read-btn bold">
+                                    <FontAwesomeIcon icon={faReadme} className="novel-list-icon"/>Read
+                                </a>
+                            ) : (
                                 <button className="btn read-btn bold">
                                     <FontAwesomeIcon icon={faReadme} className="novel-list-icon"/>Read
                                 </button>
+                            )}
                             </div>
                             <AddToFavorites novel={novel}></AddToFavorites>
                         </div>

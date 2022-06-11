@@ -2,6 +2,7 @@ import { ADD_NOVEL } from "../utils/mutations";
 import { SINGLE_UPLOAD } from "../utils/mutations";
 import { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
+import { stopSpeech } from "../utils/helpers";
 
 
 import FilePondCustom from "../components/FilePondCustom";
@@ -10,14 +11,14 @@ import SingleUpload from "../components/SingleUpload";
 function CreateNovel() {
 
     const [charCount, setCharCount] = useState(0);
-    
-    useEffect(() => {
-        // on load if speech synthesis is still talking, 
-        // from another page, cancel the utterance.
-        window.speechSynthesis.cancel();
-    }, []);
 
     const [file, setFile] = useState({});
+
+    // this is used to stop the speech synthesis if user navigates to
+    // another component or page.
+    useEffect(() => {
+        stopSpeech();
+    }, []);
 
     const [novelFormState, setNovelFormState] = useState({ title: '', description: '', imageLink: '', penName: '' });
     const [addNovel, { error }] = useMutation(ADD_NOVEL, {

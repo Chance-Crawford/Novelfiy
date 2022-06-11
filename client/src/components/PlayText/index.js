@@ -158,6 +158,22 @@ function PlayText({ chapter }) {
         });
     }
 
+    async function stopSpeech(){
+        // since synth.cancel only clears the current utterance,
+        // set it into set interval in order to clear all utterances until
+        // the synth object is no longer speaking.
+        await new Promise(resolve => {
+            const inter = setInterval(() => {
+              if (!synth.speaking) {
+                resolve();
+                clearInterval(inter);
+              } else {
+                  synth.cancel();
+              };
+            }, 10);
+        });
+    }
+
     
 
     function togglePlay(){

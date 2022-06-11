@@ -1,17 +1,12 @@
 import { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_NOVELS } from '../utils/queries';
+import { stopSpeech } from '../utils/helpers';
 
 import NovelList from '../components/NovelList'
 import TopNovelImg from '../images/topnovels.png'
 
 function Home() {
-
-    useEffect(() => {
-        // on load if speech synthesis is still talking, 
-        // from another page, cancel the utterance.
-        window.speechSynthesis.cancel();
-      }, []);
 
     // must define novel as a state to use useEffect correctly
     const [novels, setNovels] = useState([]);
@@ -28,6 +23,12 @@ function Home() {
             setNovels(data.novels); 
         }
     }, [data, loading, novels]);
+
+    // this is used to stop the speech synthesis if user navigates to
+    // another component or page.
+    useEffect(() => {
+        stopSpeech();
+    }, []);
 
     return (
         <div className="pb-5">
