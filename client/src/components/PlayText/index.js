@@ -8,7 +8,8 @@ function PlayText({ chapter }) {
     const [lastUtt, setLastUtt] = useState({});
     const [textArr, setTextArr] = useState([]);
     const [synth, setSynth] = useState({});
-    const [playing, setPlaying] = useState('None');
+    const [synthSpeaking, setSynthSpeaking] = useState(false);
+    const [playing, setPlaying] = useState(false);
     const [synthVoices, setSynthVoices] = useState({});
 
     // on load of component, do this.
@@ -87,6 +88,11 @@ function PlayText({ chapter }) {
                 for(var i = 0; i < newArr.length; i++){
                     await setUtter(i, newArr);
                 }
+                // changes play button back to pause after the synth finishes reading
+                // all chapter lines
+                if(!synth.speaking){
+                    setPlaying(false);
+                }
             }else{
                 // set lastUtt state to none.
                 setLastUtt({});
@@ -102,6 +108,11 @@ function PlayText({ chapter }) {
                 for(var i = 0; i < newArr.length; i++){
                     await setUtter(i, newArr);
                 }
+                // changes play button back to pause after the synth finishes reading
+                // all chapter lines
+                if(!synth.speaking){
+                    setPlaying(false);
+                }
             } 
         } else {
             let offset = 120;
@@ -110,6 +121,9 @@ function PlayText({ chapter }) {
             // console.log(createArr)
             for(var i = 0; i < createArr.length; i++){
                 await setUtter(i, createArr);
+            }
+            if(!synth.speaking){
+                setPlaying(false);
             }
         }
         
@@ -141,16 +155,21 @@ function PlayText({ chapter }) {
         });
     }
 
+    function togglePlay(){
+        const play = !playing
+        setPlaying(play);
 
-
+        if(play){
+            playText();
+        } else {
+            pauseSpeech();
+        }
+    }
 
     return(
         <section className="p-3 d-flex justify-content-center">
-            <div onClick={playText}>
-                <button className="btn bg-primary">Play</button>
-            </div>
-            <div onClick={pauseSpeech}>
-                <button className="btn bg-danger">Pause</button>
+            <div onClick={togglePlay}>
+                <button className="btn bg-primary">{!playing ? 'Play' : 'Pause'}</button>
             </div>
         </section>
     );
