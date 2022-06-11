@@ -3,7 +3,18 @@ import { useState, useEffect } from 'react';
 function PlayText({ chapter }) {
 
     const [sayThis, setSayThis] = useState(chapter.chapterText);
+    // the utterance that is currently being said by text to speech
+    const [currentUtt, setCurrentUtt] = useState({});
+    const [lastUtt, setLastUtt] = useState({});
+    const [textArr, setTextArr] = useState([]);
+    const [synth, setSynth] = useState({});
+    const [playing, setPlaying] = useState('None');
+    const [synthVoices, setSynthVoices] = useState({});
 
+    // on google chrome speech synthesis will usually cut out after about 
+    // 200 characters in an utterance. This is an open source well known
+    // workaround to break the uterance string into smaller utterances and play
+    // them one after another. The utterances are split at punctuation.
     var speechUtteranceChunker = function (utt, settings, callback) {
         settings = settings || {};
         var newUtt;
@@ -34,6 +45,7 @@ function PlayText({ chapter }) {
             }
             var chunk = chunkArr[0];
             newUtt = new SpeechSynthesisUtterance(chunk);
+            setCurrentUtt(newUtt);
             var x;
             for (x in utt) {
                 if (utt.hasOwnProperty(x) && x !== 'text') {
@@ -60,6 +72,20 @@ function PlayText({ chapter }) {
             speechSynthesis.speak(newUtt);
         }, 0);
     };
+
+    useEffect(() => {
+        setSpeech()
+        .then((voices)=>{ 
+            setSynthVoices(voices);
+            console.log(voices);
+        });
+    }, []);
+
+    useEffect(() => {
+        console.log(lastUtt);
+        // console.log(currentUtt);
+        console.log(synth);
+    }, [currentUtt, lastUtt, synth]);
     
     
     // it takes some amount of time to populate the voices array 
@@ -72,6 +98,7 @@ function PlayText({ chapter }) {
         return new Promise(
             function (resolve, reject) {
                 let synth = window.speechSynthesis;
+                setSynth(synth);
                 let id;
     
                 id = setInterval(() => {
@@ -83,32 +110,119 @@ function PlayText({ chapter }) {
             }
         )
     }
+
+    async function setUtter(i, arr) {
+        return new Promise(resolve => {
+                    let utter = new SpeechSynthesisUtterance(arr[i]);
+                    utter.voice = synthVoices[0];
+                    setCurrentUtt(utter);
+                    synth.speak(utter);
+                    utter.onend = resolve;
+
+                
+                
+    
+                // id = setInterval(() => {
+                //     if (utter) {
+                //         resolve(synth.speak(utter));
+                //         clearInterval(id);
+                //     }
+                // }, 50);
+        });
+
+    }
+
+    function chunkString(str, offset) {
+        return str.match(new RegExp('.{1,' + offset + '}', 'g'));
+    }
     
     async function playText(){
-        setSpeech()
-        .then((voices)=>{
-            let utter = new SpeechSynthesisUtterance(sayThis);
-            console.log(voices);
-            console.log('After');
-            utter.voice = voices[2];
-            //pass it into the chunking function to have it played out.
-            //you can set the max number of characters by changing the chunkLength property below.
-            //a callback function can also be added that will fire once the entire text has been 
-            //spoken.
-            speechUtteranceChunker(utter, {
-                chunkLength: 120
-            }, function () {
-                //some code to execute when done
-                console.log('utterance done');
-            });
+        // if text to speech voice is currently speaking when
+        // play button is pressed, return and do nothing.
+        if(synth.speaking){
+            return;
+        }
+        if(lastUtt.text && textArr.length){
+            let start = textArr.indexOf(lastUtt.text);
+            // this boolean will tell if the last utterance was at the
+            // end of the array or not.
+            let refresh = false
+            // if at end of chapter utterance array. set the refresh to true.
+            // This will refresh the lastUtt state, so that when synth stops speaking
+            // last line, and play button is hit again. It starts at the beginning
+            // of the chapter like originally.
+            if(start + 1 === textArr.length){
+                refresh = true;
+            }
+            if(!refresh){
+                let newArr = textArr.slice(start);
+                for(var i = 0; i < newArr.length; i++){
+                    await setUtter(i, newArr);
+                }
+            }else{
+                // set lastUtt state to none.
+                setLastUtt({});
+                // it will still play the last line in the utterance array
+                // that is still saved in the textArr state.
+                // if pause is hit again while playing this last line, the 
+                // lastUtt array will get set to the last line because of the
+                // logic defined in the pauseSpeech function.
+                // if pause button is not pressed while playing the last line,
+                // the lastUtt state will stay blank and the synth object will 
+                // stop speaking.
+                let newArr = textArr.slice(start);
+                for(var i = 0; i < newArr.length; i++){
+                    await setUtter(i, newArr);
+                }
+            } 
+        } else {
+            let offset = 120;
+            let createArr = chunkString(sayThis, offset);
+            setTextArr(createArr);
+            // console.log(createArr)
+            for(var i = 0; i < createArr.length; i++){
+                await setUtter(i, createArr);
+            }
+        }
+        
+        
+    }
+
+    async function pauseSpeech(){
+        // since synth.cancel only clears the current utterance,
+        // set it into set interval in order to clear all utterances until
+        // the synth object is no longer speaking.
+        let count = 0;
+        await new Promise(resolve => {
+            const inter = setInterval(() => {
+              if (!synth.speaking) {
+                resolve();
+                clearInterval(inter);
+              } else {
+                  // as soon as pause button is hit, get the current utterance
+                  // and save it in a new state. increment the counter so that this only
+                  // happens once, if not the current utterance will keep getting reset
+                  // with each synth.cancel.
+                  if(count === 0){
+                    setLastUtt(currentUtt);
+                    count += 1;
+                  }
+                  synth.cancel();
+              };
+            }, 10);
         });
     }
+
+
 
 
     return(
         <section className="p-3 d-flex justify-content-center">
             <div onClick={playText}>
                 <button className="btn bg-primary">Play</button>
+            </div>
+            <div onClick={pauseSpeech}>
+                <button className="btn bg-danger">Pause</button>
             </div>
         </section>
     );
