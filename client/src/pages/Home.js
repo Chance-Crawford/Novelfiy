@@ -7,6 +7,12 @@ import TopNovelImg from '../images/topnovels.png'
 
 function Home() {
 
+    useEffect(() => {
+        // on load if speech synthesis is still talking, 
+        // from another page, cancel the utterance.
+        window.speechSynthesis.cancel();
+      }, []);
+
     // must define novel as a state to use useEffect correctly
     const [novels, setNovels] = useState([]);
 

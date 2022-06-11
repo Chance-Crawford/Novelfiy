@@ -2,6 +2,7 @@
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { createUploadLink } from 'apollo-upload-client';
 import { Route, Switch } from 'react-router-dom';
+import { useEffect } from 'react';
 
 import { setContext } from '@apollo/client/link/context';
 
@@ -40,6 +41,13 @@ const client = new ApolloClient({
 
 
 function App() {
+
+  useEffect(() => {
+    // on load if speech synthesis is still talking, 
+    // from another page, cancel the utterance.
+    window.speechSynthesis.cancel();
+  }, []);
+
   return (
     <ApolloProvider client={client}>
         <Header></Header>

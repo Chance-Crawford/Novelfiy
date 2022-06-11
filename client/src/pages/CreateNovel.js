@@ -1,6 +1,6 @@
 import { ADD_NOVEL } from "../utils/mutations";
 import { SINGLE_UPLOAD } from "../utils/mutations";
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 
 
@@ -11,6 +11,11 @@ function CreateNovel() {
 
     const [charCount, setCharCount] = useState(0);
     
+    useEffect(() => {
+        // on load if speech synthesis is still talking, 
+        // from another page, cancel the utterance.
+        window.speechSynthesis.cancel();
+    }, []);
 
     const [file, setFile] = useState({});
 
