@@ -24,6 +24,14 @@ function PlayText({ chapter }) {
         });
     }, []);
 
+    // another precaution to stop speech when leaving the page.
+    useEffect(() => {
+        window.addEventListener("beforeunload", stopSpeech);
+        return () => {
+          window.removeEventListener("beforeunload", stopSpeech);
+        };
+      }, []);
+
     useEffect(() => {
         console.log(lastUtt);
         // console.log(currentUtt);
