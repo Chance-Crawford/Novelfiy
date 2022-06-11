@@ -211,6 +211,10 @@ function PlayText({ chapter }) {
         }
     }
 
+    async function addTen(){
+
+    }
+
     
 
     function togglePlay(){
@@ -228,17 +232,17 @@ function PlayText({ chapter }) {
         <section className="p-3 w-100 d-flex justify-content-center">
             <div className='w-100 row'>
                 <div className='col-12 col-lg-4'>
-                    <div onClick={stopSpeech} className='btn play-text-btn'>
+                    <div onClick={stopSpeech} className='btn icon-play-text play-text-btn'>
                         <div>
                         <FontAwesomeIcon icon={faStop} />
                         </div>
                     </div>
                 </div>
                 <div className='d-flex justify-content-center align-items-center col-12 col-lg-4'>
-                    <div onClick={subtractTen}>
-                        <button>-10</button>
+                    <div onClick={subtractTen} className="btn play-text-btn num-btn">
+                        <div className='bold'>-10</div>
                     </div>
-                    <div onClick={togglePlay} className="btn play-text-btn">
+                    <div onClick={togglePlay} className="btn icon-play-text play-text-btn">
                         
                         {!playing ? (
                             <div>
@@ -250,8 +254,8 @@ function PlayText({ chapter }) {
                             </div>
                         )}
                     </div>
-                    <div>
-                        <button>+10</button>
+                    <div onClick={addTen} className="btn play-text-btn num-btn">
+                        <div className='bold'>+10</div>
                     </div>
                 </div>
                 <div className='d-flex justify-content-between col-12 col-lg-4'>

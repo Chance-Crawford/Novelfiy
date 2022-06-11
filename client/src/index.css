@@ -550,9 +550,12 @@ a:hover{
   background-color: var(--primary-hover);
 }
 
+.icon-play-text{
+  width: 58.5px;
+}
+
 .play-text-btn{
   padding: 1rem 1.25rem;
-  width: 58.5px;
   margin: 0 1.25rem;
   border-radius: 50%;
   border: solid black 1px;
@@ -563,4 +566,10 @@ a:hover{
 
 .play-text-btn:hover{
   background-color: rgb(226, 226, 226);
+}
+
+.num-btn{
+  font-size: 18px;
+  border-radius: 20px;
+  padding: 1rem;
 }
