@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlay, faPause, faStop } from '@fortawesome/free-solid-svg-icons'
+
 
 function PlayText({ chapter }) {
 
@@ -173,6 +176,7 @@ function PlayText({ chapter }) {
         await new Promise(resolve => {
             const inter = setInterval(() => {
               if (!synth.speaking) {
+                setLastUtt({});
                 resolve();
                 clearInterval(inter);
               } else {
@@ -196,10 +200,41 @@ function PlayText({ chapter }) {
     }
 
     return(
-        <section className="p-3 d-flex justify-content-center">
-            <div onClick={togglePlay}>
-                <button className="btn bg-primary">{!playing ? 'Play' : 'Pause'}</button>
+        <section className="p-3 w-100 d-flex justify-content-center">
+            <div className='w-100 row'>
+                <div className='col-12 col-lg-4'>
+                    <div onClick={stopSpeech} className='btn play-text-btn'>
+                        <div>
+                        <FontAwesomeIcon icon={faStop} />
+                        </div>
+                    </div>
+                </div>
+                <div className='d-flex justify-content-center align-items-center col-12 col-lg-4'>
+                    <div>
+                        <button>-10</button>
+                    </div>
+                    <div onClick={togglePlay} className="btn play-text-btn">
+                        
+                        {!playing ? (
+                            <div>
+                                <FontAwesomeIcon icon={faPlay} />
+                            </div>
+                        ) : (
+                            <div>
+                                <FontAwesomeIcon icon={faPause} />
+                            </div>
+                        )}
+                    </div>
+                    <div>
+                        <button>+10</button>
+                    </div>
+                </div>
+                <div className='d-flex justify-content-between col-12 col-lg-4'>
+                    <div></div>
+                    <button>speed/voice</button>
+                </div>
             </div>
+            
         </section>
     );
 }
