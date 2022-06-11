@@ -186,6 +186,31 @@ function PlayText({ chapter }) {
         });
     }
 
+    async function subtractTen(){
+
+        let txt = {};
+
+        if(synth.speaking){
+            txt = currentUtt;
+        } else {
+            txt = lastUtt;
+        }
+
+        await pauseSpeech();
+        let start = textArr.indexOf(txt.text);
+        console.log(start);
+        if(textArr[start - 1]){
+            await new Promise(resolve => {
+                let utter = new SpeechSynthesisUtterance(textArr[start - 1]);
+                utter.voice = synthVoices[0];
+                setLastUtt(utter);
+                resolve();
+            });
+        } else{
+            setLastUtt({});
+        }
+    }
+
     
 
     function togglePlay(){
@@ -210,7 +235,7 @@ function PlayText({ chapter }) {
                     </div>
                 </div>
                 <div className='d-flex justify-content-center align-items-center col-12 col-lg-4'>
-                    <div>
+                    <div onClick={subtractTen}>
                         <button>-10</button>
                     </div>
                     <div onClick={togglePlay} className="btn play-text-btn">
