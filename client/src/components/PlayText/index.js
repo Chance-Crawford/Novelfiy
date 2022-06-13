@@ -346,9 +346,9 @@ function PlayText({ chapter }) {
                             <select name="voices" value={currentVoice.name} onChange={changeVoice} className='w-50'>
                                 {synthVoices.length && synthVoices.map(voice => (
                                     <option value={voice.name} key={randomId(10)}>{voice.name.length > 16 ? (
-                                        <span>{voice.name.slice(0, 16)}...</span>
+                                        <>{voice.name.slice(0, 16)}...</>
                                     ) : (
-                                        <span>{voice.name}</span>
+                                        <>{voice.name}</>
                                     )}</option>
                                 ))}
                             </select>

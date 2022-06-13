@@ -46,9 +46,9 @@ if (process.env.NODE_ENV === 'production') {
 // deploy only, if there is a get request to an undefined endpoint.
 // respond with production ready React front end code.
 
-// app.get('*', (req, res) => {
-//      res.sendFile(path.join(__dirname, '../client/build/index.html'));
-//  });
+ app.get('*', (req, res) => {
+      res.sendFile(path.join(__dirname, '../client/build/index.html'));
+ });
   
   
 db.once('open', () => {
