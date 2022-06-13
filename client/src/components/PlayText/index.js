@@ -14,6 +14,8 @@ function PlayText({ chapter }) {
     const [synth, setSynth] = useState({});
     const [playing, setPlaying] = useState(false);
     const [synthVoices, setSynthVoices] = useState({});
+    const [rewindActive, setRewindActive] = useState(false);
+    const [forwardActive, setForwardActive] = useState(false);
     const [currentVoice, setCurrentVoice] = useState({});
     const [uttSpeed, setUttSpeed] = useState(1);
 
@@ -150,6 +152,10 @@ function PlayText({ chapter }) {
         
     }
 
+    function createCustomUtt(){
+
+    }
+
     async function pauseSpeech(){
         // since synth.cancel only clears the current utterance,
         // set it into set interval in order to clear all utterances until
@@ -193,6 +199,12 @@ function PlayText({ chapter }) {
     }
 
     async function subtractTen(){
+        // makes sure first rewind click is finished before allowing to click again.
+        if(rewindActive){
+            return;
+        }
+        setRewindActive(true);
+
         let txt = {};
         const lines = 1;
 
@@ -211,14 +223,22 @@ function PlayText({ chapter }) {
                 utter.voice = currentVoice;
                 utter.rate = uttSpeed;
                 setLastUtt(utter);
+                setRewindActive(false);
                 resolve();
             });
         } else{
             setLastUtt({});
+            setRewindActive(false);
         }
     }
 
     async function addTen(){
+        // makes sure first forward click is finished before allowing to click again.
+        if(forwardActive){
+            return;
+        }
+        setForwardActive(true);
+
         let txt = {};
         const lines = 1;
 
@@ -237,6 +257,7 @@ function PlayText({ chapter }) {
                 utter.voice = currentVoice;
                 utter.rate = uttSpeed;
                 setLastUtt(utter);
+                setForwardActive(false);
                 resolve();
             });
         } else {
@@ -247,6 +268,7 @@ function PlayText({ chapter }) {
                 utter.voice = currentVoice;
                 utter.rate = uttSpeed;
                 setLastUtt(utter);
+                setForwardActive(false);
                 resolve();
             });
         }
