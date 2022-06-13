@@ -187,8 +187,8 @@ function PlayText({ chapter }) {
     }
 
     async function subtractTen(){
-
         let txt = {};
+        const lines = 1;
 
         if(synth.speaking){
             txt = currentUtt;
@@ -199,9 +199,9 @@ function PlayText({ chapter }) {
         await pauseSpeech();
         let start = textArr.indexOf(txt.text);
         console.log(start);
-        if(textArr[start - 1]){
+        if(textArr[start - lines]){
             await new Promise(resolve => {
-                let utter = new SpeechSynthesisUtterance(textArr[start - 1]);
+                let utter = new SpeechSynthesisUtterance(textArr[start - lines]);
                 utter.voice = synthVoices[0];
                 setLastUtt(utter);
                 resolve();
@@ -212,7 +212,35 @@ function PlayText({ chapter }) {
     }
 
     async function addTen(){
+        let txt = {};
+        const lines = 1;
 
+        if(synth.speaking){
+            txt = currentUtt;
+        } else {
+            txt = lastUtt;
+        }
+
+        await pauseSpeech();
+        let start = textArr.indexOf(txt.text);
+        console.log(start);
+        if(textArr[start + lines]){
+            await new Promise(resolve => {
+                let utter = new SpeechSynthesisUtterance(textArr[start + lines]);
+                utter.voice = synthVoices[0];
+                setLastUtt(utter);
+                resolve();
+            });
+        } else {
+            // if there are no more lines in front of the current line.
+            // set lastUtt to the last line in the chapter.
+            await new Promise(resolve => {
+                let utter = new SpeechSynthesisUtterance(textArr[textArr.length - 1]);
+                utter.voice = synthVoices[0];
+                setLastUtt(utter);
+                resolve();
+            });
+        }
     }
 
     
