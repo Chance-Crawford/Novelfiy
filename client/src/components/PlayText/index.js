@@ -79,8 +79,10 @@ function PlayText({ chapter }) {
         });
     }
 
-    function chunkString(str, offset) {
-        return str.match(new RegExp('.{1,' + offset + '}', 'g'));
+    function chunkString(str, chunkLength) {
+        // return str.match(new RegExp('.{1,' + offset + '}', 'g'));
+        return str.match(new RegExp('[\\s\\S]{' + Math.floor(chunkLength / 2) + ',' + chunkLength + '}[.!?,]{1}|[\\s\\S]{1,' + chunkLength + '}$|[\\s\\S]{1,' + chunkLength + '} ', 'g'));
+        //return str.match(new RegExp('.{1,' + chunkLength + '}(.|,|\s|$)', 'g'));
     }
     
     async function playText(){
@@ -285,7 +287,7 @@ function PlayText({ chapter }) {
     }
 
     return(
-        <section className="p-3 w-100 d-flex justify-content-center">
+        <section className="p-3 mt-4 mb-4 w-100 d-flex justify-content-center light-bottom-border bottom-pad">
             <div className='w-100 row'>
                 <div className='col-12 col-lg-4'>
                     <div onClick={stopSpeech} className='btn icon-play-text play-text-btn'>

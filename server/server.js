@@ -24,7 +24,7 @@ const startServer = async () => {
 
     // start the apollo server
     await server.start()
-    app.use(apolloUploadExpress({ maxFileSize: 10000000 }));
+    app.use(apolloUploadExpress({ maxFileSize: 5000000 }));
     // connect our Apollo server to our Express.js server. This will create 
     // a special /graphql endpoint for the Express.js server that will serve as the 
     // main endpoint for accessing the entire API, with graphQL playground.

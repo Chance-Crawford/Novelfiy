@@ -3,6 +3,7 @@ import Auth from '../../utils/auth';
 import { useQuery } from '@apollo/client';
 import { GET_ME } from '../../utils/queries';
 import { useState, useEffect } from 'react';
+import { stopSpeechExtra } from '../../utils/helpers';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faUser, faArrowRightFromBracket, faPencil } from '@fortawesome/free-solid-svg-icons'
@@ -30,14 +31,14 @@ function Header() {
     return(
         <div>
             <header className="top-header p-3 d-flex justify-content-between align-items-center">
-            <Link to="/">
+            <Link to="/" onClick={stopSpeechExtra}>
                 <div>
                     <h1 className="main-title m-0">novelfiy</h1>
                 </div>
             </Link>
             {Auth.loggedIn() && me.username ? (
                 <div className='d-flex align-items-center'>
-                    <Link to='/create'>
+                    <Link to='/create' onClick={stopSpeechExtra}>
                         <div className='mr-2 write-btn-contain'>
                             <p className='btn m-0'><FontAwesomeIcon icon={faPencil} /> &#160;Submit My Novel</p>
                         </div>

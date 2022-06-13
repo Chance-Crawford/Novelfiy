@@ -578,3 +578,7 @@ a:hover{
   width: 65%;
   font-size: 11px;
 }
+
+.bottom-pad{
+  padding-bottom: 2.5rem !important;
+}

@@ -79,6 +79,7 @@ function Chapter() {
                             </div>
                         </div>
                     </section>
+                    <PlayText chapter={chapter}></PlayText>
                     <section>
                         <div className='font-18 p-3'>
                             {chapter.chapterText.split('\n').map(part=>(
@@ -87,7 +88,6 @@ function Chapter() {
                             }
                         </div>
                     </section>
-                    <PlayText chapter={chapter}></PlayText>
                     <section className='p-3 d-flex justify-content-between mt-5'>
                         <div>
                             {prevChapter && (
