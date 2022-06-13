@@ -573,3 +573,8 @@ a:hover{
   border-radius: 20px;
   padding: 1rem;
 }
+
+.small-font{
+  width: 65%;
+  font-size: 11px;
+}

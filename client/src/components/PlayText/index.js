@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlay, faPause, faStop } from '@fortawesome/free-solid-svg-icons'
+import randomId from '../../utils/randomId';
 
 
 function PlayText({ chapter }) {
@@ -11,9 +12,10 @@ function PlayText({ chapter }) {
     const [lastUtt, setLastUtt] = useState({});
     const [textArr, setTextArr] = useState([]);
     const [synth, setSynth] = useState({});
-    const [synthSpeaking, setSynthSpeaking] = useState(false);
     const [playing, setPlaying] = useState(false);
     const [synthVoices, setSynthVoices] = useState({});
+    const [currentVoice, setCurrentVoice] = useState({});
+    const [uttSpeed, setUttSpeed] = useState(1);
 
     // on load of component, do this.
     useEffect(() => {
@@ -24,6 +26,7 @@ function PlayText({ chapter }) {
         .then((voices)=>{ 
             setSynthVoices(voices);
             console.log(voices);
+            setCurrentVoice(voices[0]);
         });
     }, []);
 
@@ -68,7 +71,8 @@ function PlayText({ chapter }) {
     async function setUtter(i, arr) {
         return new Promise(resolve => {
             let utter = new SpeechSynthesisUtterance(arr[i]);
-            utter.voice = synthVoices[0];
+            utter.voice = currentVoice;
+            utter.rate = uttSpeed;
             setCurrentUtt(utter);
             synth.speak(utter);
             utter.onend = resolve;
@@ -202,7 +206,8 @@ function PlayText({ chapter }) {
         if(textArr[start - lines]){
             await new Promise(resolve => {
                 let utter = new SpeechSynthesisUtterance(textArr[start - lines]);
-                utter.voice = synthVoices[0];
+                utter.voice = currentVoice;
+                utter.rate = uttSpeed;
                 setLastUtt(utter);
                 resolve();
             });
@@ -227,7 +232,8 @@ function PlayText({ chapter }) {
         if(textArr[start + lines]){
             await new Promise(resolve => {
                 let utter = new SpeechSynthesisUtterance(textArr[start + lines]);
-                utter.voice = synthVoices[0];
+                utter.voice = currentVoice;
+                utter.rate = uttSpeed;
                 setLastUtt(utter);
                 resolve();
             });
@@ -236,14 +242,13 @@ function PlayText({ chapter }) {
             // set lastUtt to the last line in the chapter.
             await new Promise(resolve => {
                 let utter = new SpeechSynthesisUtterance(textArr[textArr.length - 1]);
-                utter.voice = synthVoices[0];
+                utter.voice = currentVoice;
+                utter.rate = uttSpeed;
                 setLastUtt(utter);
                 resolve();
             });
         }
     }
-
-    
 
     function togglePlay(){
         const play = !playing
@@ -253,6 +258,29 @@ function PlayText({ chapter }) {
             playText();
         } else {
             pauseSpeech();
+        }
+    }
+
+    function changeVoice(event){
+        pauseSpeech();
+        const voiceName = event.target.value;
+        const voiceIndex = synthVoices.findIndex((voiceObj) => voiceObj.name === voiceName);
+        if(voiceIndex){
+            setUttSpeed(1);
+            setCurrentVoice(synthVoices[voiceIndex]);
+        } else {
+            return;
+        }
+    }
+
+    function changeVoiceSpeed(event){
+        pauseSpeech();
+        const speed = parseFloat(event.target.value);
+        if(speed){
+            console.log(speed);
+            setUttSpeed(speed);
+        } else {
+            return;
         }
     }
 
@@ -288,7 +316,55 @@ function PlayText({ chapter }) {
                 </div>
                 <div className='d-flex justify-content-between col-12 col-lg-4'>
                     <div></div>
-                    <button>speed/voice</button>
+                    <div className='d-flex flex-wrap justify-content-center align-items-center'>
+                        <div className='d-flex justify-content-end'>
+                            <span className='bold font-18 mr-2'>Voices:</span>
+                            <select name="voices" value={currentVoice.name} onChange={changeVoice} className='w-50'>
+                                {synthVoices.length && synthVoices.map(voice => (
+                                    <option value={voice.name} key={randomId(10)}>{voice.name.length > 16 ? (
+                                        <span>{voice.name.slice(0, 16)}...</span>
+                                    ) : (
+                                        <span>{voice.name}</span>
+                                    )}</option>
+                                ))}
+                            </select>
+                        </div>
+                        <div className='d-flex justify-content-end mt-2 mr-2'>
+                            <span className='bold font-18 mr-2'>Speed:</span>
+                            {currentVoice.name === 'Microsoft David - English (United States)' ||
+                            currentVoice.name === 'Microsoft Mark - English (United States)' ||
+                            currentVoice.name === 'Microsoft Zira - English (United States)' ? (
+                                // some voices can only go to a max of 2x speed. so I added 2
+                                // different select menus depending on which voice is picked.
+                                <select name="voices" value={uttSpeed} onChange={changeVoiceSpeed} className='w-50'>
+                                    <option value="0.25">0.25</option>
+                                    <option value="0.5">0.5</option>
+                                    <option value="0.75">0.75</option>
+                                    <option value="1">1</option>
+                                    <option value="1.25">1.25</option>
+                                    <option value="1.5">1.5</option>
+                                    <option value="1.75">1.75</option>
+                                    <option value="2">2</option>
+                                    <option value="2.5">2.5</option>
+                                    <option value="3">3</option>
+                                    <option value="3.5">3.5</option>
+                                </select>
+                            ) : (
+                                <select name="voices" value={uttSpeed} onChange={changeVoiceSpeed} className='w-50'>
+                                    <option value="0.25">0.25</option>
+                                    <option value="0.5">0.5</option>
+                                    <option value="0.75">0.75</option>
+                                    <option value="1">1</option>
+                                    <option value="1.25">1.25</option>
+                                    <option value="1.5">1.5</option>
+                                    <option value="1.75">1.75</option>
+                                    <option value="2">2</option>
+                                </select>
+                            )
+                            }
+                            
+                        </div>
+                    </div>
                 </div>
             </div>
             
