@@ -39,7 +39,7 @@ function Novel({ novel }) {
                         {
                             // have to put in a template literal to get it to read length
                             // and treat as string
-                            `${novel.description}`.length <= 450 ? (
+                            `${novel.description}`.length <= 440 ? (
                                 <p className="novel-desc">
                                     {novel.description}
                                 </p>
@@ -48,7 +48,7 @@ function Novel({ novel }) {
                                 <p className="novel-desc">
                                     {
                                         // if description more than 450 characters, add read more
-                                        `${novel.description}`.substring(0, 447)
+                                        `${novel.description}`.substring(0, 440)
                                     }
                                     ...
                                     <a href={`/novel/${novel._id}`}>
