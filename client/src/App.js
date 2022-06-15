@@ -21,7 +21,7 @@ import Chapter from './pages/Chapter';
 // "proxy": "http://localhost:3001", so server can run on different port
 // then React.
 // restart the server and client with npm run develop.
-const httpLink =  createUploadLink({uri: "http://localhost:3001/graphql"});
+const httpLink =  createUploadLink({uri: "/graphql"});
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('id_token');
   return {
