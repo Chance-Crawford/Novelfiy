@@ -106,9 +106,7 @@ function Chapter() {
                     </section>
                 </div>
             ) : loading ? (
-                <div>
-                    <p className='font-18 text-center'>Loading...</p>
-                </div>
+                <div></div>
             ) : (
                 <div></div>
             )}

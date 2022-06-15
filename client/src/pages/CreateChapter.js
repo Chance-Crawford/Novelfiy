@@ -51,7 +51,7 @@ function CreateChapter() {
             {myNovel ? (
                 <ChapterEditor novel={novel}></ChapterEditor>
             ) : loading || meLoading ? (
-                <p className='text-center font-18'>Loading...</p>
+                <div></div>
             ) : !novel._id ? (
                 <h2 className='mt-4 text-center'>Novel could not be found</h2>
             ) : (

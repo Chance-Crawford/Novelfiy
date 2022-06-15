@@ -134,7 +134,7 @@ a:hover{
 }
 
 .main-contain{
-  /* since there is a min height, must badd a table display ion order to center
+  /* since there is a min height, must add a table display in order to center
   content vertically that does not fill upo the whole page, like Login */
   display: table;
   min-height: calc(100vh - 73px - 71.39px);
@@ -581,4 +581,8 @@ a:hover{
 
 .bottom-pad{
   padding-bottom: 2.5rem !important;
+}
+
+.loading-contain{
+  min-height: 75vh;
 }

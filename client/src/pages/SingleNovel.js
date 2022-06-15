@@ -298,7 +298,9 @@ function SingleNovel() {
         </div>
         ) : !loading && !novel.title ? (
             <PageNotFound></PageNotFound>
-        ) : (<h4 className='text-center'>Loading...</h4>)
+        ) : (
+            <div></div>
+        )
         }
         </div>
     );

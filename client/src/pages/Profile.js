@@ -286,13 +286,9 @@ function Profile() {
                 <PageNotFound></PageNotFound>
             ) : (
                 // if the data is still loading
-                <div>
-                    {
-                        
-                    }
-                    <h4 className='text-center'>Loading...</h4>
+                <div className='d-flex justify-content-center align-items-center loading-contain'>
+                    <img className="" src={require('../images/loading.gif')} alt="loading" />
                 </div>
-                
             )
             }
         </div>
