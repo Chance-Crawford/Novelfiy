@@ -406,6 +406,16 @@ a:hover{
   border-radius: 10px;
 }
 
+.edit-novel-btn{
+  color: rgb(37, 131, 255);
+  white-space: nowrap;
+  transition: color .25s;
+}
+
+.edit-novel-btn:hover{
+  color: rgb(74, 153, 255);
+}
+
 .point{
   cursor: pointer;
 }

@@ -12,6 +12,7 @@ import NovelList from '../components/NovelList'
 import PageNotFound from './PageNotFound';
 import ReadMore from '../components/ReadMore';
 import FollowButton from '../components/FollowButton';
+import MyNovelList from '../components/MyNovelList';
 
 function Profile() {
 
@@ -139,8 +140,10 @@ function Profile() {
                                     )} by {user.username}</h3>
                                 </div>
                                 <div className='pt-1'>
-                                    {user.novels.length ? (
+                                    {user.novels.length && !myProfile ? (
                                         <NovelList novels={user.novels}></NovelList>
+                                    ) : user.novels.length && myProfile ? (
+                                        <MyNovelList novels={user.novels}></MyNovelList>
                                     ) : (
                                         <p className='font-18 text-center'>No novels yet</p>
                                     )}

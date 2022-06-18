@@ -103,3 +103,16 @@ mutation singleUpload($file: Upload!) {
   }
 }
 `
+
+export const REMOVE_NOVEL = gql`
+  mutation removeNovel($novelId: ID!) {
+    removeNovel(novelId: $novelId) {
+      _id
+      username
+      novels{
+        _id
+        title
+      }
+    }
+  }
+`;

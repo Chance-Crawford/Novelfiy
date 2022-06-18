@@ -77,6 +77,9 @@ const typeDefs = gql`
         addToFollowing(userId: ID!): User
         singleUpload(file: Upload!): File!
         addReview(reviewText: String!, rating: Int!, novel: ID!): Review
+        removeNovel(novelId: ID!): User
+        updateNovel(novelId: ID!, title: String!, description: String!, penName: String, imageLink: String): Novel
+        removeChapter(chapterId: ID!): User
     }
 
     type Auth {
