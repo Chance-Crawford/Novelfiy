@@ -35,7 +35,7 @@ function FilePondCustom({ file, setFile }) {
       };
 
     return (
-        <div className="w-35">
+        <div className="w-100">
             <FilePond
                 //files={file}
                 stylePanelAspectRatio={250/200}

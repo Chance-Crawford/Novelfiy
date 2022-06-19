@@ -596,3 +596,9 @@ a:hover{
 .loading-contain{
   min-height: 75vh;
 }
+
+/* ChangeNovel */
+
+.w-40{
+  width: 40%;
+}
