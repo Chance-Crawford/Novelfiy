@@ -1,7 +1,9 @@
-import { SINGLE_UPLOAD } from "../../utils/mutations";
+import { SINGLE_UPLOAD, REMOVE_NOVEL } from "../../utils/mutations";
 import { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import FilePondCustom from "../FilePondCustom";
 
 function ChangeNovel({ novel }) {
@@ -16,6 +18,34 @@ function ChangeNovel({ novel }) {
     const [singleUpload, { error: uploadError }] = useMutation(SINGLE_UPLOAD, {
         onCompleted: (data) => console.log(data),
     });
+
+    // remove novel
+    const [removeNovel, { error: removeError }] = useMutation(REMOVE_NOVEL, {
+        onCompleted: (data) => console.log(data),
+    });
+
+    const handleRemove = async (event) => {
+        // get name and value of input element from the event.target
+        let remove = window.confirm('Are you sure you want to delete this ENTIRE novel and all of it\'s chapters?');
+        
+        if(remove){
+            try {
+                await removeNovel({
+                    variables: { novelId: novel._id }
+                });
+
+                window.location.assign(`/user/${novel.user.username}`)
+            } 
+            catch (e) {
+                console.log(uploadError?.message)
+                console.error(e);
+                return;
+            }
+        }else{
+            return;
+        }
+    };
+
     const handleNovelChange = (event) => {
         // get name and value of input element from the event.target
         let { name, value } = event.target;
@@ -34,6 +64,11 @@ function ChangeNovel({ novel }) {
     return ( 
         <div>
             <div>
+                <div className="d-flex justify-content-end mt-4">
+                    <div>
+                        <button onClick={handleRemove} className="btn bold text-white del-btn"><FontAwesomeIcon icon={faTrashCan}/> &#160;Delete Novel</button>
+                    </div>
+                </div>
                 <div className="mt-4">
                     <h2 className="bold">Change Book Cover:</h2>
                 </div>

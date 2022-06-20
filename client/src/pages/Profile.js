@@ -36,6 +36,7 @@ function Profile() {
         // if there is already a user reference available with all its data populated,
         // use that one until refresh.
         if(userData?.user.favoriteNovels && !user.favoriteNovels){
+            console.log('here')
             console.log(userData.user);
             setUser(userData.user);
         } 
@@ -58,7 +59,7 @@ function Profile() {
         if(data?.me.givenReviews){
             // if data has returned fully give me a value
             setMe(data.me)
-            console.log(data.me);
+            
             if(data.me.username === username){
                 setMyProfile(true)
             }

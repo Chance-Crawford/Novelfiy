@@ -51,10 +51,12 @@ const resolvers = {
                     populate: {path: 'novel'}
                 })
                 .populate('following')
-                .populate('followers');
+                .populate('followers')
+                .exec();
 
             user.novels.reverse();
-            user.givenReviews.reverse();
+            // make sure a review that the user has given hasnt been deleted
+            user.givenReviews = user.givenReviews.filter((review)=> review.novel?._id).reverse();
             user.favoriteNovels.reverse();
             user.following.reverse();
             user.followers.reverse();

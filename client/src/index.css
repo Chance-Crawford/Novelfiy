@@ -602,3 +602,12 @@ a:hover{
 .w-40{
   width: 40%;
 }
+
+.del-btn{
+  background-color: rgb(243, 49, 49);
+  transition: background-color .25s;
+}
+
+.del-btn:hover{
+  background-color: rgb(236, 82, 82);
+}
