@@ -116,3 +116,16 @@ export const REMOVE_NOVEL = gql`
     }
   }
 `;
+
+export const UPDATE_NOVEL = gql`
+mutation updateNovel($novelId: ID!, $title: String!, $description: String!, $penName: String, $imageLink: String) {
+  updateNovel(novelId: $novelId, title: $title, description: $description, penName: $penName, imageLink: $imageLink) {
+    _id
+    title
+    imageLink
+    user {
+      _id
+    }
+  }
+}
+`

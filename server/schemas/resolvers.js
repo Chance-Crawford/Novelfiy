@@ -176,7 +176,6 @@ const resolvers = {
             return { token, user };
           },
 
-        // add context later 
         addNovel: async (parent, args, context) => {
             if (context.user) {
                 // upload image from server to cloudinary
@@ -398,6 +397,45 @@ const resolvers = {
               return userDel;
             }
             throw new AuthenticationError("You need to be logged in!");
+        },
+
+        updateNovel: async (parent, args, context) => {
+            if (context.user) {
+                // if there was no image link given in request, that means that
+                // the user is uploading a new book cover.
+                console.log('here');
+                console.log(args);
+                if(!args.imageLink){
+                    await cloudinary.uploader
+                    .upload(pathName, {
+                        resource_type: "image",
+                    })
+                    .then(async (res) => {
+                        console.log("Success!", JSON.stringify(res, null, 2));
+                        
+                        args.imageLink = res.secure_url;
+                        console.log(args.imageLink);
+                    })
+                    .catch((error) => {
+                        console.log("Error!", JSON.stringify(error, null, 2));
+                    });
+                }
+
+                
+
+                // create novel
+                const novel = await Novel.findOneAndUpdate(
+                    { _id: args.novelId },
+                    { ...args },
+                    { new: true }
+                  );
+
+                console.log(novel);
+
+                return novel;
+            }
+            
+            throw new AuthenticationError('You need to be logged in!');
         },
     }
 }
