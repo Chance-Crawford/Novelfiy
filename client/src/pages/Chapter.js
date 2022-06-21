@@ -53,10 +53,10 @@ function Chapter() {
                         <div className="d-flex align-items-center justify-content-between p-3 light-bottom-border">
                             <div className="d-flex align-items-center">
                                 <div className='chapter-novel-img'>
-                                    <img src={chapter.novelId.imageLink} className="w-100" alt="book cover" />
+                                <a href={`/novel/${chapter.novelId._id}`}><img src={chapter.novelId.imageLink} className="w-100" alt="book cover" /></a>
                                 </div>
                                 <div className="ml-3">
-                                    <h2 className="bold">{chapter.novelId.title}</h2>
+                                    <a href={`/novel/${chapter.novelId._id}`}><h2 className="bold">{chapter.novelId.title}</h2></a>
                                     {/* chapter dropdown menu */}
                                     <div className="dropdown">
                                         <button className="dropbtn">{chapter.chapterTitle} &nbsp;{<FontAwesomeIcon icon={faAngleDown} className="down-arr"/>}</button>

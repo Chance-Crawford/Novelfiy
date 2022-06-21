@@ -129,3 +129,29 @@ mutation updateNovel($novelId: ID!, $title: String!, $description: String!, $pen
   }
 }
 `
+
+export const UPDATE_CHAPTER = gql`
+mutation updateChapter($chapterTitle: String!, $chapterText: String!, $chapterId: ID!) {
+  updateChapter(chapterTitle: $chapterTitle, chapterText: $chapterText, chapterId: $chapterId) {
+    _id
+    chapterTitle
+    chapterText
+    novelId {
+      _id
+    }
+  }
+}
+`
+
+export const REMOVE_CHAPTER = gql`
+  mutation removeChapter($chapterId: ID!, $novelId: ID!) {
+    removeChapter(chapterId: $chapterId, novelId: $novelId) {
+      _id
+      title
+      chapters{
+        _id
+        chapterTitle
+      }
+    }
+  }
+`;

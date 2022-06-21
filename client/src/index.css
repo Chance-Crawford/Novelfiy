@@ -603,11 +603,25 @@ a:hover{
   width: 40%;
 }
 
+.chapter-edit-div{
+  border-bottom: 1px solid rgb(182, 182, 182);
+  border-top: 1px solid rgb(182, 182, 182);
+  padding: 1rem 0;
+}
+
+.chap-edit-btn{
+  background-color: var(--primary-hover);
+}
+
+.chap-edit-btn:hover{
+  background-color: var(--primary-color);
+}
+
 .del-btn{
   background-color: rgb(243, 49, 49);
   transition: background-color .25s;
 }
 
 .del-btn:hover{
-  background-color: rgb(236, 82, 82);
+  background-color: rgb(236, 99, 99);
 }

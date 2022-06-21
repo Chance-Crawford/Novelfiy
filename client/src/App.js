@@ -17,6 +17,7 @@ import CreateNovel from './pages/CreateNovel';
 import CreateChapter from './pages/CreateChapter';
 import Chapter from './pages/Chapter';
 import EditNovel from './pages/EditNovel';
+import EditChapter from './pages/EditChapter';
 
 // add a proxy to the client folder's package.json.
 // "proxy": "http://localhost:3001", so server can run on different port
@@ -64,6 +65,7 @@ function App() {
                 <Route exact path="/create-chapter/:novelId" component={CreateChapter} />
                 <Route exact path="/chapter/:id" component={Chapter} />
                 <Route exact path="/edit-novel/:novelId" component={EditNovel} />
+                <Route exact path="/edit-chapter/:chapterId" component={EditChapter} />
                 <Route component={PageNotFound} />
               </Switch>
             </div>

@@ -437,6 +437,41 @@ const resolvers = {
             
             throw new AuthenticationError('You need to be logged in!');
         },
+
+        updateChapter: async (parent, args, context) => {
+            if (context.user) {
+                if(!args.chapterTitle || !args.chapterText){
+                    throw new Error('Both boxes must have text inside them');
+                }
+                // create new review with the review's text and Id of novel
+                // and id of user.
+                const chapter = await Chapter.findByIdAndUpdate(
+                    { _id: args.chapterId },
+                    {...args},
+                    { new: true }
+                );
+
+                return chapter;
+            }
+            
+            throw new AuthenticationError('You need to be logged in!'); 
+        },
+
+        removeChapter: async (parent, { chapterId, novelId }, context) => {
+            if (context.user) {
+
+            const novelDel = await Novel.findByIdAndUpdate(
+                { _id: novelId },
+                { $pull: { chapters: chapterId } },
+                { new: true }
+              );
+
+              await Chapter.findOneAndDelete({ _id: chapterId });
+
+              return novelDel;
+            }
+            throw new AuthenticationError("You need to be logged in!");
+        },
     }
 }
 

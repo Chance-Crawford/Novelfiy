@@ -79,7 +79,8 @@ const typeDefs = gql`
         addReview(reviewText: String!, rating: Int!, novel: ID!): Review
         removeNovel(novelId: ID!): User
         updateNovel(novelId: ID!, title: String!, description: String!, penName: String, imageLink: String): Novel
-        removeChapter(chapterId: ID!): User
+        removeChapter(chapterId: ID!, novelId: ID!): Novel
+        updateChapter(chapterId: ID!, chapterTitle: String!, chapterText: String!): Chapter
     }
 
     type Auth {

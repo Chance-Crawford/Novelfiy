@@ -2,15 +2,18 @@ import { SINGLE_UPLOAD, REMOVE_NOVEL, UPDATE_NOVEL } from "../../utils/mutations
 import { useState, useEffect } from 'react';
 import { useMutation } from '@apollo/client';
 
+import randomId from '../../utils/randomId';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import FilePondCustom from "../FilePondCustom";
+import { REMOVE_CHAPTER } from "../../utils/mutations";
 
 function ChangeNovel({ novel }) {
 
     const [charCount, setCharCount] = useState(novel.description.length);
 
     const [file, setFile] = useState({});
+    console.log(novel)
 
     const [novelFormState, setNovelFormState] = useState({ novelId: novel._id, title: novel.title, description: novel.description, imageLink: novel.imageLink, penName: novel.penName });
     console.log(novelFormState);
@@ -38,6 +41,36 @@ function ChangeNovel({ novel }) {
             } 
             catch (e) {
                 console.log(uploadError?.message)
+                console.error(e);
+                return;
+            }
+        }else{
+            return;
+        }
+    };
+
+    // remove chapter
+    const [removeChapter, { error: chapterError }] = useMutation(REMOVE_CHAPTER, {
+        onCompleted: (data) => console.log(data),
+    });
+
+    const handleChapterRemove = async (chapId) => {
+        // get name and value of input element from the event.target
+        let remove = window.confirm('Are you sure you want to delete this chapter?');
+        
+        if(remove){
+            try {
+                console.log('here');
+                console.log(chapId);
+                console.log(novel._id);
+                await removeChapter({
+                    variables: { chapterId: chapId, novelId: novel._id }
+                });
+
+                window.location.reload();
+            } 
+            catch (e) {
+                console.log(chapterError?.message)
                 console.error(e);
                 return;
             }
@@ -189,6 +222,26 @@ function ChangeNovel({ novel }) {
                     </div>
                 </div>
             </form>
+            <div className="mt-4 mb-5">
+                <div>
+                    <h2 className="bold">Edit Chapters</h2>
+                </div>
+                <div className="pt-4 w-100">
+                    {novel.chapterCount ? novel.chapters.map(chapter=>(
+                        <div key={randomId(10)} className='d-flex justify-content-between align-items-center flex-wrap w-50 chapter-edit-div'>
+                            <p className="bold m-0">{chapter.chapterTitle}</p>
+                            <div>
+                                <a href={`/edit-chapter/${chapter._id}`} className='text-white mr-2 bold btn chap-edit-btn'>Edit</a>
+                                <button onClick={()=>{handleChapterRemove(chapter._id)}} className='text-white bold btn chap-edit-btn del-btn'>Delete</button>
+                            </div>
+                        </div>
+                    )) : (
+                        <div>
+                            <p className="font-18">No chapters to edit yet. To add a chapter go to the novel page and press the black '+' in the 'Chapters' section.</p>
+                        </div>
+                    )}
+                </div>
+            </div>
             
         </div>
      );
