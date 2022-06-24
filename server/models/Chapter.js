@@ -26,6 +26,12 @@ const chapterSchema = new Schema(
         required: true,
         ref: 'Novel'
     },
+    comments: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Comment'
+      }
+  ],
   },
   {
     toJSON: {

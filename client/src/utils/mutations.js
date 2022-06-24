@@ -43,6 +43,22 @@ export const ADD_REVIEW = gql`
   }
 `
 
+export const ADD_COMMENT = gql`
+mutation addComment($commentText: String!, $chapter: ID!) {
+  addComment(commentText: $commentText, chapter: $chapter) {
+      _id
+      commentText
+      createdAt
+      user {
+        _id
+      }
+      chapter {
+        _id
+      }
+  }
+}
+`
+
 export const TOGGLE_ADD_TO_FAVORITES = gql`
 mutation addFavNovel($novelId: ID!) {
   addFavNovel(novelId: $novelId) {

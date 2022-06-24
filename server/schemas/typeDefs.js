@@ -26,6 +26,7 @@ const typeDefs = gql`
         chapterText: String
         createdAt: String
         novelId: Novel
+        comments: [Comment]
     }
 
     type File {
@@ -41,6 +42,14 @@ const typeDefs = gql`
         createdAt: String
         user: User
         novel: Novel
+    }
+
+    type Comment{
+        _id: ID
+        commentText: String
+        createdAt: String
+        user: User
+        chapter: Chapter
     }
 
     type Novel{
@@ -77,6 +86,7 @@ const typeDefs = gql`
         addToFollowing(userId: ID!): User
         singleUpload(file: Upload!): File!
         addReview(reviewText: String!, rating: Int!, novel: ID!): Review
+        addComment(commentText: String!, chapter: ID!): Comment
         removeNovel(novelId: ID!): User
         updateNovel(novelId: ID!, title: String!, description: String!, penName: String, imageLink: String): Novel
         removeChapter(chapterId: ID!, novelId: ID!): Novel

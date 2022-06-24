@@ -1,4 +1,4 @@
-const { User, Novel, Review, Chapter } = require('../models');
+const { User, Novel, Review, Chapter, Comment } = require('../models');
 const { GraphQLUpload } = require('apollo-upload-server');
 const { AuthenticationError } = require('apollo-server-express');
 require('dotenv').config();
@@ -98,7 +98,11 @@ const resolvers = {
 
         chapter: async (parent, { _id }) => {
             // returns single novel from the novel id given
-            const chapter = await Chapter.findOne({ _id })
+            let chapter = await Chapter.findOne({ _id })
+            .populate({
+                path: 'comments',
+                populate: {path: 'user'}
+            })
             .populate({
                 path: 'novelId',
                 populate: {path: 'chapters'}
@@ -107,6 +111,8 @@ const resolvers = {
                 path: 'novelId',
                 populate: {path: 'user'}
             });
+
+            chapter.comments = chapter.comments.reverse();
 
             return chapter;
         },
@@ -378,6 +384,23 @@ const resolvers = {
                 );
 
                 return review;
+            }
+            
+            throw new AuthenticationError('You need to be logged in!'); 
+        },
+
+        addComment: async (parent, { commentText, chapter }, context) => {
+            if (context.user) {
+                const comment = await Comment.create({ commentText, chapter, user: context.user._id });
+
+                // add to user object that gave the review
+                await Chapter.findByIdAndUpdate(
+                    { _id: chapter },
+                    { $push: { comments: comment._id } },
+                    { new: true }
+                );
+
+                return comment;
             }
             
             throw new AuthenticationError('You need to be logged in!'); 

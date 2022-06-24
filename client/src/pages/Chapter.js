@@ -26,7 +26,7 @@ function Chapter() {
     // before rendering the SingleNovel page
     useEffect(() => {
         console.log(data?.chapter);
-        if (!chapter.chapterTitle && data?.chapter.novelId.chapters.every((chap) => chap._id)) {
+        if (!chapter.chapterTitle && data?.chapter.novelId.chapters.every((chap) => chap._id) && data?.chapter.comments.every((comm) => comm.user.username)) {
             setChapter(data.chapter) 
             // get index of novel in the chapters array by finding the chapter in the array
             // by its ID
@@ -105,7 +105,7 @@ function Chapter() {
                             )}
                         </div>
                     </section>
-                    <CommentSection></CommentSection>
+                    <CommentSection chapter={chapter}></CommentSection>
                 </div>
             ) : loading ? (
                 <div></div>

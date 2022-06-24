@@ -77,6 +77,14 @@ query getChapter($_id: ID!) {
       chapterTitle
       chapterText
       createdAt
+      comments{
+        commentText
+        createdAt
+        user{
+          _id
+          username
+        }
+      }
       novelId{
         _id
         title

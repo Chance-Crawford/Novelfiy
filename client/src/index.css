@@ -625,3 +625,11 @@ a:hover{
 .del-btn:hover{
   background-color: rgb(236, 99, 99);
 }
+
+
+/* CommentSection */
+
+.light-top-bottom{
+  border-bottom: 1px solid rgb(182, 182, 182);
+  border-top: 1px solid rgb(182, 182, 182);
+}
