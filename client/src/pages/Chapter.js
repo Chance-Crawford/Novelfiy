@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/client';
 import { GET_CHAPTER } from '../utils/queries';
 import randomId from '../utils/randomId'
 import PlayText from '../components/PlayText';
+import CommentSection from '../components/CommentSection'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown } from '@fortawesome/free-solid-svg-icons'
@@ -104,6 +105,7 @@ function Chapter() {
                             )}
                         </div>
                     </section>
+                    <CommentSection></CommentSection>
                 </div>
             ) : loading ? (
                 <div></div>

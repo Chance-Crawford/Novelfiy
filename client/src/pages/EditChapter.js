@@ -51,7 +51,7 @@ function EditChapter() {
                 <ChapterUpdateEditor novel={chapter.novelId} chap={chapter}></ChapterUpdateEditor>
             ) : loading || meLoading ? (
                 <div></div>
-            ) : !chapter.novelId.user._id ? (
+            ) : !chapter?.novelId?.user._id ? (
                 <h2 className='mt-4 text-center'>Novel could not be found</h2>
             ) : (
                 <div className='text-center mt-4'>
