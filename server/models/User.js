@@ -28,8 +28,8 @@ const userSchema = new Schema(
       required: true,
       minlength: 5
     },
-    imageLink: {
-      type: String
+    image: {
+      type: String,
     },
     novels: [
       {

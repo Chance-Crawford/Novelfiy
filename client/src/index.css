@@ -416,6 +416,13 @@ a:hover{
   color: rgb(74, 153, 255);
 }
 
+.user-avatar{
+  border-radius: 50%;
+}
+
+.user-stat-contain{
+  margin-left: 1.5rem;
+}
 .point{
   cursor: pointer;
 }

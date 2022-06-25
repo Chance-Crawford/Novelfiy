@@ -10,7 +10,7 @@ const typeDefs = gql`
         username: String
         email: String
         createdAt: String
-        imageLink: String
+        image: String
         novels: [Novel]
         favoriteNovels: [Novel]
         givenReviews: [Review]
@@ -80,7 +80,7 @@ const typeDefs = gql`
 
     type Mutation{
         login(email: String!, password: String!): Auth
-        addUser(username: String!, email: String!, password: String!): Auth
+        addUser(username: String!, email: String!, password: String!, image: String): Auth
         addNovel(title: String!, description: String!, penName: String): Novel
         addChapter(chapterTitle: String!, chapterText: String!, novelId: ID!): Chapter
         addFavNovel(novelId: ID!): User

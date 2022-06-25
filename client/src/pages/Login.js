@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
 import SignupImg from '../images/Signup.svg'
-
 import Auth from '../utils/auth';
 
 import { useMutation } from '@apollo/client';
 import { ADD_USER, LOGIN_USER } from '../utils/mutations';
+import randomId from '../utils/randomId';
 
 function Login() {
     // the tab state to figure out which tab the user clicked on.

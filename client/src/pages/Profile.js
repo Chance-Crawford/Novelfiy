@@ -72,10 +72,13 @@ function Profile() {
             { user?.username ? (
                 <div>
                     <section className='w-100 p-0 pt-3 pb-3 d-flex flex-wrap justify-content-center'>
+                        <div className='mb-3'>
+                            <img className='user-avatar' src={user.image} alt="user profile picture" />
+                        </div>
                         <div className='w-100'>
                             <h2 className='text-center'>@{user.username}</h2>
                         </div>
-                        <div className='w-100 pb-4 mt-3 d-flex justify-content-center flex-wrap light-bottom-border'>
+                        <div className='w-100 user-stat-contain pb-4 mt-3 d-flex justify-content-center flex-wrap light-bottom-border'>
                             <div onClick={()=>{setTab('Novels')}} className='d-flex point ml-2 mr-2 justify-content-center flex-wrap text-center'>
                                 <div className='w-100'>
                                     <p className='m-0 font-18 bold'>{user.novels.length}</p>

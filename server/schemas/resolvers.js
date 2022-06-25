@@ -1,4 +1,5 @@
 const { User, Novel, Review, Chapter, Comment } = require('../models');
+const randomId  = require('../utils/randomId');
 const { GraphQLUpload } = require('apollo-upload-server');
 const { AuthenticationError } = require('apollo-server-express');
 require('dotenv').config();
@@ -140,7 +141,10 @@ const resolvers = {
     Mutation: {
 
         addUser: async (parent, args) => {
-            const lowercaseUsername = args.username.toLowerCase()
+            const lowercaseUsername = args.username.toLowerCase();
+            // imgLink is a random generated image from dicebear that will
+            // go in the src attribute for images
+            let imgLink = `https://avatars.dicebear.com/api/avataaars/${randomId(12)}.svg?size=200&backgroundColor=lightgray`;
             // keep console log
             console.log(lowercaseUsername);
             
@@ -151,6 +155,7 @@ const resolvers = {
             
             // if the lowercase version of the username isnt in the database either, create the user.
             if (!checkForUser) {
+                args.image = imgLink
                 // creates a user from the args object defined in typeDefs.js
                 // Here, the Mongoose User model creates a new user in the database 
                 // with whatever is passed in as the args.
