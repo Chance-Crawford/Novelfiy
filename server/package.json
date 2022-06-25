@@ -13,6 +13,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@dicebear/avatars": "^4.10.3",
     "apollo-server-express": "^3.6.5",
     "apollo-upload-server": "^7.1.0",
     "bcrypt": "^5.0.1",

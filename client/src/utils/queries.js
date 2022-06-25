@@ -42,6 +42,7 @@ query getNovel($_id: ID!) {
       user {
         _id
         username
+        imageLink
         email
       }
       imageLink
@@ -92,6 +93,7 @@ query getChapter($_id: ID!) {
         user {
           _id
           username
+          imageLink
         }
         imageLink
         chapters {
@@ -111,6 +113,7 @@ query me{
     username
     email
     createdAt
+    imageLink
     favoriteNovels {
       _id
       title
@@ -175,6 +178,7 @@ query getUser($username: String!) {
     username
     email
     createdAt
+    imageLink
     favoriteNovels {
       _id
       title

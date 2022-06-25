@@ -10,6 +10,7 @@ const typeDefs = gql`
         username: String
         email: String
         createdAt: String
+        imageLink: String
         novels: [Novel]
         favoriteNovels: [Novel]
         givenReviews: [Review]

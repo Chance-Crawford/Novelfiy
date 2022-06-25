@@ -28,6 +28,9 @@ const userSchema = new Schema(
       required: true,
       minlength: 5
     },
+    imageLink: {
+      type: String
+    },
     novels: [
       {
         type: Schema.Types.ObjectId,
