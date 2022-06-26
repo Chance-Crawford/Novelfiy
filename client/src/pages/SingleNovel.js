@@ -176,8 +176,11 @@ function SingleNovel() {
                 </div>
             </section>
             <section className='mt-4 pb-3 light-bottom-border'>
-                <div className='mb-3'>
-                    <h4>@<a className="user-hover" href={`/user/${novel.user.username}`}>{novel.user.username}</a></h4>
+                <div className='pb-3 pt-2 d-flex align-items-center'>
+                    <div className='avatar-med mr-2'>
+                        <a href={`/user/${novel.user.username}`}><img className='w-100 user-avatar' src={novel.user.image} alt="user profile picture" /></a>
+                    </div>
+                    <h4 className='m-0'>@<a className="user-hover" href={`/user/${novel.user.username}`}>{novel.user.username}</a></h4>
                 </div>
                 <div className='mt-4 mb-3'>
                     <h3 className='bold'>Description</h3>
@@ -287,6 +290,7 @@ function SingleNovel() {
                                 <p className='mt-3 err-text'>Failed to submit. Review must be shorter than 10,000 characters</p>
                             )}
                         </div>
+
                     ) : (
                         <textarea name="" rows="8" className='review-textarea unactive-textarea' readOnly value="Must be logged in to write a review!"></textarea>
                     )}

@@ -45,7 +45,13 @@ function Header() {
                     </Link>
                     <span className='novel-desc'>|</span>
                     <div className="dropdown ml-2">
-                        <button className="dropbtn">{me.username} {<FontAwesomeIcon icon={faAngleDown} className="down-arr"/>}</button>
+                        <div className='d-flex dropbtn'>
+                            <div className='avatar-small'>
+                                <img className='w-100 user-avatar' src={me.image} alt="user profile picture" />
+                            </div>
+                            <button className="btn ">{me.username} {<FontAwesomeIcon icon={faAngleDown} className="down-arr"/>}</button>
+                        </div>
+                        
                         <div className="dropdown-content">
                         <a href={`/user/${me.username}`}><FontAwesomeIcon icon={faUser} className="" /> 	&#160;Profile</a>
                         <a href="/" onClick={logout}>

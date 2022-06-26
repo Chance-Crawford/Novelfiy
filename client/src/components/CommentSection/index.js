@@ -60,27 +60,33 @@ function CommentSection({ chapter }) {
             {/* comment list */}
             <div className='mt-4 mb-5'>
                 {chapter.chapterTitle && chapter.comments.map(comment=>(
-                    <div key={comment._id} className='p-3 light-top-bottom font-18'>
-                        <div>
-                            <a href={`/user/${comment.user.username}`} className='m-0 bold user-hover'>{comment.user.username}</a>
-                            <p className='m-0 novel-desc font-reg ital'>{comment.createdAt}</p>
+                    <div key={comment._id} className='p-3 light-top-bottom font-18 d-flex'>  
+                        <div className='avatar-small mr-2 pt-1'>
+                            <a href={`/user/${comment.user.username}`}>
+                                <img className='w-100 user-avatar' src={comment.user.image} alt="user profile picture" />
+                            </a>
                         </div>
-                        <div className='mt-3'>
-                            {
-                                `${comment.commentText}`.length <= 430 ? (
-                                    <div className="">
-                                        {/* split review text by the newline characters and make
-                                        each section a paragraph */}
-                                        {comment.commentText.split('\n').map(part=>(
-                                            <p className='m-0' key={randomId(10)}>{part}</p>
-                                        ))}
-                                    </div>
-                                ) : (
-                                    <ReadMore text={comment.commentText} length={430}></ReadMore>
-                                )
-                            }
-                        </div>
-                        
+                        <div className='w-100'>
+                            <div>
+                                <a href={`/user/${comment.user.username}`} className='m-0 bold user-hover'>{comment.user.username}</a>
+                                <p className='m-0 novel-desc font-reg ital'>{comment.createdAt}</p>
+                            </div>
+                            <div className='mt-2 text-over'>
+                                {
+                                    `${comment.commentText}`.length <= 430 ? (
+                                        <div className="">
+                                            {/* split review text by the newline characters and make
+                                            each section a paragraph */}
+                                            {comment.commentText.split('\n').map(part=>(
+                                                <p className='m-0' key={randomId(10)}>{part}</p>
+                                            ))}
+                                        </div>
+                                    ) : (
+                                        <ReadMore text={comment.commentText} length={430}></ReadMore>
+                                    )
+                                }
+                            </div>
+                        </div>   
                     </div>
                 ))}
             </div>
