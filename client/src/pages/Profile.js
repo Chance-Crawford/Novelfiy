@@ -6,7 +6,7 @@ import randomId from '../utils/randomId';
 import { stopSpeech } from '../utils/helpers';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBook, faFilePen, faHeart, faUserPlus } from '@fortawesome/free-solid-svg-icons'
+import { faBook, faFilePen, faHeart, faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 
 import NovelList from '../components/NovelList'
 import PageNotFound from './PageNotFound';
@@ -72,7 +72,10 @@ function Profile() {
             { user?.username ? (
                 <div>
                     <section className='w-100 p-0 pt-3 pb-3 d-flex flex-wrap justify-content-center'>
-                        <div className='mb-3'>
+                        <div className='mb-3 p-relative'>
+                            <a href={`/edit-avatar/${user.username}`}>
+                                <div className='avatar-edit'><FontAwesomeIcon icon={faPenToSquare} /></div>
+                            </a>
                             <img className='user-avatar' src={user.image} alt="user profile picture" />
                         </div>
                         <div className='w-100'>

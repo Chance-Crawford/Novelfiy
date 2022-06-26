@@ -18,6 +18,7 @@ import CreateChapter from './pages/CreateChapter';
 import Chapter from './pages/Chapter';
 import EditNovel from './pages/EditNovel';
 import EditChapter from './pages/EditChapter';
+import EditAvatar from './pages/EditAvatar';
 
 // add a proxy to the client folder's package.json.
 // "proxy": "http://localhost:3001", so server can run on different port
@@ -55,7 +56,7 @@ function App() {
 
           {/* middle main content */}
           <main className='col-lg-8'>
-            <div className='main-contain w-100'>
+            <div className='main-contain w-100 text-over'>
               <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/login" component={Login} />
@@ -66,6 +67,7 @@ function App() {
                 <Route exact path="/chapter/:id" component={Chapter} />
                 <Route exact path="/edit-novel/:novelId" component={EditNovel} />
                 <Route exact path="/edit-chapter/:chapterId" component={EditChapter} />
+                <Route exact path="/edit-avatar/:username" component={EditAvatar} />
                 <Route component={PageNotFound} />
               </Switch>
             </div>
