@@ -90,6 +90,7 @@ const typeDefs = gql`
         addComment(commentText: String!, chapter: ID!): Comment
         removeNovel(novelId: ID!): User
         updateNovel(novelId: ID!, title: String!, description: String!, penName: String, imageLink: String): Novel
+        updateAvatar(userId: ID!, image: String): User
         removeChapter(chapterId: ID!, novelId: ID!): Novel
         updateChapter(chapterId: ID!, chapterTitle: String!, chapterText: String!): Chapter
     }

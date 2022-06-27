@@ -146,6 +146,16 @@ mutation updateNovel($novelId: ID!, $title: String!, $description: String!, $pen
 }
 `
 
+export const UPDATE_AVATAR = gql`
+mutation updateAvatar($userId: ID!, $image: String) {
+  updateAvatar(userId: $userId, image: $image) {
+    _id
+    username
+    image
+  }
+}
+`
+
 export const UPDATE_CHAPTER = gql`
 mutation updateChapter($chapterTitle: String!, $chapterText: String!, $chapterId: ID!) {
   updateChapter(chapterTitle: $chapterTitle, chapterText: $chapterText, chapterId: $chapterId) {

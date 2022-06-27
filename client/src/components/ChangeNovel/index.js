@@ -174,7 +174,7 @@ function ChangeNovel({ novel }) {
                     <div className="w-40">
                         <p className="bold">New Cover Image:</p>
                         <p className="novel-desc pb-1 font-reg">Recommended Size: 200px &times; 250px <br></br>Max File Size: 5MB</p>
-                        <FilePondCustom file={file} setFile={setFile}></FilePondCustom>
+                        <FilePondCustom height={250} width={200} file={file} setFile={setFile}></FilePondCustom>
                     </div>
                 </div>
             </div>

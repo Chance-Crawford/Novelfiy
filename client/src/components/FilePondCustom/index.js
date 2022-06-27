@@ -25,7 +25,7 @@ import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css';
 // Register the plugins
 registerPlugin(FilePondPluginImageExifOrientation, FilePondPluginImagePreview, FilePondPluginImageResize);
 
-function FilePondCustom({ file, setFile }) {
+function FilePondCustom({ file, setFile, width, height }) {
     const [singleUpload, { error: uploadError }] = useMutation(SINGLE_UPLOAD);
     
     const handleFileChange = async (file) => {
@@ -38,9 +38,9 @@ function FilePondCustom({ file, setFile }) {
         <div className="w-100">
             <FilePond
                 //files={file}
-                stylePanelAspectRatio={250/200}
-                imageResizeTargetWidth={200}
-                imageResizeTargetHeight={250}
+                stylePanelAspectRatio={height/width}
+                imageResizeTargetWidth={width}
+                imageResizeTargetHeight={height}
                 // when file is chosen, add it to the state
                 onaddfile={(error, fileData)=>{handleFileChange(fileData.file)}}
                 // when file is deleted, clear the state

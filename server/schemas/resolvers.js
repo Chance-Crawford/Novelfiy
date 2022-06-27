@@ -193,6 +193,22 @@ const resolvers = {
                 await cloudinary.uploader
                 .upload(pathName, {
                     resource_type: "image",
+                    // before image is uploaded to cloudinary,
+                    // limit the width and height to 200px and 250px
+                    transformation: [
+                        {
+                            width: 200, 
+                            height: 250, 
+                            crop: "limit"
+                        },
+                        // scales up images smaller than 200x250. example
+                        // 100x 150 will go to 200x200
+                        {
+                            width: 200, 
+                            height: 250, 
+                            crop: "mfit"
+                        }
+                    ]
                 })
                 .then(async (res) => {
                     console.log("Success!", JSON.stringify(res, null, 2));
@@ -437,6 +453,22 @@ const resolvers = {
                     await cloudinary.uploader
                     .upload(pathName, {
                         resource_type: "image",
+                        // before image is uploaded to cloudinary,
+                        // limit the width and height to 200px and 250px
+                        transformation: [
+                            {
+                                width: 200, 
+                                height: 250, 
+                                crop: "limit"
+                            },
+                            // scales up images smaller than 200x250. example
+                            // 100x 150 will go to 200x200
+                            {
+                                width: 200, 
+                                height: 250, 
+                                crop: "mfit"
+                            }
+                        ]
                     })
                     .then(async (res) => {
                         console.log("Success!", JSON.stringify(res, null, 2));
@@ -461,6 +493,59 @@ const resolvers = {
                 console.log(novel);
 
                 return novel;
+            }
+            
+            throw new AuthenticationError('You need to be logged in!');
+        },
+
+        updateAvatar: async (parent, args, context) => {
+            if (context.user) {
+                // if there was no image link given in request, that means that
+                // the user is uploading a new book cover.
+                console.log('here');
+                console.log(args);
+                if(!args.image){
+                    await cloudinary.uploader
+                    .upload(pathName, {
+                        resource_type: "image",
+                        // before image is uploaded to cloudinary,
+                        // limit the width and height to 200px
+                        transformation: [
+                            {
+                                width: 200, 
+                                height: 200, 
+                                crop: "limit"
+                            },
+                            // scales up images smaller than 200x200. example
+                            // 100x 100 will go to 200x200
+                            {
+                                width: 200, 
+                                height: 200, 
+                                crop: "mfit"
+                            }
+                        ]
+                        
+                    })
+                    .then(async (res) => {
+                        console.log("Success!", JSON.stringify(res, null, 2));
+                        
+                        args.image = res.secure_url;
+                        console.log(args.image);
+                    })
+                    .catch((error) => {
+                        console.log("Error!", JSON.stringify(error, null, 2));
+                    });
+                }
+
+                const user = await User.findOneAndUpdate(
+                    { _id: args.userId },
+                    { ...args },
+                    { new: true }
+                  );
+
+                console.log(user);
+
+                return user;
             }
             
             throw new AuthenticationError('You need to be logged in!');
