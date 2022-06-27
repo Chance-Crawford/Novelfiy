@@ -3,6 +3,7 @@ import { SINGLE_UPLOAD, UPDATE_AVATAR } from "../../utils/mutations";
 import { useState, useEffect } from 'react';
 
 import FilePondCustom from "../FilePondCustom";
+import Arrow from "../../images/arrow.png"
 
 function ChangeAvatar({ user }) {
 
@@ -76,10 +77,13 @@ function ChangeAvatar({ user }) {
             <section className='w-100 table-center-section'>
                 <div className='mb-4'>
                     <h2 className='bold text-center'>Change Profile Picture</h2>
-                    <p className='novel-desc font-18 text-center'>Recommended Profile Picture Size: 200px &times; 200px</p>
+                    <p className='novel-desc font-18 text-center'>Recommended Profile Picture Size: 300px &times; 300px</p>
                 </div>
                 <div className='w-100 d-flex flex-wrap justify-content-center align-items-center'>
                     <img className='w-25' src={user.image} alt="current profile picture" />
+                    <div className='m-3'>
+                        <img src={Arrow} alt="arrow pointing to the right" />
+                    </div>
                     <div className='w-25 pt-3'>
                         <FilePondCustom height={200} width={200} file={file} setFile={setFile}></FilePondCustom>
                     </div>
