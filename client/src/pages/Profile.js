@@ -73,9 +73,11 @@ function Profile() {
                 <div>
                     <section className='w-100 p-0 pt-3 pb-3 d-flex flex-wrap justify-content-center'>
                         <div className='mb-3 p-relative'>
-                            <a href={`/edit-avatar/${user.username}`}>
-                                <div className='avatar-edit'><FontAwesomeIcon icon={faPenToSquare} /></div>
-                            </a>
+                            {myProfile && (
+                                <a href={`/edit-avatar/${user.username}`}>
+                                    <div className='avatar-edit'><FontAwesomeIcon icon={faPenToSquare} /></div>
+                                </a>
+                            )}
                             <img className='user-avatar' src={user.image} alt="user profile picture" />
                         </div>
                         <div className='w-100'>

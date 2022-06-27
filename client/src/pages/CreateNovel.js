@@ -145,7 +145,7 @@ function CreateNovel() {
                     </div>
                     <div className="pt-3 mb-3">
                         <p className="bold">Cover Image:</p>
-                        <p className="novel-desc pb-1 font-reg">Recommended Size: 200px &times; 250px <br></br>Max File Size: 5MB</p>
+                        <p className="novel-desc pb-1 font-reg">Recommended Size: 400px &times; 500px <br></br>Max File Size: 5MB</p>
                         <div className="w-35">
                             <FilePondCustom height={250} width={200} file={file} setFile={setFile}></FilePondCustom>
                         </div>
