@@ -426,6 +426,10 @@ a:hover{
   border-radius: 50%;
 }
 
+.profile-avatar{
+  padding-left: 1rem;
+}
+
 .p-relative{
   position: relative;
 }
@@ -456,6 +460,10 @@ a:hover{
 
 .point{
   cursor: pointer;
+}
+
+.follow-contain{
+ padding-right: .6rem;
 }
 
 .follow-btn{

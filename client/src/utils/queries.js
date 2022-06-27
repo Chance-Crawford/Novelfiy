@@ -208,10 +208,12 @@ query getUser($username: String!) {
     following{
       _id
       username
+      image
     }
     followers{
       _id
       username
+      image
     }
     novels {
       _id

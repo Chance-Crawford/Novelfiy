@@ -78,7 +78,7 @@ function Profile() {
                                     <div className='avatar-edit'><FontAwesomeIcon icon={faPenToSquare} /></div>
                                 </a>
                             )}
-                            <img className='user-avatar' src={user.image} alt="user profile picture" />
+                            <img className='user-avatar profile-avatar' src={user.image} alt="user profile picture" />
                         </div>
                         <div className='w-100'>
                             <h2 className='text-center'>@{user.username}</h2>
@@ -253,9 +253,14 @@ function Profile() {
                                             {user.following.map( followingUser =>(
                                                 <div key={randomId(10)} className="mb-4 pb-1">
                                                     <a href={`/user/${followingUser.username}`} >
-                                                    <div className='p-3 novel-box slight-border'>
-                                                        <h4 className='bold text-center m-0'>{followingUser.username}</h4>
-                                                    </div>
+                                                        <div className='p-3 w-100 novel-box d-flex justify-content-center align-items-center slight-border'>
+                                                            <div className='avatar-small mr-2'>
+                                                                <img className='w-100 user-avatar' src={followingUser.image} alt="user profile picture" />
+                                                            </div>
+                                                            <div className=''>
+                                                                <h4 className='bold text-center m-0'>{followingUser.username}</h4>
+                                                            </div>
+                                                        </div>
                                                     </a>
                                                 </div>
                                             ))}
@@ -277,8 +282,13 @@ function Profile() {
                                             {user.followers.map( followerUser =>(
                                                 <div key={randomId(10)} className="mb-4 pb-1">
                                                     <a href={`/user/${followerUser.username}`} className="mb-3">
-                                                        <div className='p-3 novel-box slight-border'>
-                                                            <h4 className='bold text-center m-0'>{followerUser.username}</h4>
+                                                        <div className='p-3 w-100 novel-box d-flex justify-content-center align-items-center slight-border'>
+                                                            <div className='avatar-small mr-2'>
+                                                                <img className='w-100 user-avatar' src={followerUser.image} alt="user profile picture" />
+                                                            </div>
+                                                            <div className=''>
+                                                                <h4 className='bold text-center m-0'>{followerUser.username}</h4>
+                                                            </div>
                                                         </div>
                                                     </a>
                                                 </div>

@@ -16,7 +16,7 @@ function EditAvatar() {
 
     useEffect(() => {
         console.log(data?.user);
-        if (!user._id && data?.user.image) {
+        if (!user._id && data?.user.username && data?.user._id) {
             setUser(data.user);
         }
     }, [data, loading]);

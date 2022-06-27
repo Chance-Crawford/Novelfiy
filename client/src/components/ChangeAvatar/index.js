@@ -60,7 +60,8 @@ function ChangeAvatar({ user }) {
                 });
     
                 console.log(data);
-                //window.location.assign(`/novel/${data.updateAvatar.username}`);
+                window.location.assign(`/user/${data.updateAvatar.username}`);
+                return;
             } 
             catch (e) {
                 
@@ -68,6 +69,8 @@ function ChangeAvatar({ user }) {
                 return;
             }
         }
+
+        window.location.assign(`/user/${user.username}`);
         
     }
 

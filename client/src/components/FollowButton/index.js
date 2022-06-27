@@ -63,7 +63,7 @@ function FollowButton({user}) {
     return(
         <div className='w-100 d-flex justify-content-center mt-4'>
             {!myProfile && me.username ? (
-                <div onClick={handleToggleFollow}>
+                <div className='follow-contain' onClick={handleToggleFollow}>
                     {follow ? (
                         <button className='btn font-18 bold follow-btn following-color'>Following</button>
                     ) : (
