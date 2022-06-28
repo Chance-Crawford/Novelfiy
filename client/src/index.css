@@ -615,6 +615,10 @@ a:hover{
   width: 58.5px;
 }
 
+.speed-text{
+  min-width: 56px;
+}
+
 .play-text-btn{
   padding: 1rem 1.25rem;
   margin: 0 1.25rem;

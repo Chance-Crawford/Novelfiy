@@ -354,7 +354,7 @@ function PlayText({ chapter }) {
                             </select>
                         </div>
                         <div className='d-flex justify-content-end mt-2 mr-2'>
-                            <span className='bold font-18 mr-2'>Speed:</span>
+                            <span className='bold font-18 mr-2 speed-text'>Speed:</span>
                             {currentVoice.name === 'Microsoft David - English (United States)' ||
                             currentVoice.name === 'Microsoft Mark - English (United States)' ||
                             currentVoice.name === 'Microsoft Zira - English (United States)' ? (
