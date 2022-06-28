@@ -12,7 +12,6 @@ function Login() {
     const [formTabState, setFormTabState] = useState("Login");
     const [avatar, setAvatar] = useState(`https://avatars.dicebear.com/api/avataaars/${randomId(15)}.svg?size=200&backgroundColor=lightgray`);
 
-    console.log(avatar)
     // state of the login form
     const [loginFormState, setLoginFormState] = useState({ email: '', password: '' });
     const [login, { error: loginError }] = useMutation(LOGIN_USER);
@@ -103,7 +102,6 @@ function Login() {
         setSignupFormState({ ...signupFormState, image: avatar })
     }, [avatar, setAvatar]);
 
-    console.log(signupFormState)
 
 
     return (
