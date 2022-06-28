@@ -14,6 +14,8 @@ function CreateNovel() {
 
     const [file, setFile] = useState({});
 
+    const [disableBtn, setDisableBtn] = useState(false);
+
     // this is used to stop the speech synthesis if user navigates to
     // another component or page.
     useEffect(() => {
@@ -43,7 +45,7 @@ function CreateNovel() {
     };
     const handleNovelSubmit = async (event) => {
         event.preventDefault();
-
+        setDisableBtn(true);
         
         if(novelFormState.title.length && novelFormState.description.length){
             // if the form data is valid, then upload the image.
@@ -53,8 +55,9 @@ function CreateNovel() {
                 });
             } 
             catch (e) {
+                setDisableBtn(false);
                 console.log(uploadError?.message)
-                console.error(e);
+                console.error(e); 
                 return;
             }
         }
@@ -72,7 +75,7 @@ function CreateNovel() {
         window.location.assign(`/novel/${data.addNovel._id}`)
         } 
         catch (e) {
-            
+            setDisableBtn(false);
             console.error(e);
             return;
         }
@@ -190,9 +193,16 @@ function CreateNovel() {
                             
                         )}
                         <div className='mt-4 w-100'>
-                            <button className='btn login-submit' type='submit'>
-                                Submit
-                            </button>
+                            {disableBtn ? (
+                                <button className='btn login-submit' disabled>
+                                    Submit
+                                </button>
+                            ) : (
+                                <button className='btn login-submit' type='submit'>
+                                    Submit
+                                </button>
+                            )}
+                            
                         </div>
                     </div>
                     
