@@ -99,6 +99,15 @@ a:hover{
   background-color: #f1f1f1;
 }
 
+.random-avatar{
+  background-color: rgb(37, 131, 255);
+  transition: background-color .25s;
+}
+
+.random-avatar:hover{
+  background-color: rgb(68, 149, 255);
+}
+
 .login-btn{
   color: rgb(61, 61, 61);
   border: 1px solid rgb(61, 61, 61);

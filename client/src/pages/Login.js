@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import SignupImg from '../images/Signup.svg'
 import Auth from '../utils/auth';
@@ -10,8 +10,9 @@ import randomId from '../utils/randomId';
 function Login() {
     // the tab state to figure out which tab the user clicked on.
     const [formTabState, setFormTabState] = useState("Login");
-    
+    const [avatar, setAvatar] = useState(`https://avatars.dicebear.com/api/avataaars/${randomId(15)}.svg?size=200&backgroundColor=lightgray`);
 
+    console.log(avatar)
     // state of the login form
     const [loginFormState, setLoginFormState] = useState({ email: '', password: '' });
     const [login, { error: loginError }] = useMutation(LOGIN_USER);
@@ -93,6 +94,16 @@ function Login() {
         return;
         }
     };
+
+    const randomAvatar = async (event) => {
+        setAvatar(`https://avatars.dicebear.com/api/avataaars/${randomId(15)}.svg?size=200&backgroundColor=lightgray`);
+    };
+
+    useEffect(() => {
+        setSignupFormState({ ...signupFormState, image: avatar })
+    }, [avatar, setAvatar]);
+
+    console.log(signupFormState)
 
 
     return (
@@ -218,6 +229,19 @@ function Login() {
                                                 Password is too short. Please make a password of at least 5 characters
                                             </div>
                                     )}
+                                    <div className='mt-4'>
+                                        <p className='bold m-0'>Choose Random Avatar</p>
+                                        <p className='font-reg novel-desc'>You can change this to a custom profile picture later.</p>
+                                        <div className='d-flex justify-content-between align-items-center'>
+                                            <div className='w-50'>
+                                                <img className='w-50' src={avatar} alt="random generated image for user profile picture" />
+                                            </div>
+                                            <div>
+                                                <div onClick={randomAvatar} className='btn random-avatar text-white bold'>New Random Avatar</div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
                                     <div className='mt-4'>
                                         <button className='btn login-submit' type='submit'>
                                             Sign Up
