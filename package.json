@@ -20,6 +20,7 @@
   "bugs": {
     "url": "https://github.com/Chance-Crawford/Novelfiy/issues"
   },
+  "homepage": "https://github.com/Chance-Crawford/Novelfiy#readme",
   "devDependencies": {
     "concurrently": "^7.1.0"
   },
