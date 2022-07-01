@@ -8,17 +8,11 @@ import { setContext } from '@apollo/client/link/context';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
-import Home from './pages/Home';
-import SingleNovel from './pages/SingleNovel';
+import Intro from './pages/Intro';
 import Login from './pages/Login';
-import Profile from './pages/Profile';
 import PageNotFound from './pages/PageNotFound';
 import CreateNovel from './pages/CreateNovel';
-import CreateChapter from './pages/CreateChapter';
-import Chapter from './pages/Chapter';
-import EditNovel from './pages/EditNovel';
-import EditChapter from './pages/EditChapter';
-import EditAvatar from './pages/EditAvatar';
+
 
 // add a proxy to the client folder's package.json.
 // "proxy": "http://localhost:3001", so server can run on different port
@@ -58,16 +52,9 @@ function App() {
           <main className='col-lg-8'>
             <div className='main-contain w-100 text-over'>
               <Switch>
-                <Route exact path="/" component={Home} />
+                <Route exact path="/" component={Intro} />
                 <Route exact path="/login" component={Login} />
-                <Route exact path="/novel/:id" component={SingleNovel} />
-                <Route exact path="/user/:username" component={Profile} />
                 <Route exact path="/create" component={CreateNovel} />
-                <Route exact path="/create-chapter/:novelId" component={CreateChapter} />
-                <Route exact path="/chapter/:id" component={Chapter} />
-                <Route exact path="/edit-novel/:novelId" component={EditNovel} />
-                <Route exact path="/edit-chapter/:chapterId" component={EditChapter} />
-                <Route exact path="/edit-avatar/:username" component={EditAvatar} />
                 <Route component={PageNotFound} />
               </Switch>
             </div>
