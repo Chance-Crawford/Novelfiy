@@ -34,8 +34,8 @@ function Home() {
         <div className="pb-5">
             { novels.length ? (
                 <div>
-                    <div className='text-center w-100'>
-                    <img className='w-100 top-novel' src={TopNovelImg} alt="todays top novels banner" />
+                    <div className='text-center w-100 my-2'>
+                        <img className='w-100 top-novel' src={TopNovelImg} alt="todays top novels banner" />
                     </div>
                     <div>
                         <NovelList novels={novels}></NovelList>
