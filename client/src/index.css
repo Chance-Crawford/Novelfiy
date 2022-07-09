@@ -724,7 +724,6 @@ a:hover{
 
   .login-btn{
     background: none;
-    font-size: .85rem;
   }
 
   .prof-drop{
@@ -774,6 +773,10 @@ a:hover{
   @media only screen and (max-width: 550px) {
     .main-title{
       font-size: 1rem;
+    }
+
+    .login-btn{
+      font-size: .85rem;
     }
   
     .submit-novel{
