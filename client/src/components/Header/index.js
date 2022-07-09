@@ -10,6 +10,7 @@ import { faAngleDown, faUser, faArrowRightFromBracket, faPencil } from '@fortawe
 
 function Header() {
 
+    // media query
     const [matches, setMatches] = useState(
         window.matchMedia("(min-width: 992px)").matches
     )

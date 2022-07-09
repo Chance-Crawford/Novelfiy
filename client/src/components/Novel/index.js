@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faReadme } from "@fortawesome/free-brands-svg-icons"
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import { Link } from 'react-router-dom';
-
+import { useState, useEffect } from 'react';
 
 
 import AddToFavorites from '../AddToFavorites';
@@ -10,16 +10,27 @@ import AddToFavorites from '../AddToFavorites';
 
 function Novel({ novel }) {
 
+    // media query
+    const [matches, setMatches] = useState(
+        window.matchMedia("(min-width: 992px)").matches
+    )
+
+    useEffect(() => {
+        window
+        .matchMedia("(min-width: 992px)")
+        .addEventListener('change', e => setMatches( e.matches ));
+    }, []);
+
     console.log(novel)
     return(
         <article  >
             <div className="d-flex align-items-center">
                 <div className='novel-div-margin-r'>
                     <div className='cover-div'>
-                        <img src={novel.imageLink} className="w-100" alt="book cover" />
+                        <img src={novel.imageLink} className="w-100 nov-img" alt="book cover" />
                     </div>
                 </div>
-                <div className=''>
+                <div className='nov-info-box'>
                     <div className="mb-3">
                         {/* since data wasnt loading very well on single novel with link,
                         use <a> so that the page will refresh*/}
@@ -39,13 +50,27 @@ function Novel({ novel }) {
                         {
                             // have to put in a template literal to get it to read length
                             // and treat as string
-                            `${novel.description}`.length <= 440 ? (
-                                <p className="novel-desc">
+                            `${novel.description}`.length <= 440 && matches ? (
+                                <p className="novel-desc media-novel-desc">
                                     {novel.description}
                                 </p>
                             )
-                            : (
-                                <p className="novel-desc">
+                            : `${novel.description}`.length <= 115 && !matches ? (
+                                <p className="novel-desc media-novel-desc">
+                                    {novel.description}
+                                </p>
+                            ) : `${novel.description}`.length > 115 && !matches ? (
+                                <p className="novel-desc media-novel-desc">
+                                    {
+                                        `${novel.description}`.substring(0, 105)
+                                    }
+                                    ...
+                                    <a href={`/novel/${novel._id}`}>
+                                        <span className="read-more">Read more</span>
+                                    </a>
+                                </p>
+                            ) : (
+                                <p className="novel-desc media-novel-desc">
                                     {
                                         // if description more than 450 characters, add read more
                                         `${novel.description}`.substring(0, 440)
@@ -58,7 +83,7 @@ function Novel({ novel }) {
                             )
                         }
                     </div>
-                    <div className="d-flex align-items-center">
+                    <div className="d-flex align-items-center btn-contain-novel">
                         <div>
                             {novel?.chapters?.length ? (
                                 <a href={`/chapter/${novel.chapters[0]._id}`} className="btn read-btn bold">

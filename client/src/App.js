@@ -50,12 +50,12 @@ function App() {
         <Header></Header>
         <div className='row'>
           {/* left sidebar */}
-          <section className='col-lg-2'>
+          <section className='col-12 col-lg-2'>
 
           </section>
 
           {/* middle main content */}
-          <main className='col-lg-8'>
+          <main className='col-12 col-lg-8'>
             <div className='main-contain w-100 text-over'>
               <Switch>
                 <Route exact path="/" component={Home} />
@@ -74,7 +74,7 @@ function App() {
           </main>
 
           {/* right sidebar */}
-          <section className='col-lg-2'>
+          <section className='col-12 col-lg-2'>
 
           </section>
         </div>

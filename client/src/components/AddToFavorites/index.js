@@ -57,7 +57,7 @@ function AddToFavorites({ novel }) {
 
     return(
         <div onClick={handleToggleFavorite}>
-            <button className="btn fav-btn bold ml-3">
+            <button className="btn bold ml-3 fav-btn">
             <FontAwesomeIcon icon={faHeart} className={favorite ? "novel-list-icon red-heart" : "novel-list-icon"}/>Add To Favorites
             </button>
             {error?.message.includes("logged in") && alert("Must be logged in to save this novel to favorites!")}

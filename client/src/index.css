@@ -705,6 +705,7 @@ a:hover{
 /* Media Queries */
 
 @media only screen and (max-width: 992px) {
+  /* header */
   .top-header{
     padding: .5rem !important;
   }
@@ -726,4 +727,38 @@ a:hover{
     display: flex;
     justify-content: center;
   }
+
+  /* home */
+  .novel-box{
+    padding: .5rem !important;
+    margin: 2.5rem 0;
+  }
+
+  .novel-div-margin-r{
+    width: 40%;
+  }
+
+  .cover-div{
+    max-width: 100%;
+    min-width: 100%;
+  }
+
+  .nov-info-box{
+    width: 60%;
+  }
+
+  .media-novel-desc{
+    font-size: .85rem;
+  }
+
+  .read-btn,
+  .fav-btn{
+    font-size: .75rem;
+    padding: .35rem .45rem;
+  }
+
+  .fav-btn{
+    margin-left: 1rem;
+  }
+
 }
