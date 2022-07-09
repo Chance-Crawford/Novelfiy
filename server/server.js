@@ -40,6 +40,13 @@ app.use(express.json());
 
 // in production serve up static assets
 if (process.env.NODE_ENV === 'production') {
+    // redirects to https if heroku says the url is http.
+    app.use((req, res, next) => {
+        if (req.header('x-forwarded-proto') !== 'https')
+          res.redirect(`https://${req.header('host')}${req.url}`)
+        else
+          next()
+    })
     app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
