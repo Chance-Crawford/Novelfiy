@@ -711,7 +711,7 @@ a:hover{
   }
 
   .main-title{
-    font-size: 1rem;
+    font-size: 1.75rem;
   }
 
   .submit-novel{
@@ -719,7 +719,12 @@ a:hover{
   }
 
   .avatar-small{
-    width: 70%;
+    width: 100%;
+  }
+
+  .login-btn{
+    background: none;
+    font-size: .85rem;
   }
 
   .prof-drop{
@@ -759,6 +764,25 @@ a:hover{
 
   .fav-btn{
     margin-left: 1rem;
+  }
+
+  .footer-div{
+    font-size: .9rem;
+    padding: 1.3rem;
+  }
+
+  @media only screen and (max-width: 550px) {
+    .main-title{
+      font-size: 1rem;
+    }
+  
+    .submit-novel{
+      font-size: .75rem;
+    }
+  
+    .avatar-small{
+      width: 70%;
+    }
   }
 
 }

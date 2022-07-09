@@ -72,9 +72,6 @@ function Header() {
                         
                         <div className="dropdown-content">
                         <a href={`/user/${me.username}`}><FontAwesomeIcon icon={faUser} className="" /> 	&#160;Profile</a>
-                        <a href="/" onClick={logout}>
-                        <FontAwesomeIcon icon={faArrowRightFromBracket} /> &#160;Logout
-                        </a>
                         {!matches && (
                             <Link to='/create' onClick={stopSpeechExtra}>
                                 <div className=''>
@@ -82,6 +79,9 @@ function Header() {
                                 </div>
                             </Link>
                         )}
+                        <a href="/" onClick={logout}>
+                        <FontAwesomeIcon icon={faArrowRightFromBracket} /> &#160;Logout
+                        </a>
                         </div>
                     </div>
                 </div>
