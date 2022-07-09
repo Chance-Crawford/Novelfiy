@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_CHAPTER } from '../utils/queries';
 import randomId from '../utils/randomId'
-import PlayText from '../components/PlayText';
+// import PlayText from '../components/PlayText';
 import CommentSection from '../components/CommentSection'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -80,7 +80,6 @@ function Chapter() {
                             </div>
                         </div>
                     </section>
-                    <PlayText chapter={chapter}></PlayText>
                     <section>
                         <div className='font-18 p-3'>
                             {chapter.chapterText.split('\n').map(part=>(
