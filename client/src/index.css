@@ -701,3 +701,29 @@ a:hover{
 .text-over{
   word-break: break-word;
 }
+
+/* Media Queries */
+
+@media only screen and (max-width: 992px) {
+  .top-header{
+    padding: .5rem !important;
+  }
+
+  .main-title{
+    font-size: 1rem;
+  }
+
+  .submit-novel{
+    font-size: .75rem;
+  }
+
+  .avatar-small{
+    width: 70%;
+  }
+
+  .prof-drop{
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+}

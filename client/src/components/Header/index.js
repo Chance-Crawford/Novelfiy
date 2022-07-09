@@ -9,6 +9,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faUser, faArrowRightFromBracket, faPencil } from '@fortawesome/free-solid-svg-icons'
 
 function Header() {
+
+    const [matches, setMatches] = useState(
+        window.matchMedia("(min-width: 992px)").matches
+    )
+
+    useEffect(() => {
+        window
+        .matchMedia("(min-width: 992px)")
+        .addEventListener('change', e => setMatches( e.matches ));
+    }, []);
+
+      
     const { loading, data } = useQuery(GET_ME);
 
     const [me, setMe] = useState({});
@@ -38,18 +50,23 @@ function Header() {
             </Link>
             {Auth.loggedIn() && me.username ? (
                 <div className='d-flex align-items-center'>
-                    <Link to='/create' onClick={stopSpeechExtra}>
+                    {matches && (
+                        <Link to='/create' onClick={stopSpeechExtra}>
                         <div className='mr-2 write-btn-contain'>
-                            <p className='btn m-0'><FontAwesomeIcon icon={faPencil} /> &#160;Submit My Novel</p>
+                            <p className='btn m-0 submit-novel'><FontAwesomeIcon icon={faPencil} /> &#160;Submit My Novel</p>
                         </div>
-                    </Link>
-                    <span className='novel-desc'>|</span>
+                        </Link>
+                    )}
+                    {matches && <span className='novel-desc'>|</span>}
                     <div className="dropdown ml-2">
-                        <div className='d-flex dropbtn'>
+                        <div className='d-flex dropbtn prof-drop'>
                             <div className='avatar-small'>
                                 <img className='w-100 user-avatar' src={me.image} alt="user profile picture" />
                             </div>
-                            <button className="btn ">{me.username} {<FontAwesomeIcon icon={faAngleDown} className="down-arr"/>}</button>
+                            {matches && 
+                                <button className="btn ">{me.username} {<FontAwesomeIcon icon={faAngleDown} className="down-arr"/>}</button>
+                            }
+                            
                         </div>
                         
                         <div className="dropdown-content">
@@ -57,6 +74,13 @@ function Header() {
                         <a href="/" onClick={logout}>
                         <FontAwesomeIcon icon={faArrowRightFromBracket} /> &#160;Logout
                         </a>
+                        {!matches && (
+                            <Link to='/create' onClick={stopSpeechExtra}>
+                                <div className=''>
+                                    <p className='m-0'><FontAwesomeIcon icon={faPencil} /> &#160;Submit Novel</p>
+                                </div>
+                            </Link>
+                        )}
                         </div>
                     </div>
                 </div>
