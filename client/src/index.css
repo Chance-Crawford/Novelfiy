@@ -517,6 +517,10 @@ a:hover{
 
 /* CreateNovel */
 
+.fav-btn-single{
+  margin-left: 1.5rem;
+}
+
 .hidden-i{
   display: none;
 }
@@ -704,6 +708,44 @@ a:hover{
 
 /* Media Queries */
 
+@media only screen and (max-width: 1550px) {
+
+  .single-novel-banner{
+    width: 65% !important;
+  }
+}
+
+@media only screen and (max-width: 1350px) {
+
+  .single-novel-banner{
+    justify-content: center !important;
+  }
+
+  .single-novel-info{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+  }
+
+  .btn-holder-single-novel{
+    justify-content: center;
+    margin-top: 1rem !important;
+  }
+
+  .btns-holder{
+    width: 100%;
+    justify-content: center;
+    margin-bottom: 1rem;
+  }
+
+  .fav-btn-single{
+    margin-right: 1.5rem;
+  }
+}
+
+
+
 @media only screen and (max-width: 992px) {
   /* header */
   .top-header{
@@ -724,6 +766,10 @@ a:hover{
 
   .login-btn{
     background: none;
+  }
+
+  .login-btn:hover{
+    background-color: rgb(233, 233, 233);
   }
 
   .prof-drop{
@@ -761,6 +807,10 @@ a:hover{
     padding: .35rem .45rem;
   }
 
+  .fav-btn-single{
+    margin-right: 1rem;
+  }
+
   .fav-btn{
     margin-left: 1rem;
   }
@@ -770,22 +820,24 @@ a:hover{
     padding: 1.3rem;
   }
 
-  @media only screen and (max-width: 550px) {
-    .main-title{
-      font-size: 1rem;
-    }
+  /* Single Novel */
 
-    .login-btn{
-      font-size: .85rem;
-    }
-  
-    .submit-novel{
-      font-size: .75rem;
-    }
-  
-    .avatar-small{
-      width: 70%;
-    }
+}
+
+@media only screen and (max-width: 550px) {
+  .main-title{
+    font-size: 1rem;
   }
 
+  .login-btn{
+    font-size: .85rem;
+  }
+
+  .submit-novel{
+    font-size: .75rem;
+  }
+
+  .avatar-small{
+    width: 70%;
+  }
 }

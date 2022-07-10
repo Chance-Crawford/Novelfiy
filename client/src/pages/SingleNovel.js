@@ -127,50 +127,61 @@ function SingleNovel() {
             { novel.user ? (
             <div className="pb-5">
             <section className='d-flex justify-content-center flex-wrap light-shadow-bottom'>
-                <div className='w-58 p-3 d-flex flex-wrap justify-content-between align-items-center'>
+                <div className='w-58 p-3 d-flex flex-wrap justify-content-between align-items-center single-novel-banner'>
                     <div>
                         <div className='cover-div'>
                             <img src={novel.imageLink} className="w-100" alt="book cover" />
                         </div>
                     </div>
-                    <div>
-                        <div className='mt-3 mb-2 w-100'>
-                            <h2 className='m-0 bold'>{novel.title}</h2>
-                        </div>
-                        <div className="mt-3 mb-2 w-100">
-                            <p className="m-0">By. <a className="bold user-hover" href={`/user/${novel.user.username}`}>{novel.penName ? novel.penName : novel.user.username}</a></p>
-                        </div>
-                        <div className="mt-3 mb-2 w-100">
-                            <FontAwesomeIcon icon={faHeart} /> <span>{novel.favoritesCount}</span>
+                    <div className='single-novel-info'>
+                        <div>
+                            <div className='mt-3 mb-2 w-100'>
+                                <h2 className='m-0 bold'>{novel.title}</h2>
+                            </div>
+                            <div className="mt-3 mb-2 w-100">
+                                <p className="m-0">By. <a className="bold user-hover" href={`/user/${novel.user.username}`}>{novel.penName ? novel.penName : novel.user.username}</a></p>
+                            </div>
+                            <div className="mt-3 mb-2 w-100">
+                                <FontAwesomeIcon icon={faHeart} /> <span>{novel.favoritesCount}</span>
+                            </div>
+                            
+                            {novel.reviews.length > 10 && (
+                                <div className="mt-3 mb-2 w-100">
+                                    <p className="m-0 bold font-18">Rating: {
+                                        (novel.reviews.reduce((total, review)=>{
+                                            return total + review.rating
+                                        }, 0) / novel.reviews.length).toFixed(2)
+                                    } / 10
+                                    </p>
+                                </div>
+                            )}
+                            <div className="mt-3 mb-2 w-100">
+                                <p className="m-0">Reviews: {novel.reviewCount} / Chapters: {novel.chapterCount}</p>
+                            </div>
+                            <div className="d-flex flex-wrap align-items-center mt-4 mb-4 w-100 btn-holder-single-novel">
+                                <div>
+                                {novel?.chapters?.length ? (
+                                    <div className='btns-holder'>
+                                        <a href={`/chapter/${novel.chapters[0]._id}`} className="btn read-btn bold">
+                                        <FontAwesomeIcon icon={faReadme} className="novel-list-icon"/>Read
+                                        </a>
+                                    </div>
+                                    
+                                ) : (
+                                    <div className='btns-holder'>
+                                        <button className="btn read-btn bold">
+                                        <FontAwesomeIcon icon={faReadme} className="novel-list-icon"/>Read
+                                        </button>
+                                    </div>
+                                )}
+                                </div>
+                                <div className='btns-holder'>
+                                    <AddToFavorites novel={novel}></AddToFavorites>
+                                </div>
+                                
+                            </div>
                         </div>
                         
-                        {novel.reviews.length > 10 && (
-                            <div className="mt-3 mb-2 w-100">
-                                <p className="m-0 bold font-18">Rating: {
-                                    (novel.reviews.reduce((total, review)=>{
-                                        return total + review.rating
-                                    }, 0) / novel.reviews.length).toFixed(2)
-                                } / 10
-                                </p>
-                            </div>
-                        )}
-                        <div className="mt-3 mb-2 w-100">
-                            <p className="m-0">Reviews: {novel.reviewCount} / Chapters: {novel.chapterCount}</p>
-                        </div>
-                        <div className="d-flex align-items-center mt-4 mb-4 w-100">
-                            <div>
-                            {novel?.chapters?.length ? (
-                                <a href={`/chapter/${novel.chapters[0]._id}`} className="btn read-btn bold">
-                                    <FontAwesomeIcon icon={faReadme} className="novel-list-icon"/>Read
-                                </a>
-                            ) : (
-                                <button className="btn read-btn bold">
-                                    <FontAwesomeIcon icon={faReadme} className="novel-list-icon"/>Read
-                                </button>
-                            )}
-                            </div>
-                            <AddToFavorites novel={novel}></AddToFavorites>
-                        </div>
                     </div>
                     
                 </div>
