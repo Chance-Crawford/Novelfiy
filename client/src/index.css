@@ -196,6 +196,10 @@ a:hover{
   color: rgb(219, 219, 219);
 }
 
+.ml-fav{
+  margin-left: 1rem;
+}
+
 .ml-3{
   margin-left: 1.5rem;
 }
@@ -244,8 +248,8 @@ a:hover{
   border-radius: 20px;
   padding: 1rem;
   width: 47.5%;
-  -webkit-box-shadow: 0px 0px 15px 3px rgba(0,0,0,0.4); 
-  box-shadow: 0px 0px 15px 3px rgba(0,0,0,0.4);
+  -webkit-box-shadow: 0px 0px 15px -4px rgba(0,0,0,0.88); 
+  box-shadow: 0px 0px 15px -4px rgba(0,0,0,0.88);
   min-height: 600px;
   max-height: 600px;
 }
@@ -272,7 +276,13 @@ a:hover{
   background-color: rgba(228, 155, 121, .4);
 }
 
+.review-submit-btn-contain{
+  position: relative;
+}
+
 .review-submit-btn{
+  position: absolute;
+  bottom: 0;
   margin-top: auto;
   color: white;
   margin-left: 1rem;
@@ -463,8 +473,8 @@ a:hover{
   background-color: rgb(240, 240, 240);
 }
 
-.user-stat-contain{
-  margin-left: 1.5rem;
+.novel-stat-contain{
+  margin-left: 1.75rem;
 }
 
 .point{
@@ -742,6 +752,27 @@ a:hover{
   .fav-btn-single{
     margin-right: 1.5rem;
   }
+
+  .novel-article{
+    width: 95%;
+    margin-bottom: 2rem;
+  }
+
+  .chap-review-contain{
+    justify-content: center !important;
+  }
+
+  .rate-select{
+    width: 25%;
+  }
+
+  .edit-novel-btn-contain{
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
+    padding-top: .5rem;
+    border-top: 1px solid lightgrey;
+  }
 }
 
 
@@ -811,8 +842,13 @@ a:hover{
     margin-right: 1rem;
   }
 
-  .fav-btn{
-    margin-left: 1rem;
+  .cover-div{
+    display: flex;
+    justify-content: center;
+  }
+
+  .nov-img{
+    width: 75% !important;
   }
 
   .footer-div{
@@ -821,12 +857,62 @@ a:hover{
   }
 
   /* Single Novel */
+  .single-novel-desc-section{
+    padding: 1rem;
+  }
+
+  .avatar-med{
+    max-width: 55px;
+  }
+
+  .novel-article{
+    -webkit-box-shadow: 0px 0px 15px -4px rgba(0,0,0,0.8); 
+    box-shadow: 0px 0px 15px -4px rgba(0,0,0,0.8);
+  }
+
+  .write-review-section{
+    padding: 1.5rem;
+  }
+
+  .review-textarea{
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .review-submit-btn-contain{
+    position: static;
+    width: 100%;
+  }
+
+  .review-submit-btn{
+    position: static;
+    width: 100%;
+    margin: 0;
+  }
+
+  .profile-icon-box{
+    width: 95% !important;
+  }
+
+  .novels-list-section{
+    padding: .5rem;
+  }
 
 }
 
 @media only screen and (max-width: 550px) {
   .main-title{
     font-size: 1rem;
+  }
+
+  .nov-img{
+    width: 100% !important;
+  }
+
+  .created-at-review{
+    margin-left: 0 !important;
+    margin-top: .5rem !important;
+    width: 100%;
   }
 
   .login-btn{
@@ -839,5 +925,9 @@ a:hover{
 
   .avatar-small{
     width: 70%;
+  }
+
+  .rate-select{
+    width: 50%;
   }
 }

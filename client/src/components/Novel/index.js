@@ -96,7 +96,10 @@ function Novel({ novel }) {
                             )}
                             
                         </div>
-                        <AddToFavorites novel={novel}></AddToFavorites>
+                        <div className='ml-fav'>
+                            <AddToFavorites novel={novel}></AddToFavorites>
+                        </div>
+                        
                         
                     </div>
                 </div>

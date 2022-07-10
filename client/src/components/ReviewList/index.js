@@ -17,11 +17,11 @@ function ReviewList({ reviews }) {
                         </a>
                     </div>
                     <div className="w-100">
-                        <div className="d-flex mb-2">
+                        <div className="d-flex flex-wrap mb-2">
                             <a href={`/user/${review.user.username}`}>
                                 <p className="bold font-17 m-0 user-hover">{review.user.username}</p>
                             </a>
-                            <p className="ital font-17 m-0 ml-2">{review.createdAt}</p>
+                            <p className="ital font-17 m-0 ml-2 created-at-review">{review.createdAt}</p>
                         </div>
                         <div className={review.rating < 4 ? 'mb-2 review-red w-50' :
                             review.rating < 7 ? 'mb-2 review-yellow w-50' :

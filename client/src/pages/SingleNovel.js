@@ -186,7 +186,7 @@ function SingleNovel() {
                     
                 </div>
             </section>
-            <section className='mt-4 pb-3 light-bottom-border'>
+            <section className='mt-4 pb-3 light-bottom-border single-novel-desc-section'>
                 <div className='pb-3 pt-2 d-flex align-items-center'>
                     <div className='avatar-med mr-2'>
                         <a href={`/user/${novel.user.username}`}><img className='w-100 user-avatar' src={novel.user.image} alt="user profile picture" /></a>
@@ -206,7 +206,7 @@ function SingleNovel() {
                 </div>
             </section>
             <section className='mt-3 p-3'>
-                <div className='row justify-content-between'>
+                <div className='row flex-wrap justify-content-between chap-review-contain'>
                     <article className='novel-article col-12'>
                         <div className='d-flex justify-content-between'>
                             <h3>Chapters</h3>
@@ -266,7 +266,7 @@ function SingleNovel() {
                     </article>
                 </div>
             </section>
-            <section className='mt-4 mb-4'>
+            <section className='mt-4 mb-4 write-review-section'>
                 <h3 className='bold mb-4'>Write A Review</h3>
                 <form id='novel-review-form' onSubmit={handleReviewFormSubmit}>
                     <div className='d-flex'>
@@ -293,7 +293,10 @@ function SingleNovel() {
                             )}
                             <p className='font-larger w-100'>Write text for the review:</p>
                             <textarea onChange={handleReviewChange} name="reviewText" rows="8" className='review-textarea'></textarea>
-                            <button type="submit" className='btn review-submit-btn'><FontAwesomeIcon icon={faPaperPlane} /></button>
+                            <div className='review-submit-btn-contain'>
+                                <button type="submit" className='btn review-submit-btn'><FontAwesomeIcon icon={faPaperPlane} /></button>
+                            </div>
+                            
                             {reviewFormError.includes('text') && (
                                 <p className='mt-3 err-text'>{reviewFormError}</p>
                             )}

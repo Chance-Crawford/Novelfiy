@@ -83,8 +83,8 @@ function Profile() {
                         <div className='w-100'>
                             <h2 className='text-center'>@{user.username}</h2>
                         </div>
-                        <div className='w-100 user-stat-contain pb-4 mt-3 d-flex justify-content-center flex-wrap light-bottom-border'>
-                            <div onClick={()=>{setTab('Novels')}} className='d-flex point ml-2 mr-2 justify-content-center flex-wrap text-center'>
+                        <div className='w-100 pb-4 mt-3 d-flex justify-content-center flex-wrap light-bottom-border'>
+                            <div onClick={()=>{setTab('Novels')}} className='d-flex point novel-stat-contain mr-2 justify-content-center flex-wrap text-center'>
                                 <div className='w-100'>
                                     <p className='m-0 font-18 bold'>{user.novels.length}</p>
                                 </div>
@@ -120,7 +120,7 @@ function Profile() {
                         </div>
                     </section>
                     <section className='w-100 d-flex justify-content-center light-bottom-border'>
-                        <div className='w-75 d-flex flex-wrap justify-content-between text-center'>
+                        <div className='w-75 d-flex flex-wrap justify-content-between text-center profile-icon-box'>
                             <div 
                             className={tab === 'Novels' ? 'd-flex justify-content-center w-25 profile-icon active-icon' : 'd-flex profile-icon justify-content-center w-25'}
                             onClick={()=>{setTab('Novels')}}>
@@ -138,7 +138,7 @@ function Profile() {
                             </div>
                         </div>
                     </section>
-                    <section className='mb-5'>
+                    <section className='mb-5 novels-list-section'>
                         {tab === 'Novels' ? (
                             <div>
                                 <div className='mt-4 mb-3'>

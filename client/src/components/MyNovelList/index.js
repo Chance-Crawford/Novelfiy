@@ -2,8 +2,20 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faReadme } from "@fortawesome/free-brands-svg-icons"
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 import AddToFavorites from '../AddToFavorites';
+import { useState, useEffect } from 'react';
 
 function MyNovelList({ novels }) {
+
+    // media query
+    const [matches, setMatches] = useState(
+        window.matchMedia("(min-width: 992px)").matches
+    )
+
+    useEffect(() => {
+        window
+        .matchMedia("(min-width: 992px)")
+        .addEventListener('change', e => setMatches( e.matches ));
+    }, []);
 
     if(!novels.length){
         return(
@@ -20,14 +32,14 @@ function MyNovelList({ novels }) {
                 <div className='novel-box p-3' key={novel._id}>
                     {/* every novel */}
                     <article  >
-                        <div className="d-flex justify-content-between">
-                            <div className="d-flex align-items-center">
+                        <div className="d-flex flex-wrap justify-content-between">
+                            <div className="d-flex w-100 align-items-center">
                                 <div className='novel-div-margin-r'>
                                     <div className='cover-div'>
-                                        <img src={novel.imageLink} className="w-100" alt="book cover" />
+                                        <img src={novel.imageLink} className="w-100 nov-img" alt="book cover" />
                                     </div>
                                 </div>
-                                <div className=''>
+                                <div className='nov-info-box'>
                                     <div className="mb-3">
                                         {/* since data wasnt loading very well on single novel with link,
                                         use <a> so that the page will refresh*/}
@@ -44,29 +56,43 @@ function MyNovelList({ novels }) {
                                         <FontAwesomeIcon icon={faHeart} /> <span>{novel.favoritesCount}</span>
                                     </div>
                                     <div className="mb-3">
-                                        {
-                                            // have to put in a template literal to get it to read length
-                                            // and treat as string
-                                            `${novel.description}`.length <= 440 ? (
-                                                <p className="novel-desc">
-                                                    {novel.description}
-                                                </p>
-                                            )
-                                            : (
-                                                <p className="novel-desc">
-                                                    {
-                                                        // if description more than 450 characters, add read more
-                                                        `${novel.description}`.substring(0, 440)
-                                                    }
-                                                    ...
-                                                    <a href={`/novel/${novel._id}`}>
-                                                        <span className="read-more">Read more</span>
-                                                    </a>
-                                                </p>
-                                            )
-                                        }
+                                    {
+                                        // have to put in a template literal to get it to read length
+                                        // and treat as string
+                                        `${novel.description}`.length <= 440 && matches ? (
+                                            <p className="novel-desc media-novel-desc">
+                                                {novel.description}
+                                            </p>
+                                        )
+                                        : `${novel.description}`.length <= 115 && !matches ? (
+                                            <p className="novel-desc media-novel-desc">
+                                                {novel.description}
+                                            </p>
+                                        ) : `${novel.description}`.length > 115 && !matches ? (
+                                            <p className="novel-desc media-novel-desc">
+                                                {
+                                                    `${novel.description}`.substring(0, 105)
+                                                }
+                                                ...
+                                                <a href={`/novel/${novel._id}`}>
+                                                    <span className="read-more">Read more</span>
+                                                </a>
+                                            </p>
+                                        ) : (
+                                            <p className="novel-desc media-novel-desc">
+                                                {
+                                                    // if description more than 450 characters, add read more
+                                                    `${novel.description}`.substring(0, 440)
+                                                }
+                                                ...
+                                                <a href={`/novel/${novel._id}`}>
+                                                    <span className="read-more">Read more</span>
+                                                </a>
+                                            </p>
+                                        )
+                                    }
                                     </div>
-                                    <div className="d-flex align-items-center">
+                                    <div className="d-flex align-items-center btn-contain-novel">
                                         <div>
                                             {novel?.chapters?.length ? (
                                                 <a href={`/chapter/${novel.chapters[0]._id}`} className="btn read-btn bold">
@@ -79,12 +105,15 @@ function MyNovelList({ novels }) {
                                             )}
                                             
                                         </div>
-                                        <AddToFavorites novel={novel}></AddToFavorites>
+                                        <div className='ml-fav'>
+                                            <AddToFavorites novel={novel}></AddToFavorites>
+                                        </div>
+                                        
                                         
                                     </div>
                                 </div>
                             </div>
-                            <div className=''>
+                            <div className='edit-novel-btn-contain'>
                                 <a href={`/edit-novel/${novel._id}`} className='btn edit-novel-btn bold ml-auto'>Edit Novel & Chapters</a>
                             </div>
                         </div>

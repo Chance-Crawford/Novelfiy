@@ -37,7 +37,7 @@ function Home() {
                     <div className='text-center w-100 my-2'>
                         <img className='w-100 top-novel' src={TopNovelImg} alt="todays top novels banner" />
                     </div>
-                    <div>
+                    <div className='novels-list-section'>
                         <NovelList novels={novels}></NovelList>
                     </div>
                 </div>  
