@@ -773,6 +773,12 @@ a:hover{
     padding-top: .5rem;
     border-top: 1px solid lightgrey;
   }
+
+  .review-green,
+  .review-red,
+  .review-yellow{
+    width: 50%;
+  }
 }
 
 
@@ -890,6 +896,8 @@ a:hover{
     margin: 0;
   }
 
+  /* profile */
+
   .profile-icon-box{
     width: 95% !important;
   }
@@ -898,11 +906,25 @@ a:hover{
     padding: .5rem;
   }
 
+  .review-book-cover{
+    width: 30% !important;
+  }
+
 }
 
 @media only screen and (max-width: 550px) {
   .main-title{
     font-size: 1rem;
+  }
+
+  .review-book-cover{
+    width: 55% !important;
+  }
+
+  .review-green,
+  .review-red,
+  .review-yellow{
+    width: 90%;
   }
 
   .nov-img{

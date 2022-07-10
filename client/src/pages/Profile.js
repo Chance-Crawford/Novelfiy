@@ -180,7 +180,7 @@ function Profile() {
                                                         </div>
                                                         <div className='d-flex justify-content-center mb-2'>
                                                             <div className='cover-div p-3'>
-                                                                <img src={review.novel.imageLink} className="w-100" alt="book cover" />
+                                                                <img src={review.novel.imageLink} className="w-100 review-book-cover" alt="book cover" />
                                                             </div>
                                                         </div>
                                                         
