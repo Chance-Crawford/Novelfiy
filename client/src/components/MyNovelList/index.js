@@ -32,8 +32,8 @@ function MyNovelList({ novels }) {
                 <div className='novel-box p-3' key={novel._id}>
                     {/* every novel */}
                     <article  >
-                        <div className="d-flex flex-wrap justify-content-between">
-                            <div className="d-flex w-100 align-items-center">
+                        <div className="d-flex justify-content-between novel-contain-div">
+                            <div className="d-flex align-items-center">
                                 <div className='novel-div-margin-r'>
                                     <div className='cover-div'>
                                         <img src={novel.imageLink} className="w-100 nov-img" alt="book cover" />

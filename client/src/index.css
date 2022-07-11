@@ -739,6 +739,10 @@ a:hover{
     justify-content: center !important;
   }
 
+  .novel-contain-div{
+    flex-wrap: wrap;
+  }
+
   .single-novel-info{
     display: flex;
     justify-content: center;
@@ -759,6 +763,13 @@ a:hover{
 
   .fav-btn-single{
     margin-right: 1.5rem;
+  }
+
+  .chapter-publish-btn-contain{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
   }
 
   .novel-article{
@@ -1000,6 +1011,12 @@ a:hover{
 
   .chap-change-btns-contain{
     padding-bottom: 1rem;
+  }
+
+  /* edit chapter */
+
+  .chapter-editor-contain{
+    padding: 1rem;
   }
 
 }

@@ -53,7 +53,7 @@ function ChapterEditor({ novel }) {
     return(
         <div>
             <section>
-                <div className="d-flex align-items-center justify-content-between p-3 light-bottom-border">
+                <div className="d-flex align-items-center flex-wrap justify-content-between p-3 light-bottom-border">
                     <div className="d-flex align-items-center">
                         <div className='chapter-novel-img'>
                             <img src={novel.imageLink} className="w-100" alt="book cover" />
@@ -63,7 +63,7 @@ function ChapterEditor({ novel }) {
                             <p className="font-20 ital m-0">{chapterForm.chapterTitle}</p>
                         </div>
                     </div>
-                    <div>
+                    <div className='chapter-publish-btn-contain'>
                         <div>
                             <button onClick={handleChapterSubmit} className="btn font-20 bold publish-btn">Publish</button>
                         </div>
@@ -87,16 +87,18 @@ function ChapterEditor({ novel }) {
                     <div></div>
                 )}
             </section>
-            <section className="mt-3">
-                <div className="w-100">
-                    <input onChange={handleChapterTitleChange} className="w-100 chapter-input font-20" type="text" placeholder="Chapter 00 - New Chapter" />
-                </div>
-            </section>
-            <section className="mt-3 mb-3">
-                <div className='w-100'>
-                    <textarea onChange={handleChapterTextChange} className='font-18 chapter-textarea' placeholder='Chapter text...'></textarea>
-                </div>
-            </section>
+            <div className='chapter-editor-contain'>
+                <section className="mt-3">
+                    <div className="w-100">
+                        <input onChange={handleChapterTitleChange} className="w-100 chapter-input font-20" type="text" placeholder="Chapter 00 - New Chapter" />
+                    </div>
+                </section>
+                <section className="mt-3 mb-3">
+                    <div className='w-100'>
+                        <textarea onChange={handleChapterTextChange} className='font-18 chapter-textarea' placeholder='Chapter text...'></textarea>
+                    </div>
+                </section>
+            </div>
         </div>
     );
 }
