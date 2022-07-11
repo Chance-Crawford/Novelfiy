@@ -975,6 +975,33 @@ a:hover{
     width: 55% !important;
   }
 
+  /* edit novel */
+  .change-novel-img-contain{
+    width: 100% !important;
+    flex-wrap: wrap;
+  }
+
+  .chapter-edit-div{
+    padding-bottom: 0;
+  }
+
+  .edit-cover-div{
+    width: 100% !important;
+    margin-bottom: 1rem;
+  }
+
+  .edit-cover-div-img{
+    width: 40% !important;
+  }
+
+  .chap-edit-title{
+    padding-bottom: 1rem;
+  }
+
+  .chap-change-btns-contain{
+    padding-bottom: 1rem;
+  }
+
 }
 
 @media only screen and (max-width: 550px) {
@@ -982,8 +1009,16 @@ a:hover{
     font-size: 1rem;
   }
 
+  .chap-change-btns-contain{
+    width: 100% !important;
+  }
+
   .submit-img-input{
     width: 100% !important;
+  }
+
+  .edit-cover-div-img{
+    width: 70% !important;
   }
 
   .review-book-cover{

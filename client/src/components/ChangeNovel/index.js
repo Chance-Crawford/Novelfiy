@@ -163,18 +163,20 @@ function ChangeNovel({ novel }) {
                 <div className="mt-4">
                     <h2 className="bold">Change Book Cover:</h2>
                 </div>
-                <div className="font-18 d-flex flex-wrap w-75 justify-content-between upload-height pt-3 mb-4">
-                    <div className="w-40">
+                <div className="font-18 d-flex flex-wrap w-75 justify-content-between upload-height pt-3 mb-4 change-novel-img-contain">
+                    <div className="w-40 edit-cover-div">
                         <p className="bold">Current Cover Image:</p>
                         <p className="novel-desc pb-1 font-reg">If you want to keep the same book cover, <br />leave this section blank.</p>
-                        <div>
+                        <div className="edit-cover-div-img">
                             <img className="w-100" src={novel.imageLink} alt="current book cover" />
                         </div>
                     </div>
-                    <div className="w-40">
+                    <div className="w-40 edit-cover-div">
                         <p className="bold">New Cover Image:</p>
                         <p className="novel-desc pb-1 font-reg">Recommended Size: 400px &times; 500px <br></br>Max File Size: 5MB</p>
-                        <FilePondCustom height={250} width={200} file={file} setFile={setFile}></FilePondCustom>
+                        <div className="edit-cover-div-img">
+                            <FilePondCustom height={250} width={200} file={file} setFile={setFile}></FilePondCustom>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -182,7 +184,7 @@ function ChangeNovel({ novel }) {
                 <div className="font-18 d-flex flex-wrap mb-4">
                     <label className="bold w-100" htmlFor="title">Title:</label>
                     <input 
-                        className="form-padding mt-2 w-50" 
+                        className="form-padding mt-2 w-50 submit-inputs" 
                         defaultValue={novel.title}
                         name="title" 
                         type="text" 
@@ -193,7 +195,7 @@ function ChangeNovel({ novel }) {
                 <div className='font-18 d-flex flex-wrap mb-4'>
                     <label htmlFor="penName" className='bold w-100'>Pen Name:</label>
                     <input
-                        className='form-padding mt-2 w-50'
+                        className='form-padding mt-2 w-50 submit-inputs'
                         defaultValue={novel.penName}
                         name='penName'
                         type='text'
@@ -201,7 +203,7 @@ function ChangeNovel({ novel }) {
                         onChange={handleNovelChange}
                     />          
                 </div>
-                <div className='font-18 d-flex flex-wrap w-75 mb-5'>
+                <div className='font-18 d-flex flex-wrap w-75 mb-5 submit-inputs'>
                     <label htmlFor="description" className='bold w-100'>Description:</label>
                     <p className={charCount > 999 ? "novel-desc m-0 font-reg text-danger bold" : "novel-desc m-0 font-reg"}>
                         Max Character Count: {charCount}/1000
@@ -228,15 +230,15 @@ function ChangeNovel({ novel }) {
                 </div>
                 <div className="pt-4 w-100">
                     {novel.chapterCount ? novel.chapters.map(chapter=>(
-                        <div key={randomId(10)} className='d-flex justify-content-between align-items-center flex-wrap w-50 chapter-edit-div'>
-                            <p className="bold m-0">{chapter.chapterTitle}</p>
-                            <div>
+                        <div key={randomId(10)} className='d-flex justify-content-between align-items-center flex-wrap w-50 chapter-edit-div submit-inputs'>
+                            <p className="bold m-0 chap-edit-title">{chapter.chapterTitle}</p>
+                            <div className="chap-change-btns-contain">
                                 <a href={`/edit-chapter/${chapter._id}`} className='text-white mr-2 bold btn chap-edit-btn'>Edit</a>
                                 <button onClick={()=>{handleChapterRemove(chapter._id)}} className='text-white bold btn chap-edit-btn del-btn'>Delete</button>
                             </div>
                         </div>
                     )) : (
-                        <div>
+                        <div className="submit-inputs">
                             <p className="font-18">No chapters to edit yet. To add a chapter go to the novel page and press the black '+' in the 'Chapters' section.</p>
                         </div>
                     )}
