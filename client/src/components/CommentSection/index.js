@@ -48,12 +48,12 @@ function CommentSection({ chapter }) {
                 <h3 className='bold'>Comments ({chapter.comments.length})</h3>
             </div>
             <div>
-                <form onSubmit={handleCommentSubmit} className='mt-4 w-75 d-flex align-items-center flex-wrap'>
-                    <div className='w-75'>
+                <form onSubmit={handleCommentSubmit} className='mt-4 w-75 d-flex flex-wrap comment-full-form'>
+                    <div className='w-75 comment-form-textarea'>
                         <textarea onChange={handleCommentChange} className='w-100 p-2 font-18' name="commentText" id="commentText" rows="5"></textarea>
                     </div>
-                    <div>
-                        <button type="submit" className='btn review-submit-btn'><FontAwesomeIcon icon={faPaperPlane} /></button>
+                    <div className='review-submit-btn-contain comment-submit-contain'>
+                        <button type="submit" className='btn review-submit-btn comment-submit'><FontAwesomeIcon icon={faPaperPlane} /></button>
                     </div>
                 </form>
             </div>

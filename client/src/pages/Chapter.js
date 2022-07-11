@@ -51,16 +51,16 @@ function Chapter() {
             {chapter?.novelId?.chapters.every((chap) => chap._id) ? (
                 <div className='h-100'>
                     <section>
-                        <div className="d-flex align-items-center justify-content-between p-3 light-bottom-border">
+                        <div className="d-flex flex-wrap align-items-center justify-content-between p-3 light-bottom-border">
                             <div className="d-flex align-items-center">
                                 <div className='chapter-novel-img'>
-                                <a href={`/novel/${chapter.novelId._id}`}><img src={chapter.novelId.imageLink} className="w-100" alt="book cover" /></a>
+                                    <a href={`/novel/${chapter.novelId._id}`}><img src={chapter.novelId.imageLink} className="w-100" alt="book cover" /></a>
                                 </div>
                                 <div className="ml-3">
                                     <a href={`/novel/${chapter.novelId._id}`}><h2 className="bold">{chapter.novelId.title}</h2></a>
                                     {/* chapter dropdown menu */}
                                     <div className="dropdown">
-                                        <button className="dropbtn">{chapter.chapterTitle} &nbsp;{<FontAwesomeIcon icon={faAngleDown} className="down-arr"/>}</button>
+                                        <button className="dropbtn chap-drop">{chapter.chapterTitle} &nbsp;{<FontAwesomeIcon icon={faAngleDown} className="down-arr"/>}</button>
                                         <div className="dropdown-content w-100">
                                             {chapter?.novelId?.chapters && chapter.novelId.chapters.map(chap => (
                                                 <a key={randomId(10)} className='' href={`/chapter/${chap._id}`}>{chap.chapterTitle}</a>
@@ -69,7 +69,7 @@ function Chapter() {
                                     </div>
                                 </div>
                             </div>
-                            <div>
+                            <div className='chapter-author'>
                                 <div>
                                     {chapter.novelId.penName ? (
                                         <p className='m-0 font-20'>By. <a className='hover-underline' href={`/user/${chapter.novelId.user.username}`}>{chapter.novelId.penName}</a></p>
@@ -88,7 +88,7 @@ function Chapter() {
                             }
                         </div>
                     </section>
-                    <section className='p-3 d-flex justify-content-between mt-5'>
+                    <section className='p-3 d-flex justify-content-between align-items-center mt-5'>
                         <div>
                             {prevChapter && (
                                 <a href={`/chapter/${prevChapter}`}>

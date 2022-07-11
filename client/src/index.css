@@ -266,6 +266,10 @@ a:hover{
   max-height: 515px;
 }
 
+.chap-drop{
+  padding-left: .15rem;
+}
+
 .review-textarea{
   width: 75%;
   font-size: 18px;
@@ -290,6 +294,10 @@ a:hover{
   width: 5rem;
   font-size: 30px;
   background-color: rgb(0, 185, 46);
+}
+
+.comment-submit{
+  bottom: 6px;
 }
 
 .font-larger{
@@ -896,6 +904,7 @@ a:hover{
     margin: 0;
   }
 
+
   /* profile */
 
   .profile-icon-box{
@@ -908,6 +917,28 @@ a:hover{
 
   .review-book-cover{
     width: 30% !important;
+  }
+
+  /* chapter */
+  .chapter-author{
+    width: 100% !important;
+    margin-top: 1rem;
+    font-weight: bold;
+  }
+
+  .comment-form-textarea{
+    width: 100% !important;
+  }
+
+  .comment-submit-contain{
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: right;
+  }
+
+  .comment-submit{
+    width: 20%;
   }
 
 }
@@ -951,5 +982,14 @@ a:hover{
 
   .rate-select{
     width: 50%;
+  }
+  
+  .review-submit-btn{
+    font-size: 1.25rem;
+    height: 3rem;
+  }
+
+  .comment-full-form{
+    width: 100% !important;
   }
 }
