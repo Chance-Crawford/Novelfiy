@@ -47,7 +47,7 @@ function EditNovel() {
     }, [myData, meLoading, novel]);
 
     return(
-        <div>
+        <div className="create-novel-contain">
             {myNovel ? (
                 <ChangeNovel novel={novel}></ChangeNovel>
             ) : loading || meLoading ? (
