@@ -84,13 +84,13 @@ function CreateNovel() {
     
 
     return(
-        <div>
+        <div className="create-novel-contain">
             <div className="mt-3 mb-3">
-                <h2 className="m-0">Submit Novel For Review</h2>
+                <h2 className="m-0 submit-h2">Submit Novel For Review</h2>
             </div>
             <div className="row pt-3 mb-3 align-items-center">
-                <div className="col-12 col-lg-1 text-center">
-                    <h3>Info</h3>
+                <div className="col-12 col-lg-1 text-center info-heading-contain">
+                    <h3 className="info-heading">Info</h3>
                 </div>
                 <div className="col-12 col-lg-11 info-box">
                     <p className="bold">**DISREGARD THIS INFO BOX. THIS IS A DEVELOPMENT BUILD, YOU CAN JUST CREATE A NOVEL LIKE
@@ -117,7 +117,7 @@ function CreateNovel() {
                     <div className='d-flex flex-wrap mb-3'>
                         <label htmlFor="title" className='bold w-100'>Title:</label>
                         <input
-                            className='form-padding mt-2 w-50'
+                            className='form-padding mt-2 w-50 submit-inputs'
                             placeholder='Novel title'
                             name='title'
                             type='text'
@@ -138,7 +138,7 @@ function CreateNovel() {
                             If no pen name is specified, your account's username will be used.
                         </p>
                         <input
-                            className='form-padding mt-2 w-50'
+                            className='form-padding mt-2 w-50 submit-inputs'
                             placeholder='Author'
                             name='penName'
                             type='text'
@@ -149,9 +149,10 @@ function CreateNovel() {
                     <div className="pt-3 mb-3">
                         <p className="bold">Cover Image:</p>
                         <p className="novel-desc pb-1 font-reg">Recommended Size: 400px &times; 500px <br></br>Max File Size: 5MB</p>
-                        <div className="w-35">
+                        <div className="w-35 submit-img-input">
                             <FilePondCustom height={250} width={200} file={file} setFile={setFile}></FilePondCustom>
                         </div>
+                        
                         
                     </div>
                     {error && error.message.includes('imageLink') && error.message.includes('required') && (
@@ -166,7 +167,7 @@ function CreateNovel() {
                             </div>
                             
                     )}
-                    <div className='d-flex flex-wrap pt-3 w-75'>
+                    <div className='d-flex flex-wrap pt-3 w-75 submit-inputs'>
                         <label htmlFor="description" className='bold w-100'>Description:</label>
                         <p className={charCount > 999 ? "novel-desc m-0 font-reg text-danger bold" : "novel-desc m-0 font-reg"}>
                             Max Character Count: {charCount}/1000
