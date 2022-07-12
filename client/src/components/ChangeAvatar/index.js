@@ -4,8 +4,20 @@ import { useState, useEffect } from 'react';
 
 import FilePondCustom from "../FilePondCustom";
 import Arrow from "../../images/arrow.png"
+import downArrow from "../../images/down arrow.png"
 
 function ChangeAvatar({ user }) {
+
+    // media query
+    const [stillLarge, setStillLarge] = useState(
+        window.matchMedia("(min-width: 551px)").matches
+    )
+
+    useEffect(() => {
+        window
+        .matchMedia("(min-width: 551px)")
+        .addEventListener('change', e => setStillLarge( e.matches ));
+    }, []);
 
     const [file, setFile] = useState({});
 
@@ -82,12 +94,17 @@ function ChangeAvatar({ user }) {
                     <h2 className='bold text-center'>Change Profile Picture</h2>
                     <p className='novel-desc font-18 text-center'>Recommended Profile Picture Size: 300px &times; 300px</p>
                 </div>
-                <div className='w-100 d-flex flex-wrap justify-content-center align-items-center'>
-                    <img className='w-25' src={user.image} alt="current profile picture" />
+                <div className='w-100 d-flex flex-wrap justify-content-center align-items-center change-avatar-sect-holder'>
+                    <img className='w-25 change-avatar-sect' src={user.image} alt="current profile picture" />
                     <div className='m-3'>
-                        <img src={Arrow} alt="arrow pointing to the right" />
+                        {stillLarge ? (
+                            <img src={Arrow} alt="arrow pointing to the right" />
+                        ) : (
+                            <img src={downArrow} alt="arrow pointing down" />
+                        )}
+                        
                     </div>
-                    <div className='w-25 pt-3'>
+                    <div className='w-25 pt-3 change-avatar-sect'>
                         <FilePondCustom height={200} width={200} file={file} setFile={setFile}></FilePondCustom>
                     </div>
                 </div>

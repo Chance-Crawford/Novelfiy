@@ -35,7 +35,7 @@ function EditAvatar() {
     }, [myData, meLoading, user]);
 
     return ( 
-        <section>
+        <section className='edit-avatar-section'>
             {myAvatar ? (
                 <ChangeAvatar user={user}></ChangeAvatar>
             ) : loading || meLoading ? (

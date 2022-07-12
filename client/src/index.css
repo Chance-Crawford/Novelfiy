@@ -798,6 +798,14 @@ a:hover{
   .review-yellow{
     width: 50%;
   }
+
+  .login-header{
+    width: 50%;
+  }
+
+  .login-section{
+    padding: 1.5rem;
+  }
 }
 
 
@@ -1019,15 +1027,43 @@ a:hover{
     padding: 1rem;
   }
 
+  /* login */
+  .login-holder{
+    flex-wrap: wrap;
+    justify-content: center !important;
+  }
+
+  .login-divs{
+    width: 70%;
+  }
+
 }
 
 @media only screen and (max-width: 550px) {
+
+  /* change avatar */
+  .edit-avatar-section{
+    padding: 1rem;
+  }
+
+  .change-avatar-sect-holder{
+    justify-content: center !important;
+  }
+
+  .change-avatar-sect{
+    width: 60% !important;
+  }
+
   .main-title{
     font-size: 1rem;
   }
 
   .chap-change-btns-contain{
     width: 100% !important;
+  }
+
+  .login-divs{
+    width: 100%;
   }
 
   .submit-img-input{

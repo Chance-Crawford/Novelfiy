@@ -106,7 +106,7 @@ function Login() {
 
     return (
         <section className="login-section w-100">
-            <div className='d-flex align-items-center justify-content-between'>
+            <div className='d-flex align-items-center justify-content-between login-holder'>
                 <div className='login-divs'>
                     <img src={SignupImg} alt="sign up illustration" />
                 </div>
